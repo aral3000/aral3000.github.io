@@ -2,10 +2,17 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>M. Athallah Rafif Aldera | AI Engineer & Data Scientist Portfolio</title>
-    <meta name="description" content="Interactive Portfolio of M. Athallah Rafif Aldera - AI Engineer, Data Scientist, and Computer Systems Graduate from Sriwijaya University.">
+    <meta name="description" content="Official Portfolio of M. Athallah Rafif Aldera - AI Engineer, Data Scientist, and Computer Systems Graduate from Sriwijaya University.">
     
+    <!-- PWA & Mobile Web App Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#7A0C0D">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="profile.jpg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,11 +137,11 @@
         <div class="container">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number text-gold" data-target="91.2">91.2%</div>
+                    <div class="metric-number text-gold">91.2%</div>
                     <div class="metric-label">DenseNet121 Classification Accuracy</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number text-gold" data-target="59.49">59.49</div>
+                    <div class="metric-number text-gold">59.49</div>
                     <div class="metric-label">Peak FID Score (StyleGAN2-ADA)</div>
                 </div>
                 <div class="metric-card">
@@ -168,7 +175,7 @@
                         Saya tipe individu yang bekerja dengan ritme <strong>hyper-focus</strong>—mampu mempelajari teknologi baru dengan cepat, menyelesaikan masalah teknis yang rumit dengan efisiensi tinggi, serta mengeksekusi proyek dari fase ideasi hingga siap pakai. Siap memberikan nilai tambah nyata bagi perusahaan Anda.
                     </p>
 
-                    <div class="bio-tags">
+                    <div class bio-tags">
                         <span class="tag"><i class="fas fa-check-circle text-gold"></i> End-to-End AI Pipelines</span>
                         <span class="tag"><i class="fas fa-check-circle text-gold"></i> Data Science & Analytics</span>
                         <span class="tag"><i class="fas fa-check-circle text-gold"></i> Computer Vision Specialist</span>
@@ -187,10 +194,10 @@
                             </div>
                         </li>
                         <li>
-                            <div class="p-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="p-icon"><i class="fas fa-chart-pie"></i></div>
                             <div>
-                                <strong>Practical IT & Systems Experience</strong>
-                                <p>Hands-on experience in municipal IT infrastructure and digital transformation workflows at Diskominfo Kota Prabumulih.</p>
+                                <strong>Data Science & Analytical Pipelines</strong>
+                                <p>Proven skills in SQL database querying, exploratory data analysis, and predictive modeling using Scikit-Learn, Pandas & NumPy.</p>
                             </div>
                         </li>
                         <li>
@@ -319,7 +326,7 @@
             <div class="section-header text-center">
                 <span class="section-subtitle"><i class="fas fa-folder-open text-gold"></i> Interactive Case Studies</span>
                 <h2 class="section-title">Featured Projects & <span class="text-gold">Recruiter Insights</span></h2>
-                <p class="section-desc">Click on any project card to open the interactive case study modal with technical insights, business problem, and code preview.</p>
+                <p class="section-desc">Click on any project card to open the interactive case study modal with technical insights, problem solving, and code preview.</p>
             </div>
 
             <div class="interactive-projects-grid">
@@ -343,16 +350,16 @@
                     </div>
                 </div>
 
-                <!-- Case Study 2 -->
-                <div class="interactive-project-card" data-project="diskominfo">
+                <!-- Case Study 2 (Replaced Diskominfo with Data Visualization Dashboard) -->
+                <div class="interactive-project-card" data-project="dashboard">
                     <div class="ipc-body">
-                        <div class="ipc-icon"><i class="fas fa-building-user"></i></div>
-                        <h3>Municipal IT & Digital Transformation Workflow</h3>
-                        <p class="ipc-desc">Assisted in maintaining municipal IT infrastructure, network systems, and digital transformation initiatives at Diskominfo Kota Prabumulih.</p>
+                        <div class="ipc-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Automated Data Analytics & Visualization Dashboard</h3>
+                        <p class="ipc-desc">Engineered automated Python data-harvesting scripts and dynamic visualization dashboards to parse multi-stage experimental logs and model metrics.</p>
                         
                         <div class="ipc-stats">
-                            <span><i class="fas fa-network-wired text-gold"></i> IT Infrastructure</span>
-                            <span><i class="fas fa-check-double text-gold"></i> Diskominfo Feb 2026</span>
+                            <span><i class="fas fa-chart-area text-gold"></i> Matplotlib / Seaborn</span>
+                            <span><i class="fas fa-code text-gold"></i> Automated Python</span>
                         </div>
 
                         <div class="ipc-footer">
@@ -411,22 +418,7 @@
 
             <div class="timeline">
                 
-                <!-- Item 1 -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Feb 2026</div>
-                    <div class="timeline-content">
-                        <div class="role-badge">Internship</div>
-                        <h3>IT & Systems Intern</h3>
-                        <span class="company-name"><i class="fas fa-building text-gold"></i> Diskominfo Kota Prabumulih</span>
-                        <ul class="timeline-bullet-list">
-                            <li>Gained practical hands-on experience in municipal IT infrastructure and systems management.</li>
-                            <li>Assisted in maintaining technical workflows and supporting digital transformation initiatives within local government.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
+                <!-- Item 1: AI Research & Engineering (Primary Focus) -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2026</div>
@@ -435,14 +427,14 @@
                         <h3>Undergraduate AI Researcher & Developer</h3>
                         <span class="company-name"><i class="fas fa-university text-gold"></i> ISys Research Group & Sriwijaya University</span>
                         <ul class="timeline-bullet-list">
-                            <li>Conducted comparative analysis of StyleGAN2-ADA vs StyleGAN3 to address medical data scarcity.</li>
+                            <li>Conducted comparative analysis of StyleGAN2-ADA vs StyleGAN3 to address data scarcity in medical AI.</li>
                             <li>Achieved peak FID score of 59.49 and elevated DenseNet121 classification accuracy to 91.2%.</li>
                             <li>Formulated clean, modular open-source repositories with strict data security standards.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Item 3 -->
+                <!-- Item 2: Leadership UKM Taekwondo UNSRI -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2023 – 2025</div>
@@ -453,6 +445,20 @@
                         <ul class="timeline-bullet-list">
                             <li>Directed the Martial Arts Division, overseeing training schedules and member athletic development.</li>
                             <li>Managed committee responsibilities for organizational events, fostering teamwork, operational efficiency, and event coordination under pressure.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Item 3: Systems Exposure -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Feb 2026</div>
+                    <div class="timeline-content">
+                        <div class="role-badge">Internship</div>
+                        <h3>IT & Systems Intern</h3>
+                        <span class="company-name"><i class="fas fa-building text-gold"></i> Diskominfo Kota Prabumulih</span>
+                        <ul class="timeline-bullet-list">
+                            <li>Gained practical exposure to local government IT systems workflows and infrastructure maintenance.</li>
                         </ul>
                     </div>
                 </div>
@@ -490,7 +496,7 @@
                 <div class="cert-card">
                     <div class="cert-badge-icon"><i class="fas fa-table-cells"></i></div>
                     <div class="cert-info">
-                        <h4>Belajar Dasar SQL</h4>
+                        <h4>Belajar Dasar Structured Query Language (SQL)</h4>
                         <span class="cert-issuer">Dicoding Indonesia • Jun 2026</span>
                         <span class="cert-id">ID: 4EXG1WJKEPRL</span>
                     </div>

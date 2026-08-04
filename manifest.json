@@ -1,0 +1,22 @@
+{
+  "name": "M. Athallah Rafif Aldera Portfolio",
+  "short_name": "Athallah.AI",
+  "description": "AI Engineer & Data Scientist Portfolio of M. Athallah Rafif Aldera",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0A0A0F",
+  "theme_color": "#7A0C0D",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "profile.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

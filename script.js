@@ -1,5 +1,5 @@
 // ==========================================================================
-// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION - FIXED GEOMETRY)
+// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION - FIXED GEOMETRY V3)
 // Author: M. Athallah Rafif Aldera
 // ==========================================================================
 
@@ -234,21 +234,21 @@ img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
             `,
             link: "https://github.com/aral3000/cervical-cancer-stylegan2-densenet121"
         },
-        diskominfo: {
-            tag: "IT Systems & Infrastructure Experience",
-            title: "Municipal IT & Systems Management (Diskominfo Kota Prabumulih)",
+        dashboard: {
+            tag: "Data Science & Visualization Pipeline",
+            title: "Automated Data Analytics & Visualization Dashboard",
             body: `
-                <h4>Role & Responsibilities</h4>
-                <p>Served as IT & Systems Intern at Diskominfo Kota Prabumulih (February 2026), assisting municipal IT infrastructure management and digital transformation initiatives.</p>
+                <h4>Technical Problem & Solution</h4>
+                <p>Multi-stage deep learning experiments produce massive raw JSON metric logs. Manual tracking is slow and error-prone.</p>
 
-                <h4>Key Deliverables</h4>
+                <h4>Implementation & Value-Add</h4>
                 <ul>
-                    <li>Maintained local government network infrastructure and server maintenance protocols.</li>
-                    <li>Supported digital transformation workflows and technical troubleshooting for municipal services.</li>
-                    <li>Collaborated across municipal IT teams to ensure zero downtime during critical operations.</li>
+                    <li>Engineered automated Python data-harvesting scripts to parse cumulative training metrics and FID scores.</li>
+                    <li>Generated publication-ready statistical visualizations using Matplotlib & Seaborn.</li>
+                    <li>Streamlined metric tracking and experiment convergence auditing.</li>
                 </ul>
             `,
-            link: "#contact"
+            link: "https://github.com/aral3000/cervical-cancer-stylegan2-densenet121"
         },
         sql: {
             tag: "Data Science & Database Querying",
