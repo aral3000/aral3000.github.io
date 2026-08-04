@@ -1,5 +1,5 @@
 // ==========================================================================
-// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION)
+// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION - FIXED GEOMETRY)
 // Author: M. Athallah Rafif Aldera
 // ==========================================================================
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Helper function to draw 4-leaf clover pattern (Daun Semanggi)
+        // Helper function to draw 4-leaf clover pattern (Daun Semanggi Presisi)
         function drawClover(ctx, x, y, size, rotation, color, alpha) {
             ctx.save();
             ctx.translate(x, y);
@@ -27,26 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.globalAlpha = alpha;
             ctx.fillStyle = color;
             ctx.strokeStyle = color;
-            ctx.lineWidth = Math.max(1, size * 0.12);
 
-            // Draw 4 heart-shaped leaves at 90-degree rotations
+            // 1. Draw Curved Stem (Tangkai Semanggi) FIRST - extending downward between bottom leaves
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(size * 0.4, size * 1.0, size * 0.2, size * 1.8);
+            ctx.lineWidth = Math.max(1.5, size * 0.16);
+            ctx.stroke();
+
+            // 2. Draw 4 Heart-Shaped Leaves rotated at 45°, 135°, 225°, 315° so stem passes through the gap
             for (let i = 0; i < 4; i++) {
                 ctx.save();
-                ctx.rotate((i * Math.PI) / 2);
+                ctx.rotate((i * Math.PI / 2) + (Math.PI / 4));
                 ctx.beginPath();
                 let r = size;
                 ctx.moveTo(0, 0);
-                ctx.bezierCurveTo(-r * 0.6, -r * 0.5, -r * 0.8, -r * 1.2, 0, -r * 1.5);
-                ctx.bezierCurveTo(r * 0.8, -r * 1.2, r * 0.6, -r * 0.5, 0, 0);
+                ctx.bezierCurveTo(-r * 0.6, -r * 0.5, -r * 0.75, -r * 1.2, 0, -r * 1.4);
+                ctx.bezierCurveTo(r * 0.75, -r * 1.2, r * 0.6, -r * 0.5, 0, 0);
                 ctx.fill();
                 ctx.restore();
             }
-
-            // Curved Stem (Tangkai Semanggi)
-            ctx.beginPath();
-            ctx.moveTo(0, size * 0.2);
-            ctx.quadraticCurveTo(size * 0.3, size * 0.9, size * 0.1, size * 1.4);
-            ctx.stroke();
 
             ctx.restore();
         }
@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     // Spawn from top or left border for continuous diagonal flow
                     if (Math.random() > 0.5) {
-                        this.x = -40;
+                        this.x = -50;
                         this.y = Math.random() * canvas.height;
                     } else {
                         this.x = Math.random() * canvas.width;
-                        this.y = -40;
+                        this.y = -50;
                     }
                 }
 
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.rotation += this.rotationSpeed;
 
                 // Out of screen bounds check
-                if (this.x > canvas.width + 50 || this.y > canvas.height + 50) {
+                if (this.x > canvas.width + 60 || this.y > canvas.height + 60) {
                     this.reset(false);
                 }
             }
