@@ -1,16 +1,16 @@
 // ==========================================================================
-// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT V2 (HIGHLY INTERACTIVE RECRUITER EDITION)
+// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION)
 // Author: M. Athallah Rafif Aldera
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Subtle Floating Particle Canvas Effect
+    // 1. Interactive Diagonal Floating Clover Leaf Particle Canvas Background
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        const particleCount = 35;
+        let clovers = [];
+        const cloverCount = 30;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -19,51 +19,100 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        class Particle {
-            constructor() {
-                this.reset();
+        // Helper function to draw 4-leaf clover pattern (Daun Semanggi)
+        function drawClover(ctx, x, y, size, rotation, color, alpha) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = Math.max(1, size * 0.12);
+
+            // Draw 4 heart-shaped leaves at 90-degree rotations
+            for (let i = 0; i < 4; i++) {
+                ctx.save();
+                ctx.rotate((i * Math.PI) / 2);
+                ctx.beginPath();
+                let r = size;
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-r * 0.6, -r * 0.5, -r * 0.8, -r * 1.2, 0, -r * 1.5);
+                ctx.bezierCurveTo(r * 0.8, -r * 1.2, r * 0.6, -r * 0.5, 0, 0);
+                ctx.fill();
+                ctx.restore();
             }
 
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.color = Math.random() > 0.5 ? 'rgba(212, 175, 55, ' : 'rgba(139, 0, 0, ';
-                this.alpha = Math.random() * 0.4 + 0.1;
+            // Curved Stem (Tangkai Semanggi)
+            ctx.beginPath();
+            ctx.moveTo(0, size * 0.2);
+            ctx.quadraticCurveTo(size * 0.3, size * 0.9, size * 0.1, size * 1.4);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        class CloverParticle {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                // Diagonal trajectory: moving down and right (45 degrees)
+                this.size = Math.random() * 12 + 10; // Clover radius 10px to 22px
+                this.speed = Math.random() * 0.75 + 0.35;
+                this.angle = Math.PI / 4; // 45 degrees diagonal angle
+                this.dx = Math.cos(this.angle) * this.speed;
+                this.dy = Math.sin(this.angle) * this.speed;
+
+                if (initial) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                } else {
+                    // Spawn from top or left border for continuous diagonal flow
+                    if (Math.random() > 0.5) {
+                        this.x = -40;
+                        this.y = Math.random() * canvas.height;
+                    } else {
+                        this.x = Math.random() * canvas.width;
+                        this.y = -40;
+                    }
+                }
+
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.015;
+                this.alpha = Math.random() * 0.35 + 0.15;
+                this.color = Math.random() > 0.5 ? '#D4AF37' : '#8B0000';
             }
 
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+                this.x += this.dx;
+                this.y += this.dy;
+                this.rotation += this.rotationSpeed;
 
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                    this.reset();
+                // Out of screen bounds check
+                if (this.x > canvas.width + 50 || this.y > canvas.height + 50) {
+                    this.reset(false);
                 }
             }
 
             draw() {
-                ctx.fillStyle = this.color + this.alpha + ')';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                drawClover(ctx, this.x, this.y, this.size, this.rotation, this.color, this.alpha);
             }
         }
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
+        for (let i = 0; i < cloverCount; i++) {
+            clovers.push(new CloverParticle());
         }
 
-        function animateParticles() {
+        function animateClovers() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            clovers.forEach(c => {
+                c.update();
+                c.draw();
             });
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animateClovers);
         }
-        animateParticles();
+        animateClovers();
     }
 
     // 2. Navbar Scroll Effect & Active Section Tracking
@@ -226,7 +275,7 @@ img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
 
                 <h4>Key Technical Achievements</h4>
                 <ul>
-                    <li>Implemented WGAN-GP loss function to enforce 1-Lipschitz constraint via gradient penalty penalty coefficient.</li>
+                    <li>Implemented WGAN-GP loss function to enforce 1-Lipschitz constraint via gradient penalty coefficient.</li>
                     <li>Compared Mode Collapse behavior between vanilla GANs vs WGAN-GP on custom image patches.</li>
                 </ul>
             `,
