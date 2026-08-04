@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M. Athallah Rafif Aldera | AI Engineer & Data Scientist Portfolio</title>
-    <meta name="description" content="Official Portfolio of M. Athallah Rafif Aldera - AI Engineer, Data Scientist, and Computer Systems Graduate from Sriwijaya University. Specialized in Deep Learning, Computer Vision, and Data Science.">
+    <meta name="description" content="Interactive Portfolio of M. Athallah Rafif Aldera - AI Engineer, Data Scientist, and Computer Systems Graduate from Sriwijaya University.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,8 @@
 </head>
 <body>
 
-    <!-- Ambient Lighting Elements -->
+    <!-- Ambient Lighting & Canvas Particle Background -->
+    <canvas id="particle-canvas"></canvas>
     <div class="ambient-light light-1"></div>
     <div class="ambient-light light-2"></div>
 
@@ -33,7 +34,7 @@
             <nav class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">About Me</a>
-                <a href="#competencies" class="nav-link">Capabilities</a>
+                <a href="#skills" class="nav-link">Capabilities</a>
                 <a href="#projects" class="nav-link">Featured Work</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#certifications" class="nav-link">Certifications</a>
@@ -41,7 +42,8 @@
             </nav>
             
             <div class="nav-actions">
-                <a href="#contact" class="btn-talk">Hire / Contact Me</a>
+                <button class="btn-talk" id="btn-quick-cv"><i class="fas fa-file-pdf"></i> Quick CV</button>
+                <a href="#contact" class="btn-talk btn-talk-primary">Hire / Contact</a>
                 <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -55,20 +57,20 @@
         <div class="hero-container">
             <div class="hero-content-wrapper">
                 
-                <!-- Circular Avatar Frame with Formal Profile Photo -->
-                <div class="avatar-card">
+                <!-- Portrait Avatar Card with Full Face Photo -->
+                <div class="avatar-card" id="avatar-card-container">
                     <div class="avatar-ring-outer"></div>
                     <div class="avatar-ring-gold"></div>
                     <div class="avatar-img-box">
-                        <img src="profile.jpg" alt="M. Athallah Rafif Aldera" class="avatar-photo">
+                        <img src="profile.jpg" alt="M. Athallah Rafif Aldera" class="avatar-photo" id="profile-img">
                     </div>
                     <div class="avatar-badge">
-                        <i class="fas fa-briefcase"></i>
+                        <i class="fas fa-briefcase text-gold"></i>
                         <span>Open to Work</span>
                     </div>
                 </div>
 
-                <!-- Hero Headline & Value Proposition -->
+                <!-- Hero Headline & Recruiter Value Proposition -->
                 <div class="hero-text-box">
                     <div class="hero-greeting-tag">
                         <i class="fas fa-user-check gold-icon"></i>
@@ -79,9 +81,9 @@
                         <span class="title-sub">AI Engineer & Data Scientist</span>
                     </h1>
                     <p class="hero-description">
-                        Computer Systems graduate from <strong>Sriwijaya University</strong> with strong technical foundations in 
-                        <strong>AI Engineering, Machine Learning, Computer Vision</strong>, and <strong>Data Analytics</strong>. 
-                        Equipped with a hyper-focus execution mindset to solve complex technical tasks with speed, precision, and business impact.
+                        Computer Systems graduate from <strong>Sriwijaya University</strong> specializing in 
+                        <strong>Generative AI, Computer Vision, and Data Analytics</strong>. Equipped with a 
+                        <em>hyper-focus execution rhythm</em> to solve complex technical challenges with speed, accuracy, and business value.
                     </p>
                     
                     <div class="hero-cta-group">
@@ -89,25 +91,25 @@
                             <i class="fas fa-paper-plane"></i> Get In Touch
                         </a>
                         <a href="#projects" class="btn-secondary-red">
-                            <i class="fas fa-briefcase"></i> View Featured Projects
+                            <i class="fas fa-layer-group"></i> Explore Case Studies
                         </a>
-                        <a href="https://github.com/aral3000" target="_blank" class="btn-outline-gold">
-                            <i class="fab fa-github"></i> GitHub Profile
-                        </a>
+                        <button class="btn-outline-gold" id="btn-copy-email-hero">
+                            <i class="fas fa-copy"></i> Copy Email
+                        </button>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Calvino Hero Footer Bar (Recruiter Fast Info) -->
+            <!-- Calvino Hero Footer Bar (Recruiter Quick Info Strip) -->
             <div class="hero-footer-bar">
                 <div class="hero-foot-item">
                     <span class="foot-label">Target Roles</span>
                     <span class="foot-value"><i class="fas fa-bullseye text-gold"></i> AI Engineer | Data Scientist | Graduate Trainee</span>
                 </div>
                 <div class="hero-foot-item">
-                    <span class="foot-label">Location / Availability</span>
-                    <span class="foot-value"><i class="fas fa-location-dot text-gold"></i> Indonesia (Relocation & Remote Ready)</span>
+                    <span class="foot-label">Location & Status</span>
+                    <span class="foot-value"><i class="fas fa-location-dot text-gold"></i> Prabumulih / Relocation & Remote Ready</span>
                 </div>
                 <div class="hero-foot-item">
                     <span class="foot-label">Direct Contact</span>
@@ -123,31 +125,31 @@
         </div>
     </section>
 
-    <!-- Key Candidate Strengths Ribbon -->
+    <!-- Interactive Candidate Metrics Ribbon -->
     <section class="metrics-ribbon">
         <div class="container">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number text-gold">UNSRI</div>
-                    <div class="metric-label">S1 Sistem Komputer (2022 - 2026)</div>
+                    <div class="metric-number text-gold" data-target="91.2">91.2%</div>
+                    <div class="metric-label">DenseNet121 Classification Accuracy</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number text-gold">AI & CV</div>
-                    <div class="metric-label">Generative Models & Deep Learning</div>
+                    <div class="metric-number text-gold" data-target="59.49">59.49</div>
+                    <div class="metric-label">Peak FID Score (StyleGAN2-ADA)</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-number text-gold">7+</div>
                     <div class="metric-label">Google Cloud & Dicoding Certifications</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number text-gold">Hands-On</div>
-                    <div class="metric-label">Municipal IT & Research Experience</div>
+                    <div class="metric-number text-gold">UNSRI '26</div>
+                    <div class="metric-label">Bachelor of Computer Systems</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Me Section (Who I Am) -->
+    <!-- About Me Section (Who I Am & Candidate Value) -->
     <section class="section about-section" id="about">
         <div class="container">
             <div class="section-header">
@@ -158,18 +160,18 @@
             <div class="about-grid">
                 <div class="about-card main-about">
                     <div class="about-icon-badge"><i class="fas fa-user-gear"></i></div>
-                    <h3>About Me</h3>
+                    <h3>Professional Profile</h3>
                     <p>
-                        Saya adalah lulusan Sistem Komputer dari <strong>Universitas Sriwijaya (UNSRI)</strong> yang berfokus merintis karir profesional sebagai <strong>AI Engineer, Data Scientist, dan Technology Innovator</strong>. Saya memiliki dasar yang solid dalam statistik, algoritma machine learning, pemrosesan citra (Computer Vision), dan query database.
+                        Saya adalah lulusan Sistem Komputer dari <strong>Universitas Sriwijaya (UNSRI)</strong> yang berfokus merintis karir profesional sebagai <strong>AI Engineer, Data Scientist, dan Technology Innovator</strong>. Playground utama saya mencakup algoritma Machine Learning, Deep Learning (Generative AI & Computer Vision), dan Data Analytics.
                     </p>
                     <p>
-                        Saya tipe individu yang bekerja dengan ritme <strong>hyper-focus</strong>—mampu mempelajari teknologi baru dengan cepat, menyelesaikan tantangan teknis yang rumit dengan kecepatan dan akurasi tinggi, serta mengeksekusi project end-to-end dari riset hingga siap pakai. Siap memberikan nilai tambah terbaik untuk <strong>Graduate Trainee Program</strong> maupun posisi teknis di industri tech/PropTech.
+                        Saya tipe individu yang bekerja dengan ritme <strong>hyper-focus</strong>—mampu mempelajari teknologi baru dengan cepat, menyelesaikan masalah teknis yang rumit dengan efisiensi tinggi, serta mengeksekusi proyek dari fase ideasi hingga siap pakai. Siap memberikan nilai tambah nyata bagi perusahaan Anda.
                     </p>
 
                     <div class="bio-tags">
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> AI Engineering</span>
+                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> End-to-End AI Pipelines</span>
                         <span class="tag"><i class="fas fa-check-circle text-gold"></i> Data Science & Analytics</span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> Computer Vision</span>
+                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> Computer Vision Specialist</span>
                         <span class="tag"><i class="fas fa-check-circle text-gold"></i> Fast Learner & Hyper-Focus</span>
                     </div>
                 </div>
@@ -181,21 +183,21 @@
                             <div class="p-icon"><i class="fas fa-brain"></i></div>
                             <div>
                                 <strong>Technical Mastery in AI/ML</strong>
-                                <p>Proven experience building generative models (StyleGAN2-ADA, StyleGAN3, DCGAN) & CNN classifiers with TensorFlow and PyTorch.</p>
+                                <p>Proven track record building generative models (StyleGAN2-ADA, StyleGAN3, DCGAN) & CNN classifiers using PyTorch & TensorFlow.</p>
                             </div>
                         </li>
                         <li>
                             <div class="p-icon"><i class="fas fa-network-wired"></i></div>
                             <div>
                                 <strong>Practical IT & Systems Experience</strong>
-                                <p>Hands-on experience in municipal IT infrastructure, workflow optimization, and digital transformation initiatives at Diskominfo.</p>
+                                <p>Hands-on experience in municipal IT infrastructure and digital transformation workflows at Diskominfo Kota Prabumulih.</p>
                             </div>
                         </li>
                         <li>
                             <div class="p-icon"><i class="fas fa-people-group"></i></div>
                             <div>
-                                <strong>Leadership & Discipline</strong>
-                                <p>Proven leadership as Martial Arts Division Lead at UKM Taekwondo UNSRI—managing events, training schedules, and team execution under pressure.</p>
+                                <strong>Leadership & Execution Discipline</strong>
+                                <p>Led the Martial Arts Division at UKM Taekwondo UNSRI—managing events, athlete training schedules, and team coordination under pressure.</p>
                             </div>
                         </li>
                     </ul>
@@ -204,167 +206,212 @@
         </div>
     </section>
 
-    <!-- Core Competencies & Capabilities Section (What I Can Do) -->
-    <section class="section skills-section" id="competencies">
+    <!-- Interactive Capabilities & Skill Progress Matrix (What I Can Do) -->
+    <section class="section skills-section" id="skills">
         <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle"><i class="fas fa-laptop-code text-gold"></i> Technical Arsenal</span>
-                <h2 class="section-title">Core Technical <span class="text-gold">Competencies & Skills</span></h2>
+            <div class="section-header text-center">
+                <span class="section-subtitle"><i class="fas fa-laptop-code text-gold"></i> Interactive Competency Matrix</span>
+                <h2 class="section-title">Core Capabilities & <span class="text-gold">Skill Proficiency</span></h2>
+                <p class="section-desc">Click tabs to filter skills and inspect proficiency metrics across AI Engineering, Data Science, and Computer Vision.</p>
             </div>
 
-            <div class="expertise-grid">
+            <!-- Skill Filter Tabs -->
+            <div class="skill-tabs">
+                <button class="skill-tab-btn active" data-filter="all">All Capabilities</button>
+                <button class="skill-tab-btn" data-filter="ai">AI & Deep Learning</button>
+                <button class="skill-tab-btn" data-filter="ds">Data Science & SQL</button>
+                <button class="skill-tab-btn" data-filter="cv">Computer Vision & Tools</button>
+            </div>
+
+            <div class="skills-matrix-grid" id="skills-grid">
                 
-                <!-- Skill Category 1 -->
-                <div class="expertise-card">
-                    <div class="exp-header">
-                        <div class="exp-icon"><i class="fas fa-brain"></i></div>
-                        <h3>AI & Machine Learning</h3>
+                <!-- AI Skills -->
+                <div class="skill-progress-card" data-category="ai">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-brain text-gold"></i> PyTorch & TensorFlow</span>
+                        <span class="sp-val">90%</span>
                     </div>
-                    <ul class="exp-list">
-                        <li><i class="fas fa-check text-gold"></i> <span>Deep Learning & CNN Architectures (DenseNet121)</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Generative AI (StyleGAN2-ADA, StyleGAN3, DCGAN, WGAN-GP)</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Frameworks: PyTorch, TensorFlow, Keras</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Model Evaluation, FID Score Calculation & Hyperparameter Tuning</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Zero Data-Leakage Protocols & Dataset Splitting</span></li>
-                    </ul>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
+                    <p class="sp-desc">Deep Learning model training, loss functions, custom CNN heads, and GPU optimization.</p>
                 </div>
 
-                <!-- Skill Category 2 -->
-                <div class="expertise-card">
-                    <div class="exp-header">
-                        <div class="exp-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3>Data Science & Analytics</h3>
+                <div class="skill-progress-card" data-category="ai">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-robot text-gold"></i> Generative AI (StyleGAN2/3)</span>
+                        <span class="sp-val">92%</span>
                     </div>
-                    <ul class="exp-list">
-                        <li><i class="fas fa-check text-gold"></i> <span>Python 3.10+ (Data Manipulation & Automation)</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>SQL (Relational Database Querying & Aggregation)</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Data Analysis: Pandas, NumPy, Scipy, Scikit-Learn</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Data Visualization: Matplotlib, Seaborn, Automated Dashboards</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Exploratory Data Analysis (EDA) & Feature Engineering</span></li>
-                    </ul>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 92%;"></div></div>
+                    <p class="sp-desc">Multi-stage StyleGAN training, ADA adaptive augmentation, and FID metric convergence analysis.</p>
                 </div>
 
-                <!-- Skill Category 3 -->
-                <div class="expertise-card">
-                    <div class="exp-header">
-                        <div class="exp-icon"><i class="fas fa-eye"></i></div>
-                        <h3>Computer Vision & Engineering</h3>
+                <div class="skill-progress-card" data-category="ai">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-network-wired text-gold"></i> CNN Classifiers (DenseNet121)</span>
+                        <span class="sp-val">88%</span>
                     </div>
-                    <ul class="exp-list">
-                        <li><i class="fas fa-check text-gold"></i> <span>OpenCV Image Processing & Feature Extraction</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>PIL, pyspng, imageio & Media Automation</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>C / C++ Programming Foundations</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>Version Control: Git & GitHub Workflow</span></li>
-                        <li><i class="fas fa-check text-gold"></i> <span>IT Systems & Network Infrastructure Management</span></li>
-                    </ul>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 88%;"></div></div>
+                    <p class="sp-desc">Transfer learning, feature extraction, binary cross-entropy, and confusion matrix validation.</p>
+                </div>
+
+                <!-- Data Science Skills -->
+                <div class="skill-progress-card" data-category="ds">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fab fa-python text-gold"></i> Python 3.10+ Ecosystem</span>
+                        <span class="sp-val">95%</span>
+                    </div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 95%;"></div></div>
+                    <p class="sp-desc">OOP, scripting, automation, harvest utilities, and end-to-end data processing pipelines.</p>
+                </div>
+
+                <div class="skill-progress-card" data-category="ds">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-database text-gold"></i> SQL Querying & Relational DB</span>
+                        <span class="sp-val">85%</span>
+                    </div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 85%;"></div></div>
+                    <p class="sp-desc">Relational queries, aggregations, joins, data extraction, and Dicoding SQL certification.</p>
+                </div>
+
+                <div class="skill-progress-card" data-category="ds">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-chart-pie text-gold"></i> Pandas, NumPy & Scikit-Learn</span>
+                        <span class="sp-val">90%</span>
+                    </div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
+                    <p class="sp-desc">Data cleaning, EDA, feature scaling, evaluation metrics, and statistical analytics.</p>
+                </div>
+
+                <!-- CV & Tools -->
+                <div class="skill-progress-card" data-category="cv">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-eye text-gold"></i> OpenCV & Image Processing</span>
+                        <span class="sp-val">88%</span>
+                    </div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 88%;"></div></div>
+                    <p class="sp-desc">Image resizing, channel transformations, augmentation pipelines, and PIL/pyspng integration.</p>
+                </div>
+
+                <div class="skill-progress-card" data-category="cv">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fab fa-git-alt text-gold"></i> Git & GitHub DevOps</span>
+                        <span class="sp-val">90%</span>
+                    </div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
+                    <p class="sp-desc">Branching strategy, .gitignore data security enforcement, GitHub Pages, and version control.</p>
+                </div>
+
+                <div class="skill-progress-card" data-category="cv">
+                    <div class="sp-header">
+                        <span class="sp-name"><i class="fas fa-chart-area text-gold"></i> Matplotlib & Seaborn Dashboards</span>
+                        <span class="sp-val">92%</span>
+                    </div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 92%;"></div></div>
+                    <p class="sp-desc">Automated chart generation, multi-stage training curve visualization, and publication-ready plots.</p>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- Featured Projects & Applied Portfolio (My Work) -->
+    <!-- Interactive Featured Projects & Deep-Dive Case Studies -->
     <section class="section research-section" id="projects">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-folder-open text-gold"></i> Practical Portfolio</span>
-                <h2 class="section-title">Featured Projects & <span class="text-gold">Technical Deliverables</span></h2>
-                <p class="section-desc">Demonstrating practical problem-solving capabilities in AI Engineering, Computer Vision, and Systems Management.</p>
+                <span class="section-subtitle"><i class="fas fa-folder-open text-gold"></i> Interactive Case Studies</span>
+                <h2 class="section-title">Featured Projects & <span class="text-gold">Recruiter Insights</span></h2>
+                <p class="section-desc">Click on any project card to open the interactive case study modal with technical insights, business problem, and code preview.</p>
             </div>
 
-            <!-- Main Flagship Project Spotlight -->
-            <div class="research-spotlight-card">
-                <div class="spotlight-header">
-                    <div class="spotlight-badge"><i class="fas fa-award"></i> Flagship AI Research Project</div>
-                    <span class="spotlight-year">Sriwijaya University & ISys Research Group</span>
-                </div>
+            <div class="interactive-projects-grid">
                 
-                <div class="spotlight-body">
-                    <div class="spotlight-content">
-                        <h3>Generative AI Cervical Image Augmentation (StyleGAN2-ADA & DenseNet121)</h3>
-                        <p class="spotlight-abstract">
-                            Solved medical data scarcity and class imbalance in Visual Inspection with Acetic Acid (VIA) cervical images. Implemented multi-stage StyleGAN2-ADA generative synthesis, achieving a peak FID score of <strong>59.49</strong>, and trained DenseNet121 classifiers to boost accuracy from <strong>82.5%</strong> to <strong>91.2%</strong> under strict zero data-leakage protocols.
-                        </p>
+                <!-- Case Study 1 (Flagship) -->
+                <div class="interactive-project-card flagship" data-project="stylegan">
+                    <div class="ipc-badge"><i class="fas fa-star"></i> Featured Case Study</div>
+                    <div class="ipc-body">
+                        <div class="ipc-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Generative AI Medical Image Augmentation (StyleGAN2-ADA & DenseNet121)</h3>
+                        <p class="ipc-desc">Solved medical data scarcity by generating high-resolution synthetic cervical images, elevating DenseNet121 CNN classification accuracy from 82.5% to 91.2%.</p>
                         
-                        <div class="spotlight-highlights">
-                            <div class="sh-item">
-                                <i class="fas fa-chart-pie text-gold"></i>
-                                <span><strong>Outcome:</strong> 8.7% Classification Accuracy Lift via Synthetic Data</span>
-                            </div>
-                            <div class="sh-item">
-                                <i class="fas fa-cogs text-gold"></i>
-                                <span><strong>Engineering:</strong> Multi-stage Kaggle dual T4 GPU training & log harvesting</span>
-                            </div>
-                            <div class="sh-item">
-                                <i class="fas fa-code-commit text-gold"></i>
-                                <span><strong>Open Source:</strong> Production-ready modular Python codebase published on GitHub</span>
-                            </div>
+                        <div class="ipc-stats">
+                            <span><i class="fas fa-arrow-trend-up text-gold"></i> +8.7% Accuracy</span>
+                            <span><i class="fas fa-chart-line text-gold"></i> 59.49 Best FID</span>
                         </div>
 
-                        <div class="spotlight-actions">
-                            <a href="https://github.com/aral3000/cervical-cancer-stylegan2-densenet121" target="_blank" class="btn-primary-gold">
-                                <i class="fab fa-github"></i> View GitHub Repository
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="spotlight-tech-stack">
-                        <h4>Technologies Utilized</h4>
-                        <div class="tech-grid">
-                            <span class="tech-chip"><i class="fab fa-python"></i> Python 3.10+</span>
-                            <span class="tech-chip"><i class="fas fa-fire"></i> PyTorch</span>
-                            <span class="tech-chip"><i class="fas fa-cubes"></i> TensorFlow</span>
-                            <span class="tech-chip"><i class="fas fa-eye"></i> OpenCV</span>
-                            <span class="tech-chip"><i class="fas fa-database"></i> Scikit-Learn</span>
-                            <span class="tech-chip"><i class="fas fa-table"></i> Pandas & NumPy</span>
+                        <div class="ipc-footer">
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Recruiter Insights &rarr;</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Other Projects Grid -->
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-building-user"></i></div>
-                    <h4>Municipal IT & Digital Transformation</h4>
-                    <p>Assisted local government digital transformation initiatives and municipal IT systems infrastructure management during Diskominfo internship.</p>
-                    <div class="project-tags">
-                        <span>IT Systems</span><span>Diskominfo</span><span>Infrastructure</span>
+                <!-- Case Study 2 -->
+                <div class="interactive-project-card" data-project="diskominfo">
+                    <div class="ipc-body">
+                        <div class="ipc-icon"><i class="fas fa-building-user"></i></div>
+                        <h3>Municipal IT & Digital Transformation Workflow</h3>
+                        <p class="ipc-desc">Assisted in maintaining municipal IT infrastructure, network systems, and digital transformation initiatives at Diskominfo Kota Prabumulih.</p>
+                        
+                        <div class="ipc-stats">
+                            <span><i class="fas fa-network-wired text-gold"></i> IT Infrastructure</span>
+                            <span><i class="fas fa-check-double text-gold"></i> Diskominfo Feb 2026</span>
+                        </div>
+
+                        <div class="ipc-footer">
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Insights &rarr;</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-database"></i></div>
-                    <h4>SQL & Relational Data Pipeline</h4>
-                    <p>Designed structured query scripts for relational database management, data extraction, and business logic analytics.</p>
-                    <div class="project-tags">
-                        <span>SQL</span><span>Database Query</span><span>Dicoding Certified</span>
+                <!-- Case Study 3 -->
+                <div class="interactive-project-card" data-project="sql">
+                    <div class="ipc-body">
+                        <div class="ipc-icon"><i class="fas fa-database"></i></div>
+                        <h3>Relational SQL Querying & Business Analytics Pipeline</h3>
+                        <p class="ipc-desc">Engineered relational database queries, table aggregations, and data extraction pipelines for structured business logic analysis.</p>
+                        
+                        <div class="ipc-stats">
+                            <span><i class="fas fa-table text-gold"></i> Relational SQL</span>
+                            <span><i class="fas fa-certificate text-gold"></i> Dicoding Certified</span>
+                        </div>
+
+                        <div class="ipc-footer">
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Insights &rarr;</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-brain"></i></div>
-                    <h4>DCGAN & WGAN-GP Image Synthesis</h4>
-                    <p>Built and evaluated baseline Deep Convolutional GANs and Wasserstein GANs with Gradient Penalty for image patch synthesis.</p>
-                    <div class="project-tags">
-                        <span>PyTorch</span><span>WGAN-GP</span><span>Generative AI</span>
+                <!-- Case Study 4 -->
+                <div class="interactive-project-card" data-project="vision">
+                    <div class="ipc-body">
+                        <div class="ipc-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Generative Vision Baseline Exploration (DCGAN & WGAN-GP)</h3>
+                        <p class="ipc-desc">Designed comparative Deep Convolutional GANs and Wasserstein GANs with Gradient Penalty for patch synthesis and stability evaluation.</p>
+                        
+                        <div class="ipc-stats">
+                            <span><i class="fas fa-fire text-gold"></i> PyTorch & CUDA</span>
+                            <span><i class="fas fa-sliders text-gold"></i> WGAN-GP Loss</span>
+                        </div>
+
+                        <div class="ipc-footer">
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Insights &rarr;</span>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Experience & Leadership Timeline (Track Record) -->
+    <!-- Experience & Leadership Track Record Section -->
     <section class="section experience-section" id="experience">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle"><i class="fas fa-history text-gold"></i> Professional Track Record</span>
+                <span class="section-subtitle"><i class="fas fa-briefcase text-gold"></i> Track Record & Impact</span>
                 <h2 class="section-title">Work Experience & <span class="text-gold">Leadership Roles</span></h2>
             </div>
 
             <div class="timeline">
                 
-                <!-- Experience Item 1 -->
+                <!-- Item 1 -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">Feb 2026</div>
@@ -374,12 +421,12 @@
                         <span class="company-name"><i class="fas fa-building text-gold"></i> Diskominfo Kota Prabumulih</span>
                         <ul class="timeline-bullet-list">
                             <li>Gained practical hands-on experience in municipal IT infrastructure and systems management.</li>
-                            <li>Assisted in maintaining technical workflows and supporting digital transformation initiatives within the local government office.</li>
+                            <li>Assisted in maintaining technical workflows and supporting digital transformation initiatives within local government.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Experience Item 2 -->
+                <!-- Item 2 -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2026</div>
@@ -388,14 +435,14 @@
                         <h3>Undergraduate AI Researcher & Developer</h3>
                         <span class="company-name"><i class="fas fa-university text-gold"></i> ISys Research Group & Sriwijaya University</span>
                         <ul class="timeline-bullet-list">
-                            <li>Conducted comparative analysis of StyleGAN2-ADA vs StyleGAN3 to address data scarcity in medical AI.</li>
+                            <li>Conducted comparative analysis of StyleGAN2-ADA vs StyleGAN3 to address medical data scarcity.</li>
                             <li>Achieved peak FID score of 59.49 and elevated DenseNet121 classification accuracy to 91.2%.</li>
                             <li>Formulated clean, modular open-source repositories with strict data security standards.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Experience Item 3 -->
+                <!-- Item 3 -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2023 – 2025</div>
@@ -414,16 +461,15 @@
         </div>
     </section>
 
-    <!-- Certifications & Credentials Section -->
+    <!-- Certifications Showcase Grid -->
     <section class="section cert-section" id="certifications">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-certificate text-gold"></i> Verified Competencies</span>
-                <h2 class="section-title">Certifications & <span class="text-gold">Professional Credentials</span></h2>
+                <span class="section-subtitle"><i class="fas fa-certificate text-gold"></i> Verified Credentials</span>
+                <h2 class="section-title">Certifications & <span class="text-gold">Continuous Learning</span></h2>
             </div>
 
             <div class="cert-grid">
-                
                 <div class="cert-card">
                     <div class="cert-badge-icon"><i class="fab fa-google"></i></div>
                     <div class="cert-info">
@@ -436,7 +482,7 @@
                     <div class="cert-badge-icon"><i class="fas fa-database"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Dasar Data Science</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Issued May 2026</span>
+                        <span class="cert-issuer">Dicoding Indonesia • May 2026</span>
                         <span class="cert-id">ID: 07Z672QWRPQR</span>
                     </div>
                 </div>
@@ -444,8 +490,8 @@
                 <div class="cert-card">
                     <div class="cert-badge-icon"><i class="fas fa-table-cells"></i></div>
                     <div class="cert-info">
-                        <h4>Belajar Dasar Structured Query Language (SQL)</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Issued Jun 2026</span>
+                        <h4>Belajar Dasar SQL</h4>
+                        <span class="cert-issuer">Dicoding Indonesia • Jun 2026</span>
                         <span class="cert-id">ID: 4EXG1WJKEPRL</span>
                     </div>
                 </div>
@@ -454,7 +500,7 @@
                     <div class="cert-badge-icon"><i class="fas fa-brain"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Machine Learning untuk Pemula</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Issued Jun 2024</span>
+                        <span class="cert-issuer">Dicoding Indonesia • Jun 2024</span>
                         <span class="cert-id">ID: N9ZOM21KDPG5</span>
                     </div>
                 </div>
@@ -463,7 +509,7 @@
                     <div class="cert-badge-icon"><i class="fab fa-python"></i></div>
                     <div class="cert-info">
                         <h4>Memulai Pemrograman dengan Python</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Issued Jun 2024</span>
+                        <span class="cert-issuer">Dicoding Indonesia • Jun 2024</span>
                         <span class="cert-id">ID: 81P2NO51NXOY</span>
                     </div>
                 </div>
@@ -472,7 +518,7 @@
                     <div class="cert-badge-icon"><i class="fas fa-robot"></i></div>
                     <div class="cert-info">
                         <h4>Dasar AI</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Issued Oct 2024</span>
+                        <span class="cert-issuer">Dicoding Indonesia • Oct 2024</span>
                         <span class="cert-id">ID: 0LZ044E1RP65</span>
                     </div>
                 </div>
@@ -481,11 +527,10 @@
                     <div class="cert-badge-icon"><i class="fas fa-chart-line"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Dasar Visualisasi Data</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Issued Jun 2024</span>
+                        <span class="cert-issuer">Dicoding Indonesia • Jun 2024</span>
                         <span class="cert-id">ID: NVP7QNRJRZR0</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -496,10 +541,10 @@
             <div class="contact-box-wrapper">
                 
                 <div class="contact-left">
-                    <span class="section-subtitle"><i class="fas fa-envelope-open-text text-gold"></i> Connect With Me</span>
-                    <h2 class="contact-heading">Ready to contribute to your <span class="text-gold">engineering team</span>.</h2>
+                    <span class="section-subtitle"><i class="fas fa-paper-plane text-gold"></i> Get In Touch</span>
+                    <h2 class="contact-heading">Ready to add value to your <span class="text-gold">tech team</span>.</h2>
                     <p class="contact-text">
-                        Actively seeking opportunities for <strong>AI Engineer, Data Scientist, Computer Vision Specialist</strong> roles, and <strong>Graduate Trainee Programs</strong>. Open to relocation and remote opportunities.
+                        Actively seeking opportunities for <strong>AI Engineer, Data Scientist, Computer Vision Specialist</strong> roles, and <strong>Graduate Trainee Programs</strong>. Open for full-time, relocation, and remote positions.
                     </p>
 
                     <div class="contact-links-list">
@@ -536,21 +581,21 @@
 
                 <div class="contact-right">
                     <form class="contact-form" id="contact-form">
-                        <h3>Send a Message / Recruiter Inquiry</h3>
+                        <h3>Send a Recruiter Message</h3>
                         <div class="form-group">
-                            <label for="name">Your Name / Company Name</label>
-                            <input type="text" id="name" required placeholder="e.g. Recruiter at 99 Group">
+                            <label for="name">Your Name / Company</label>
+                            <input type="text" id="name" required placeholder="e.g. HR Manager / Tech Lead">
                         </div>
                         <div class="form-group">
                             <label for="email">Work Email</label>
                             <input type="email" id="email" required placeholder="recruiter@company.com">
                         </div>
                         <div class="form-group">
-                            <label for="message">Inquiry / Opportunity Details</label>
-                            <textarea id="message" rows="4" required placeholder="Hello Athallah, we are interested in discussing an opportunity for..."></textarea>
+                            <label for="message">Message / Opportunity Details</label>
+                            <textarea id="message" rows="4" required placeholder="Hello Athallah, we would like to connect with you regarding..."></textarea>
                         </div>
                         <button type="submit" class="btn-primary-gold btn-full">
-                            <i class="fas fa-paper-plane"></i> Submit Inquiry
+                            <i class="fas fa-paper-plane"></i> Send Direct Message
                         </button>
                     </form>
                 </div>
@@ -558,6 +603,23 @@
             </div>
         </div>
     </section>
+
+    <!-- Interactive Case Study Modal Dialog -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <span class="modal-tag" id="modal-tag">Case Study Insight</span>
+                <h2 id="modal-title">Project Title</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content injected dynamically via script.js -->
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <!-- Links injected dynamically -->
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
