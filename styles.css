@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ATHALLAH. PORTFOLIO SYSTEM - ROYAL RED & GOLD CALVINO THEME (INTERACTIVE V2)
+   ATHALLAH. PORTFOLIO SYSTEM - ROYAL RED & GOLD CALVINO THEME (INTERACTIVE V3)
    Author: M. Athallah Rafif Aldera
    Color Palette: Royal Red (#7A0C0D, #8B0000), Regal Gold (#D4AF37, #FFD700), Obsidian (#0A0A0F)
    ========================================================================== */
@@ -134,34 +134,37 @@ ul {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.25rem 0;
+    padding: 1.1rem 0;
     transition: var(--transition);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(14px);
+    background: rgba(10, 10, 15, 0.7);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .navbar.scrolled {
-    background: rgba(10, 10, 15, 0.92);
-    padding: 0.85rem 0;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(10, 10, 15, 0.95);
+    padding: 0.8rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
-    max-width: 1240px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 }
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--text-light);
+    white-space: nowrap;
 }
 
 .logo-dot {
@@ -170,16 +173,17 @@ ul {
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     align-items: center;
 }
 
 .nav-link {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-muted);
     position: relative;
     padding: 0.25rem 0;
+    white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -205,20 +209,25 @@ ul {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    white-space: nowrap;
 }
 
 .btn-talk {
-    padding: 0.6rem 1.4rem;
+    padding: 0.55rem 1.15rem;
     border: 1.5px solid var(--gold-main);
     border-radius: 50px;
     color: var(--gold-light);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.5px;
     transition: var(--transition);
     background: transparent;
     cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .btn-talk:hover {
@@ -240,6 +249,7 @@ ul {
     color: var(--gold-light);
     font-size: 1.5rem;
     cursor: pointer;
+    padding: 0.25rem;
 }
 
 /* ==========================================================================
@@ -881,7 +891,6 @@ ul {
     font-weight: 600;
     color: var(--text-light);
     margin-bottom: 1.5rem;
-
 }
 
 .ipc-footer {
@@ -1349,7 +1358,33 @@ ul {
 }
 
 /* Responsive Media Queries */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2.5rem 0;
+        transition: var(--transition);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .btn-talk {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
+    }
+
     .hero-content-wrapper {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1383,27 +1418,6 @@ ul {
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        background: rgba(10, 10, 15, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 2.5rem 0;
-        transition: var(--transition);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .mobile-toggle {
-        display: block;
-    }
-
     .btn-talk {
         display: none;
     }
