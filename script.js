@@ -1,5 +1,5 @@
 // ==========================================================================
-// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION - FIXED GEOMETRY V3)
+// ATHALLAH. PORTFOLIO INTERACTIVE SCRIPT (ROYAL CLOVER DIAGONAL EDITION - SINGLE STEM V4)
 // Author: M. Athallah Rafif Aldera
 // ==========================================================================
 
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let clovers = [];
-        const cloverCount = 30;
+        const cloverCount = 28;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -19,31 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Helper function to draw 4-leaf clover pattern (Daun Semanggi Presisi)
+        // Helper function to draw 4-leaf clover pattern (Daun Semanggi Presisi Tanpa Seam/Double Line)
         function drawClover(ctx, x, y, size, rotation, color, alpha) {
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(rotation);
             ctx.globalAlpha = alpha;
-            ctx.fillStyle = color;
-            ctx.strokeStyle = color;
 
-            // 1. Draw Curved Stem (Tangkai Semanggi) FIRST - extending downward between bottom leaves
+            // 1. Stem - single clean stroke extending down from lower leaf junction
+            ctx.strokeStyle = color;
+            ctx.lineWidth = Math.max(1.2, size * 0.12);
+            ctx.lineCap = 'round';
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.quadraticCurveTo(size * 0.4, size * 1.0, size * 0.2, size * 1.8);
-            ctx.lineWidth = Math.max(1.5, size * 0.16);
+            ctx.moveTo(0, size * 0.35);
+            ctx.quadraticCurveTo(size * 0.35, size * 1.05, size * 0.18, size * 1.65);
             ctx.stroke();
 
-            // 2. Draw 4 Heart-Shaped Leaves rotated at 45°, 135°, 225°, 315° so stem passes through the gap
+            // 2. 4 Leaves - solid filled hearts with NO stroke lines inside
+            ctx.fillStyle = color;
             for (let i = 0; i < 4; i++) {
                 ctx.save();
                 ctx.rotate((i * Math.PI / 2) + (Math.PI / 4));
                 ctx.beginPath();
                 let r = size;
                 ctx.moveTo(0, 0);
-                ctx.bezierCurveTo(-r * 0.6, -r * 0.5, -r * 0.75, -r * 1.2, 0, -r * 1.4);
-                ctx.bezierCurveTo(r * 0.75, -r * 1.2, r * 0.6, -r * 0.5, 0, 0);
+                ctx.bezierCurveTo(-r * 0.6, -r * 0.6, -r * 0.8, -r * 1.25, 0, -r * 1.35);
+                ctx.bezierCurveTo(r * 0.8, -r * 1.25, r * 0.6, -r * 0.6, 0, 0);
                 ctx.fill();
                 ctx.restore();
             }
