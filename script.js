@@ -667,23 +667,36 @@ img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
 
     // 7. Contact Form Submission Simulation
     const contactForm = document.getElementById('contact-form');
+    // 7. Contact Form Real Email Dispatch
+    const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const nameInput = document.getElementById('name').value;
+            const emailInput = document.getElementById('email').value;
+            const messageInput = document.getElementById('message').value;
 
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
 
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Message...';
             submitBtn.disabled = true;
 
-            setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Message Sent!';
+            // Form Data Payload for Real Email Dispatch
+            const formData = new FormData(contactForm);
+
+            fetch('https://formspree.io/f/xvovbkgp', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Message Sent to Gmail!';
                 submitBtn.style.background = 'linear-gradient(135deg, #2ECC71 0%, #27AE60 100%)';
                 submitBtn.style.color = '#fff';
 
-                showToast(currentLang === 'zh' ? `感谢 ${nameInput}，您的留言已成功发送！` : currentLang === 'id' ? `Terima kasih ${nameInput}, pesan Anda telah terkirim!` : `Thank you ${nameInput}, your inquiry has been submitted!`);
+                showToast(currentLang === 'zh' ? `感谢 ${nameInput}，您的留言已成功发送至 Athallah 的邮箱！` : currentLang === 'id' ? `Terima kasih ${nameInput}, pesan Anda telah terkirim ke Gmail Athallah!` : `Thank you ${nameInput}, your message has been sent directly to Athallah's Gmail!`);
 
                 contactForm.reset();
 
@@ -693,7 +706,16 @@ img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
                     submitBtn.style.color = '';
                     submitBtn.disabled = false;
                 }, 4000);
-            }, 1200);
+            }).catch(error => {
+                // Direct Mailto Fallback if network blocks Formspree
+                const mailtoSubject = encodeURIComponent(`[Portfolio Recruiter Inquiry] From: ${nameInput}`);
+                const mailtoBody = encodeURIComponent(`Recruiter Name: ${nameInput}\nRecruiter Work Email: ${emailInput}\n\nMessage:\n${messageInput}`);
+                window.location.href = `mailto:mathallahrafifaldera@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                showToast(currentLang === 'zh' ? '已通过默认邮件应用准备向 Athallah 发送邮件！' : currentLang === 'id' ? 'Membuka aplikasi email untuk mengirim ke Gmail Athallah!' : 'Opening email client to send message to Athallah\'s Gmail!');
+            });
         });
     }
 
