@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -16,7 +16,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -39,18 +39,23 @@
             </a>
             
             <nav class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About Me</a>
-                <a href="#skills" class="nav-link">Capabilities</a>
-                <a href="#projects" class="nav-link">Featured Work</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#home" class="nav-link active" data-i18n="nav.home">Home</a>
+                <a href="#about" class="nav-link" data-i18n="nav.about">About Me</a>
+                <a href="#skills" class="nav-link" data-i18n="nav.skills">Capabilities</a>
+                <a href="#projects" class="nav-link" data-i18n="nav.projects">Featured Work</a>
+                <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+                <a href="#certifications" class="nav-link" data-i18n="nav.certifications">Certifications</a>
             </nav>
             
-            <!-- Far Right Corner Action Group -->
+            <!-- Far Right Corner Action Group with Multi-Language Switcher -->
             <div class="nav-actions">
-                <button class="btn-talk" id="btn-quick-cv"><i class="fas fa-file-pdf"></i> Quick CV</button>
-                <a href="#contact" class="btn-talk btn-talk-primary"><i class="fas fa-paper-plane"></i> Hire / Contact</a>
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="en" title="English">EN</button>
+                    <button class="lang-btn" data-lang="id" title="Bahasa Indonesia">ID</button>
+                    <button class="lang-btn" data-lang="zh" title="简体中文">中文</button>
+                </div>
+                <button class="btn-talk" id="btn-quick-cv"><i class="fas fa-file-pdf"></i> <span data-i18n="btn.quick_cv">Quick CV</span></button>
+                <a href="#contact" class="btn-talk btn-talk-primary"><i class="fas fa-paper-plane"></i> <span data-i18n="btn.hire">Hire / Contact</span></a>
                 <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -73,7 +78,7 @@
                     </div>
                     <div class="avatar-badge">
                         <i class="fas fa-briefcase text-gold"></i>
-                        <span>Open to Work</span>
+                        <span data-i18n="hero.open_to_work">Open to Work</span>
                     </div>
                 </div>
 
@@ -81,13 +86,13 @@
                 <div class="hero-text-box">
                     <div class="hero-greeting-tag">
                         <i class="fas fa-user-check gold-icon"></i>
-                        <span>Computer Systems Graduate | AI & Data Science Candidate</span>
+                        <span data-i18n="hero.tag">Computer Systems Graduate | AI & Data Science Candidate</span>
                     </div>
-                    <h1 class="hero-title">
+                    <h1 class="hero-title" data-i18n="hero.title">
                         Hello, I'm <span class="text-gold">M. Athallah Rafif Aldera.</span><br>
                         <span class="title-sub">AI Engineer & Data Scientist</span>
                     </h1>
-                    <p class="hero-description">
+                    <p class="hero-description" data-i18n="hero.desc">
                         Computer Systems graduate from <strong>Sriwijaya University</strong> specializing in 
                         <strong>Generative AI, Computer Vision, and Data Analytics</strong>. Equipped with a 
                         <em>hyper-focus execution rhythm</em> to solve complex technical challenges with speed, accuracy, and business value.
@@ -95,13 +100,13 @@
                     
                     <div class="hero-cta-group">
                         <a href="#contact" class="btn-primary-gold">
-                            <i class="fas fa-paper-plane"></i> Get In Touch
+                            <i class="fas fa-paper-plane"></i> <span data-i18n="btn.get_in_touch">Get In Touch</span>
                         </a>
                         <a href="#projects" class="btn-secondary-red">
-                            <i class="fas fa-layer-group"></i> Explore Case Studies
+                            <i class="fas fa-layer-group"></i> <span data-i18n="btn.explore_case_studies">Explore Case Studies</span>
                         </a>
                         <button class="btn-outline-gold" id="btn-copy-email-hero">
-                            <i class="fas fa-copy"></i> Copy Email
+                            <i class="fas fa-copy"></i> <span data-i18n="btn.copy_email">Copy Email</span>
                         </button>
                     </div>
                 </div>
@@ -111,15 +116,15 @@
             <!-- Calvino Hero Footer Bar (Recruiter Quick Info Strip) -->
             <div class="hero-footer-bar">
                 <div class="hero-foot-item">
-                    <span class="foot-label">Target Roles</span>
-                    <span class="foot-value"><i class="fas fa-bullseye text-gold"></i> AI Engineer | Data Scientist | Computer Vision Specialist | ML Engineer | Data Analyst | AI Developer</span>
+                    <span class="foot-label" data-i18n="hero.target_roles_label">Target Roles</span>
+                    <span class="foot-value"><i class="fas fa-bullseye text-gold"></i> <span data-i18n="hero.target_roles_val">AI Engineer | Data Scientist | Computer Vision Specialist | ML Engineer | Data Analyst | AI Developer</span></span>
                 </div>
                 <div class="hero-foot-item">
-                    <span class="foot-label">Location & Status</span>
-                    <span class="foot-value"><i class="fas fa-location-dot text-gold"></i> Prabumulih / Relocation & Remote Ready</span>
+                    <span class="foot-label" data-i18n="hero.location_label">Location & Status</span>
+                    <span class="foot-value"><i class="fas fa-location-dot text-gold"></i> <span data-i18n="hero.location_val">Prabumulih / Relocation & Remote Ready</span></span>
                 </div>
                 <div class="hero-foot-item">
-                    <span class="foot-label">Direct Contact</span>
+                    <span class="foot-label" data-i18n="hero.contact_label">Direct Contact</span>
                     <a href="mailto:mathallahrafifaldera@gmail.com" class="foot-value email-link">
                         <span>mathallahrafifaldera@gmail.com</span>
                         <div class="mail-circle-btn">
@@ -138,19 +143,19 @@
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-number text-gold">91.2%</div>
-                    <div class="metric-label">DenseNet121 Classification Accuracy</div>
+                    <div class="metric-label" data-i18n="metrics.acc">DenseNet121 Classification Accuracy</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-number text-gold">59.49</div>
-                    <div class="metric-label">Peak FID Score (StyleGAN2-ADA)</div>
+                    <div class="metric-label" data-i18n="metrics.fid">Peak FID Score (StyleGAN2-ADA)</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-number text-gold">7+</div>
-                    <div class="metric-label">Google Cloud & Dicoding Certifications</div>
+                    <div class="metric-label" data-i18n="metrics.certs">Google Cloud & Dicoding Certifications</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-number text-gold">UNSRI '26</div>
-                    <div class="metric-label">Bachelor of Computer Systems</div>
+                    <div class="metric-label" data-i18n="metrics.degree">Bachelor of Computer Systems</div>
                 </div>
             </div>
         </div>
@@ -160,51 +165,53 @@
     <section class="section about-section" id="about">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle"><i class="fas fa-user-astronaut text-gold"></i> Candidate Overview</span>
-                <h2 class="section-title">Who I Am & <span class="text-gold">What I Bring to Your Team</span></h2>
+                <span class="section-subtitle"><i class="fas fa-user-astronaut text-gold"></i> <span data-i18n="about.subtitle">Candidate Overview</span></span>
+                <h2 class="section-title" data-i18n="about.title">Who I Am & <span class="text-gold">What I Bring to Your Team</span></h2>
             </div>
             
             <div class="about-grid">
                 <div class="about-card main-about">
                     <div class="about-icon-badge"><i class="fas fa-user-gear"></i></div>
-                    <h3>Professional Profile</h3>
-                    <p>
-                        Saya adalah lulusan Sistem Komputer dari <strong>Universitas Sriwijaya (UNSRI)</strong> yang berfokus merintis karir profesional sebagai <strong>AI Engineer, Data Scientist, dan Technology Innovator</strong>. Playground utama saya mencakup algoritma Machine Learning, Deep Learning (Generative AI & Computer Vision), dan Data Analytics.
-                    </p>
-                    <p>
-                        Saya tipe individu yang bekerja dengan ritme <strong>hyper-focus</strong>—mampu mempelajari teknologi baru dengan cepat, menyelesaikan masalah teknis yang rumit dengan efisiensi tinggi, serta mengeksekusi proyek dari fase ideasi hingga siap pakai. Siap memberikan nilai tambah nyata bagi perusahaan Anda.
-                    </p>
+                    <h3 data-i18n="about.card_title">Professional Profile</h3>
+                    <div data-i18n="about.text">
+                        <p>
+                            I am a Computer Systems graduate from <strong>Sriwijaya University (UNSRI)</strong>, dedicated to pursuing a professional career as an <strong>AI Engineer, Data Scientist, and Technology Innovator</strong>. My core expertise covers Machine Learning algorithms, Deep Learning (Generative AI & Computer Vision), and Data Analytics.
+                        </p>
+                        <p>
+                            I operate with a <strong>hyper-focus execution rhythm</strong>—capable of mastering new technologies rapidly, tackling complex technical problems with high efficiency, and executing projects end-to-end from ideation to production. Ready to deliver immediate value to your organization.
+                        </p>
+                    </div>
 
                     <div class="bio-tags">
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> End-to-End AI Pipelines</span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> Data Science & Analytics</span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> Computer Vision Specialist</span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> Fast Learner & Hyper-Focus</span>
+                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.ai_pipelines">End-to-End AI Pipelines</span></span>
+                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.data_analytics">Data Science & Analytics</span></span>
+                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.cv_spec">Computer Vision Specialist</span></span>
+                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.hyper_focus">Fast Learner & Hyper-Focus</span></span>
                     </div>
                 </div>
 
                 <div class="about-card highlight-box">
-                    <h4 class="gold-heading"><i class="fas fa-star"></i> Why Hire Me?</h4>
+                    <h4 class="gold-heading"><i class="fas fa-star"></i> <span data-i18n="why.title">Why Hire Me?</span></h4>
                     <ul class="philosophy-list">
                         <li>
                             <div class="p-icon"><i class="fas fa-brain"></i></div>
                             <div>
-                                <strong>Technical Mastery in AI/ML</strong>
-                                <p>Proven track record building generative models (StyleGAN2-ADA, StyleGAN3, DCGAN) & CNN classifiers using PyTorch & TensorFlow.</p>
+                                <strong data-i18n="why.p1_title">Technical Mastery in AI/ML</strong>
+                                <p data-i18n="why.p1_desc">Proven track record building generative models (StyleGAN2-ADA, StyleGAN3, DCGAN) & CNN classifiers using PyTorch & TensorFlow.</p>
                             </div>
                         </li>
                         <li>
                             <div class="p-icon"><i class="fas fa-chart-pie"></i></div>
                             <div>
-                                <strong>Data Science & Analytical Pipelines</strong>
-                                <p>Proven skills in SQL database querying, exploratory data analysis, and predictive modeling using Scikit-Learn, Pandas & NumPy.</p>
+                                <strong data-i18n="why.p2_title">Data Science & Analytical Pipelines</strong>
+                                <p data-i18n="why.p2_desc">Proven skills in SQL database querying, exploratory data analysis, and predictive modeling using Scikit-Learn, Pandas & NumPy.</p>
                             </div>
                         </li>
                         <li>
                             <div class="p-icon"><i class="fas fa-people-group"></i></div>
                             <div>
-                                <strong>Leadership & Execution Discipline</strong>
-                                <p>Led the Martial Arts Division at UKM Taekwondo UNSRI—managing events, athlete training schedules, and team coordination under pressure.</p>
+                                <strong data-i18n="why.p3_title">Leadership & Execution Discipline</strong>
+                                <p data-i18n="why.p3_desc">Led the Martial Arts Division at UKM Taekwondo UNSRI—managing events, athlete training schedules, and team coordination under pressure.</p>
                             </div>
                         </li>
                     </ul>
@@ -217,17 +224,17 @@
     <section class="section skills-section" id="skills">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-laptop-code text-gold"></i> Interactive Competency Matrix</span>
-                <h2 class="section-title">Core Capabilities & <span class="text-gold">Skill Proficiency</span></h2>
-                <p class="section-desc">Click tabs to filter skills and inspect proficiency metrics across AI Engineering, Data Science, and Computer Vision.</p>
+                <span class="section-subtitle"><i class="fas fa-laptop-code text-gold"></i> <span data-i18n="skills.subtitle">Interactive Competency Matrix</span></span>
+                <h2 class="section-title" data-i18n="skills.title">Core Capabilities & <span class="text-gold">Skill Proficiency</span></h2>
+                <p class="section-desc" data-i18n="skills.desc">Click tabs to filter skills and inspect proficiency metrics across AI Engineering, Data Science, and Computer Vision.</p>
             </div>
 
             <!-- Skill Filter Tabs -->
             <div class="skill-tabs">
-                <button class="skill-tab-btn active" data-filter="all">All Capabilities</button>
-                <button class="skill-tab-btn" data-filter="ai">AI & Deep Learning</button>
-                <button class="skill-tab-btn" data-filter="ds">Data Science & SQL</button>
-                <button class="skill-tab-btn" data-filter="cv">Computer Vision & Tools</button>
+                <button class="skill-tab-btn active" data-filter="all" data-i18n="tabs.all">All Capabilities</button>
+                <button class="skill-tab-btn" data-filter="ai" data-i18n="tabs.ai">AI & Deep Learning</button>
+                <button class="skill-tab-btn" data-filter="ds" data-i18n="tabs.ds">Data Science & SQL</button>
+                <button class="skill-tab-btn" data-filter="cv" data-i18n="tabs.cv">Computer Vision & Tools</button>
             </div>
 
             <div class="skills-matrix-grid" id="skills-grid">
@@ -239,7 +246,7 @@
                         <span class="sp-val">90%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
-                    <p class="sp-desc">Deep Learning model training, loss functions, custom CNN heads, and GPU optimization.</p>
+                    <p class="sp-desc" data-i18n="sp.pytorch">Deep Learning model training, loss functions, custom CNN heads, and GPU optimization.</p>
                 </div>
 
                 <div class="skill-progress-card" data-category="ai">
@@ -248,7 +255,7 @@
                         <span class="sp-val">92%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 92%;"></div></div>
-                    <p class="sp-desc">Multi-stage StyleGAN training, ADA adaptive augmentation, and FID metric convergence analysis.</p>
+                    <p class="sp-desc" data-i18n="sp.stylegan">Multi-stage StyleGAN training, ADA adaptive augmentation, and FID metric convergence analysis.</p>
                 </div>
 
                 <div class="skill-progress-card" data-category="ai">
@@ -257,7 +264,7 @@
                         <span class="sp-val">88%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 88%;"></div></div>
-                    <p class="sp-desc">Transfer learning, feature extraction, binary cross-entropy, and confusion matrix validation.</p>
+                    <p class="sp-desc" data-i18n="sp.densenet">Transfer learning, feature extraction, binary cross-entropy, and confusion matrix validation.</p>
                 </div>
 
                 <!-- Data Science Skills -->
@@ -267,7 +274,7 @@
                         <span class="sp-val">95%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 95%;"></div></div>
-                    <p class="sp-desc">OOP, scripting, automation, harvest utilities, and end-to-end data processing pipelines.</p>
+                    <p class="sp-desc" data-i18n="sp.python">OOP, scripting, automation, harvest utilities, and end-to-end data processing pipelines.</p>
                 </div>
 
                 <div class="skill-progress-card" data-category="ds">
@@ -276,7 +283,7 @@
                         <span class="sp-val">85%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 85%;"></div></div>
-                    <p class="sp-desc">Relational queries, aggregations, joins, data extraction, and Dicoding SQL certification.</p>
+                    <p class="sp-desc" data-i18n="sp.sql">Relational queries, aggregations, joins, data extraction, and Dicoding SQL certification.</p>
                 </div>
 
                 <div class="skill-progress-card" data-category="ds">
@@ -285,7 +292,7 @@
                         <span class="sp-val">90%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
-                    <p class="sp-desc">Data cleaning, EDA, feature scaling, evaluation metrics, and statistical analytics.</p>
+                    <p class="sp-desc" data-i18n="sp.pandas">Data cleaning, EDA, feature scaling, evaluation metrics, and statistical analytics.</p>
                 </div>
 
                 <!-- CV & Tools -->
@@ -295,7 +302,7 @@
                         <span class="sp-val">88%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 88%;"></div></div>
-                    <p class="sp-desc">Image resizing, channel transformations, augmentation pipelines, and PIL/pyspng integration.</p>
+                    <p class="sp-desc" data-i18n="sp.opencv">Image resizing, channel transformations, augmentation pipelines, and PIL/pyspng integration.</p>
                 </div>
 
                 <div class="skill-progress-card" data-category="cv">
@@ -304,7 +311,7 @@
                         <span class="sp-val">90%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
-                    <p class="sp-desc">Branching strategy, .gitignore data security enforcement, GitHub Pages, and version control.</p>
+                    <p class="sp-desc" data-i18n="sp.git">Branching strategy, .gitignore data security enforcement, GitHub Pages, and version control.</p>
                 </div>
 
                 <div class="skill-progress-card" data-category="cv">
@@ -313,7 +320,7 @@
                         <span class="sp-val">92%</span>
                     </div>
                     <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 92%;"></div></div>
-                    <p class="sp-desc">Automated chart generation, multi-stage training curve visualization, and publication-ready plots.</p>
+                    <p class="sp-desc" data-i18n="sp.plotlib">Automated chart generation, multi-stage training curve visualization, and publication-ready plots.</p>
                 </div>
 
             </div>
@@ -324,20 +331,20 @@
     <section class="section research-section" id="projects">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-folder-open text-gold"></i> Interactive Case Studies</span>
-                <h2 class="section-title">Featured Projects & <span class="text-gold">Recruiter Insights</span></h2>
-                <p class="section-desc">Click on any project card to open the interactive case study modal with technical insights, problem solving, and code preview.</p>
+                <span class="section-subtitle"><i class="fas fa-folder-open text-gold"></i> <span data-i18n="projects.subtitle">Interactive Case Studies</span></span>
+                <h2 class="section-title" data-i18n="projects.title">Featured Projects & <span class="text-gold">Recruiter Insights</span></h2>
+                <p class="section-desc" data-i18n="projects.desc">Click on any project card to open the interactive case study modal with technical insights, problem solving, and code preview.</p>
             </div>
 
             <div class="interactive-projects-grid">
                 
                 <!-- Case Study 1 (Flagship) -->
                 <div class="interactive-project-card flagship" data-project="stylegan">
-                    <div class="ipc-badge"><i class="fas fa-star"></i> Featured Case Study</div>
+                    <div class="ipc-badge"><i class="fas fa-star"></i> <span data-i18n="projects.flagship_badge">Featured Case Study</span></div>
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-brain"></i></div>
-                        <h3>Generative AI Medical Image Augmentation (StyleGAN2-ADA & DenseNet121)</h3>
-                        <p class="ipc-desc">Solved medical data scarcity by generating high-resolution synthetic cervical images, elevating DenseNet121 CNN classification accuracy from 82.5% to 91.2%.</p>
+                        <h3 data-i18n="cs1.title">Generative AI Medical Image Augmentation (StyleGAN2-ADA & DenseNet121)</h3>
+                        <p class="ipc-desc" data-i18n="cs1.desc">Solved medical data scarcity by generating high-resolution synthetic cervical images, elevating DenseNet121 CNN classification accuracy from 82.5% to 91.2%.</p>
                         
                         <div class="ipc-stats">
                             <span><i class="fas fa-arrow-trend-up text-gold"></i> +8.7% Accuracy</span>
@@ -345,7 +352,7 @@
                         </div>
 
                         <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Recruiter Insights &rarr;</span>
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Recruiter Insights &rarr;</span></span>
                         </div>
                     </div>
                 </div>
@@ -354,8 +361,8 @@
                 <div class="interactive-project-card" data-project="dashboard">
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3>Automated Data Analytics & Visualization Dashboard</h3>
-                        <p class="ipc-desc">Engineered automated Python data-harvesting scripts and dynamic visualization dashboards to parse multi-stage experimental logs and model metrics.</p>
+                        <h3 data-i18n="cs2.title">Automated Data Analytics & Visualization Dashboard</h3>
+                        <p class="ipc-desc" data-i18n="cs2.desc">Engineered automated Python data-harvesting scripts and dynamic visualization dashboards to parse multi-stage experimental logs and model metrics.</p>
                         
                         <div class="ipc-stats">
                             <span><i class="fas fa-chart-area text-gold"></i> Matplotlib / Seaborn</span>
@@ -363,7 +370,7 @@
                         </div>
 
                         <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Insights &rarr;</span>
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Insights &rarr;</span></span>
                         </div>
                     </div>
                 </div>
@@ -372,8 +379,8 @@
                 <div class="interactive-project-card" data-project="sql">
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-database"></i></div>
-                        <h3>Relational SQL Querying & Business Analytics Pipeline</h3>
-                        <p class="ipc-desc">Engineered relational database queries, table aggregations, and data extraction pipelines for structured business logic analysis.</p>
+                        <h3 data-i18n="cs3.title">Relational SQL Querying & Business Analytics Pipeline</h3>
+                        <p class="ipc-desc" data-i18n="cs3.desc">Engineered relational database queries, table aggregations, and data extraction pipelines for structured business logic analysis.</p>
                         
                         <div class="ipc-stats">
                             <span><i class="fas fa-table text-gold"></i> Relational SQL</span>
@@ -381,7 +388,7 @@
                         </div>
 
                         <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Insights &rarr;</span>
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Insights &rarr;</span></span>
                         </div>
                     </div>
                 </div>
@@ -390,8 +397,8 @@
                 <div class="interactive-project-card" data-project="vision">
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-eye"></i></div>
-                        <h3>Generative Vision Baseline Exploration (DCGAN & WGAN-GP)</h3>
-                        <p class="ipc-desc">Designed comparative Deep Convolutional GANs and Wasserstein GANs with Gradient Penalty for patch synthesis and stability evaluation.</p>
+                        <h3 data-i18n="cs4.title">Generative Vision Baseline Exploration (DCGAN & WGAN-GP)</h3>
+                        <p class="ipc-desc" data-i18n="cs4.desc">Designed comparative Deep Convolutional GANs and Wasserstein GANs with Gradient Penalty for patch synthesis and stability evaluation.</p>
                         
                         <div class="ipc-stats">
                             <span><i class="fas fa-fire text-gold"></i> PyTorch & CUDA</span>
@@ -399,7 +406,7 @@
                         </div>
 
                         <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> Click for Insights &rarr;</span>
+                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Insights &rarr;</span></span>
                         </div>
                     </div>
                 </div>
@@ -412,8 +419,8 @@
     <section class="section experience-section" id="experience">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle"><i class="fas fa-briefcase text-gold"></i> Track Record & Impact</span>
-                <h2 class="section-title">Work Experience & <span class="text-gold">Leadership Roles</span></h2>
+                <span class="section-subtitle"><i class="fas fa-briefcase text-gold"></i> <span data-i18n="exp.subtitle">Track Record & Impact</span></span>
+                <h2 class="section-title" data-i18n="exp.title">Work Experience & <span class="text-gold">Leadership Roles</span></h2>
             </div>
 
             <div class="timeline">
@@ -423,10 +430,10 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2026</div>
                     <div class="timeline-content">
-                        <div class="role-badge">AI Research</div>
-                        <h3>Undergraduate AI Researcher & Developer</h3>
+                        <div class="role-badge" data-i18n="exp.r1_badge">AI Research</div>
+                        <h3 data-i18n="exp.r1_role">Undergraduate AI Researcher & Developer</h3>
                         <span class="company-name"><i class="fas fa-university text-gold"></i> ISys Research Group & Sriwijaya University</span>
-                        <ul class="timeline-bullet-list">
+                        <ul class="timeline-bullet-list" data-i18n="exp.r1_bullets">
                             <li>Conducted comparative analysis of StyleGAN2-ADA vs StyleGAN3 to address data scarcity in medical AI.</li>
                             <li>Achieved peak FID score of 59.49 and elevated DenseNet121 classification accuracy to 91.2%.</li>
                             <li>Formulated clean, modular open-source repositories with strict data security standards.</li>
@@ -439,10 +446,10 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2023 – 2025</div>
                     <div class="timeline-content">
-                        <div class="role-badge">Leadership</div>
-                        <h3>Committee Member & Martial Arts Division Lead</h3>
+                        <div class="role-badge" data-i18n="exp.r2_badge">Leadership</div>
+                        <h3 data-i18n="exp.r2_role">Committee Member & Martial Arts Division Lead</h3>
                         <span class="company-name"><i class="fas fa-trophy text-gold"></i> UKM Beladiri Taekwondo UNSRI</span>
-                        <ul class="timeline-bullet-list">
+                        <ul class="timeline-bullet-list" data-i18n="exp.r2_bullets">
                             <li>Directed the Martial Arts Division, overseeing training schedules and member athletic development.</li>
                             <li>Managed committee responsibilities for organizational events, fostering teamwork, operational efficiency, and event coordination under pressure.</li>
                         </ul>
@@ -454,10 +461,10 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">Feb 2026</div>
                     <div class="timeline-content">
-                        <div class="role-badge">Internship</div>
-                        <h3>IT & Systems Intern</h3>
+                        <div class="role-badge" data-i18n="exp.r3_badge">Internship</div>
+                        <h3 data-i18n="exp.r3_role">IT & Systems Intern</h3>
                         <span class="company-name"><i class="fas fa-building text-gold"></i> Diskominfo Kota Prabumulih</span>
-                        <ul class="timeline-bullet-list">
+                        <ul class="timeline-bullet-list" data-i18n="exp.r3_bullets">
                             <li>Gained practical exposure to local government IT systems workflows and infrastructure maintenance.</li>
                         </ul>
                     </div>
@@ -471,8 +478,8 @@
     <section class="section cert-section" id="certifications">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-certificate text-gold"></i> Verified Credentials</span>
-                <h2 class="section-title">Certifications & <span class="text-gold">Continuous Learning</span></h2>
+                <span class="section-subtitle"><i class="fas fa-certificate text-gold"></i> <span data-i18n="certs.subtitle">Verified Credentials</span></span>
+                <h2 class="section-title" data-i18n="certs.title">Certifications & <span class="text-gold">Continuous Learning</span></h2>
             </div>
 
             <div class="cert-grid">
@@ -547,9 +554,9 @@
             <div class="contact-box-wrapper">
                 
                 <div class="contact-left">
-                    <span class="section-subtitle"><i class="fas fa-paper-plane text-gold"></i> Get In Touch</span>
-                    <h2 class="contact-heading">Ready to add value to your <span class="text-gold">tech team</span>.</h2>
-                    <p class="contact-text">
+                    <span class="section-subtitle"><i class="fas fa-paper-plane text-gold"></i> <span data-i18n="contact.subtitle">Get In Touch</span></span>
+                    <h2 class="contact-heading" data-i18n="contact.title">Ready to add value to your <span class="text-gold">tech team</span>.</h2>
+                    <p class="contact-text" data-i18n="contact.desc">
                         Actively seeking opportunities for <strong>AI Engineer, Data Scientist, Computer Vision Specialist, Machine Learning Engineer, Data Analyst,</strong> and <strong>AI Developer</strong> roles. Open for full-time, relocation, and remote positions.
                     </p>
 
@@ -557,28 +564,28 @@
                         <a href="mailto:mathallahrafifaldera@gmail.com" class="c-link-item">
                             <div class="c-icon"><i class="fas fa-envelope"></i></div>
                             <div>
-                                <span class="c-label">Email Address</span>
+                                <span class="c-label" data-i18n="contact.email_label">Email Address</span>
                                 <span class="c-val">mathallahrafifaldera@gmail.com</span>
                             </div>
                         </a>
                         <a href="https://wa.me/6289519333313" target="_blank" class="c-link-item">
                             <div class="c-icon"><i class="fab fa-whatsapp"></i></div>
                             <div>
-                                <span class="c-label">Phone / WhatsApp</span>
+                                <span class="c-label" data-i18n="contact.phone_label">Phone / WhatsApp</span>
                                 <span class="c-val">+62 895-1933-3313</span>
                             </div>
                         </a>
                         <a href="https://www.linkedin.com/in/mathallahrafifaldera/" target="_blank" class="c-link-item">
                             <div class="c-icon"><i class="fab fa-linkedin"></i></div>
                             <div>
-                                <span class="c-label">LinkedIn Profile</span>
+                                <span class="c-label" data-i18n="contact.linkedin_label">LinkedIn Profile</span>
                                 <span class="c-val">linkedin.com/in/mathallahrafifaldera</span>
                             </div>
                         </a>
                         <a href="https://github.com/aral3000" target="_blank" class="c-link-item">
                             <div class="c-icon"><i class="fab fa-github"></i></div>
                             <div>
-                                <span class="c-label">GitHub Account</span>
+                                <span class="c-label" data-i18n="contact.github_label">GitHub Account</span>
                                 <span class="c-val">github.com/aral3000</span>
                             </div>
                         </a>
@@ -587,21 +594,21 @@
 
                 <div class="contact-right">
                     <form class="contact-form" id="contact-form">
-                        <h3>Send a Recruiter Message</h3>
+                        <h3 data-i18n="form.title">Send a Recruiter Message</h3>
                         <div class="form-group">
-                            <label for="name">Your Name / Company</label>
+                            <label for="name" data-i18n="form.name_label">Your Name / Company</label>
                             <input type="text" id="name" required placeholder="e.g. HR Manager / Tech Lead">
                         </div>
                         <div class="form-group">
-                            <label for="email">Work Email</label>
+                            <label for="email" data-i18n="form.email_label">Work Email</label>
                             <input type="email" id="email" required placeholder="recruiter@company.com">
                         </div>
                         <div class="form-group">
-                            <label for="message">Message / Opportunity Details</label>
+                            <label for="message" data-i18n="form.msg_label">Message / Opportunity Details</label>
                             <textarea id="message" rows="4" required placeholder="Hello Athallah, we would like to connect with you regarding..."></textarea>
                         </div>
                         <button type="submit" class="btn-primary-gold btn-full">
-                            <i class="fas fa-paper-plane"></i> Send Direct Message
+                            <i class="fas fa-paper-plane"></i> <span data-i18n="form.btn_send">Send Direct Message</span>
                         </button>
                     </form>
                 </div>
@@ -632,7 +639,7 @@
         <div class="container footer-container">
             <div class="footer-brand">
                 <span class="logo-name">Athallah</span><span class="logo-dot">.</span>
-                <p>M. Athallah Rafif Aldera | AI Engineer & Data Scientist Candidate</p>
+                <p data-i18n="footer.tag">M. Athallah Rafif Aldera | AI Engineer & Data Scientist Candidate</p>
             </div>
             <div class="footer-socials">
                 <a href="https://github.com/aral3000" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
