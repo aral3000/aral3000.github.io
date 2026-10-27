@@ -70,25 +70,25 @@ document.addEventListener('DOMContentLoaded', () => {
             "projects.desc": "Click on any project card to open the interactive case study modal with technical insights, problem solving, and code preview.",
             "projects.flagship_badge": "Featured Case Study",
             "cs1.title": "Generative AI Medical Image Augmentation (StyleGAN2-ADA & DenseNet121)",
-            "cs1.desc": "Solved medical data scarcity by generating high-resolution synthetic cervical images, elevating DenseNet121 CNN classification accuracy from 82.5% to 91.2%.",
-            "cs2.title": "Automated Data Analytics & Visualization Dashboard",
-            "cs2.desc": "Engineered automated Python data-harvesting scripts and dynamic visualization dashboards to parse multi-stage experimental logs and model metrics.",
-            "cs3.title": "Relational SQL Querying & Business Analytics Pipeline",
-            "cs3.desc": "Engineered relational database queries, table aggregations, and data extraction pipelines for structured business logic analysis.",
-            "cs4.title": "Generative Vision Baseline Exploration (DCGAN & WGAN-GP)",
-            "cs4.desc": "Designed comparative Deep Convolutional GANs and Wasserstein GANs with Gradient Penalty for patch synthesis and stability evaluation.",
+            "cs1.desc": "Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN on clinical VIA cervical datasets (peak FID 49.62), elevating DenseNet121 accuracy to 97.00% (50:50 mix) and 95.00% on 100% synthetic substitution.",
+            "cs2.title": "Real-Time Phishing URL Detection System (630K URLs • Random Forest)",
+            "cs2.desc": "Built an end-to-end cybersecurity ML pipeline for Dinas Kominfo trained on 630,071 URLs (89.0% test accuracy), featuring 9 lexical URL extractors, FastAPI service, and Streamlit dashboard.",
+            "cs3.title": "Autonomous Market Research Agent (ReAct & Cosine Vector Store)",
+            "cs3.desc": "Engineered an autonomous multi-step ReAct agent with web search & scraper tools, custom NumPy cosine similarity vector memory, and structured executive report generation.",
+            "cs4.title": "Python AI Core Toolkit (TDD Data Structures, NumPy & Pandas)",
+            "cs4.desc": "Modular software engineering & AI fundamentals monorepo implementing O(1) data structures, vectorized NumPy cosine similarity matrices, and Pandas ETL pipelines verified by pytest.",
             "btn.click_insights": "Click for Recruiter Insights →",
             "exp.subtitle": "Track Record & Impact",
             "exp.title": 'Work Experience & <span class="text-gold">Leadership Roles</span>',
             "exp.r1_badge": "AI Research",
             "exp.r1_role": "Undergraduate AI Researcher & Developer",
-            "exp.r1_bullets": '<li>Conducted comparative analysis of StyleGAN2-ADA vs StyleGAN3 to address data scarcity in medical AI.</li><li>Achieved peak FID score of 59.49 and elevated DenseNet121 classification accuracy to 91.2%.</li><li>Formulated clean, modular open-source repositories with strict data security standards.</li>',
+            "exp.r1_bullets": '<li>Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN under Prof. Ir. Siti Nurmaini, M.T., Ph.D. to address clinical VIA cervical image scarcity.</li><li>Achieved peak FID score of 49.62 (StyleGAN2-ADA), elevated DenseNet121 accuracy to 97.00% (50:50 mix), and proved 95.00% accuracy with 100% positive precision on 100% synthetic substitution.</li><li>Published reproducible open-source inference CLI and test suite on GitHub.</li>',
             "exp.r2_badge": "Leadership",
             "exp.r2_role": "Committee Member & Martial Arts Division Lead",
-            "exp.r2_bullets": '<li>Directed the Martial Arts Division, overseeing training schedules and member athletic development.</li><li>Managed committee responsibilities for organizational events, fostering teamwork, operational efficiency, and event coordination under pressure.</li>',
+            "exp.r2_bullets": '<li>Directed the Martial Arts Division, overseeing training schedules and athlete development; won 3rd Place (Under 70kg) at PORKAB IV Ogan Ilir 2023.</li><li>Managed committee responsibilities for organizational events, fostering teamwork and operational discipline under pressure.</li>',
             "exp.r3_badge": "Internship",
-            "exp.r3_role": "IT & Systems Intern",
-            "exp.r3_bullets": '<li>Gained practical exposure to local government IT systems workflows and infrastructure maintenance.</li>',
+            "exp.r3_role": "Web Developer & Applied ML Intern",
+            "exp.r3_bullets": '<li>Developed and refined responsive internal web application modules using HTML, CSS, PHP, and JavaScript (Evaluated Grade A / 89.83).</li><li>Engineered a Random Forest URL phishing detection prototype trained on 630,071 URLs (89.0% test accuracy) to support public-sector digital security literacy.</li>',
             "certs.subtitle": "Verified Credentials",
             "certs.title": 'Certifications & <span class="text-gold">Continuous Learning</span>',
             "contact.subtitle": "Get In Touch",
@@ -167,25 +167,25 @@ document.addEventListener('DOMContentLoaded', () => {
             "projects.desc": "Klik pada kartu proyek untuk membuka modal studi kasus interaktif yang berisi tantangan teknis, solusi, dan contoh kode.",
             "projects.flagship_badge": "Studi Kasus Unggulan",
             "cs1.title": "Augmentasi Citra Medis Generative AI (StyleGAN2-ADA & DenseNet121)",
-            "cs1.desc": "Mengatasi kelangkaan data medis dengan menghasilkan citra serviks sintetis berkualitas tinggi, meningkatkan akurasi DenseNet121 dari 82.5% ke 91.2%.",
-            "cs2.title": "Dashboard Analisis & Visualisasi Data Otomatis",
-            "cs2.desc": "Merancang skrip otomatisasi Python dan dashboard visualisasi dinamis untuk mengolah log eksperimen dan metrik model.",
-            "cs3.title": "Query SQL Relasional & Pipeline Analisis Bisnis",
-            "cs3.desc": "Merancang query database relasional, agregasi tabel, dan pipeline ekstraksi data untuk analisis logika bisnis.",
-            "cs4.title": "Eksplorasi Baseline Generative Vision (DCGAN & WGAN-GP)",
-            "cs4.desc": "Merancang dan membandingkan model DCGAN dan WGAN-GP dengan Gradient Penalty untuk sintesis gambar dan evaluasi stabilitas.",
+            "cs1.desc": "Membandingkan StyleGAN2-ADA, StyleGAN3, dan DCGAN pada citra serviks VIA klinis (FID terbaik 49.62), meningkatkan akurasi DenseNet121 ke 97.00% (50:50) dan 95.00% pada substitusi sintetis 100%.",
+            "cs2.title": "Sistem Deteksi URL Phishing Real-Time (630K URL • Random Forest)",
+            "cs2.desc": "Membangun pipeline Machine Learning keamanan siber untuk Dinas Kominfo pada 630.071 URL (akurasi uji 89.0%), lengkap dengan 9 fitur leksikal URL, FastAPI, dan dashboard Streamlit.",
+            "cs3.title": "Autonomous Market Research Agent (ReAct & Cosine Vector Store)",
+            "cs3.desc": "Merancang agen ReAct otonom multi-langkah dengan tool pencarian web, memori vektor kemiripan kosinus NumPy, dan pembuatan laporan eksekutif terstruktur.",
+            "cs4.title": "Python AI Core Toolkit (TDD Struktur Data, NumPy & Pandas)",
+            "cs4.desc": "Monorepo fundamental rekayasa perangkat lunak & AI yang mengimplementasikan struktur data O(1), matriks kemiripan kosinus NumPy tervektorisasi, dan pipeline ETL Pandas teruji pytest.",
             "btn.click_insights": "Klik untuk Insight Recruiter →",
             "exp.subtitle": "Pengalaman & Dampak",
             "exp.title": 'Pengalaman Kerja & <span class="text-gold">Peran Kepemimpinan</span>',
             "exp.r1_badge": "Riset AI",
             "exp.r1_role": "Peneliti & Developer AI",
-            "exp.r1_bullets": '<li>Melakukan analisis komparatif StyleGAN2-ADA vs StyleGAN3 untuk mengatasi kelangkaan data AI medis.</li><li>Mencapai skor FID terbaik 59.49 dan meningkatkan akurasi klasifikasi DenseNet121 menjadi 91.2%.</li><li>Menyusun repositori open-source modular dan memenuhi standar keamanan data.</li>',
+            "exp.r1_bullets": '<li>Melakukan benchmarking StyleGAN2-ADA, StyleGAN3, dan DCGAN di bawah bimbingan Prof. Ir. Siti Nurmaini, M.T., Ph.D. untuk mengatasi kelangkaan citra serviks VIA.</li><li>Mencapai skor FID terbaik 49.62 (StyleGAN2-ADA), meningkatkan akurasi klasifikasi DenseNet121 menjadi 97.00% (50:50), serta membuktikan akurasi 95.00% dengan presisi positif 100% pada substitusi sintetis penuh.</li><li>Mempublikasikan CLI inferensi open-source dan automated test suite di GitHub.</li>',
             "exp.r2_badge": "Kepemimpinan",
             "exp.r2_role": "Ketua Divisi Beladiri & Anggota Pengurus",
-            "exp.r2_bullets": '<li>Memimpin Divisi Beladiri UKM Taekwondo UNSRI, mengawasi program latihan dan perkembangan atlet.</li><li>Mengelola tanggung jawab panitia event organisasi, membina kerja sama tim dan efisiensi operasional.</li>',
+            "exp.r2_bullets": '<li>Memimpin Divisi Beladiri UKM Taekwondo UNSRI serta meraih Juara III Kelas Under 70 Kg Putra pada PORKAB IV Ogan Ilir 2023.</li><li>Mengelola tanggung jawab kepanitiaan event organisasi dan koordinasi tim di bawah tekanan.</li>',
             "exp.r3_badge": "Magang",
-            "exp.r3_role": "Magang IT & Sistem Informasi",
-            "exp.r3_bullets": '<li>Mendapatkan pengalaman praktis terkait alur kerja sistem IT pemerintah daerah dan perawatan infrastruktur.</li>',
+            "exp.r3_role": "Web Developer & Applied ML Intern",
+            "exp.r3_bullets": '<li>Mengembangkan dan menyempurnakan modul antarmuka aplikasi web internal menggunakan HTML, CSS, PHP, dan JavaScript (Predikat Nilai A / 89,83).</li><li>Membangun prototipe deteksi tautan phishing berbasis Random Forest pada 630.071 URL (akurasi uji 89,0%) untuk mendukung literasi keamanan digital publik.</li>',
             "certs.subtitle": "Kredensial Terverifikasi",
             "certs.title": 'Sertifikasi & <span class="text-gold">Pembelajaran Berkelanjutan</span>',
             "contact.subtitle": "Hubungi Saya",
@@ -264,25 +264,25 @@ document.addEventListener('DOMContentLoaded', () => {
             "projects.desc": "点击任意项目卡片打开交互式案例弹窗，查看技术难点解析、解决方案与核心代码预览。",
             "projects.flagship_badge": "旗舰精选案例",
             "cs1.title": "生成式 AI 医疗图像增强 (StyleGAN2-ADA & DenseNet121)",
-            "cs1.desc": "通过生成高分辨率合成宫颈图像，解决医疗数据稀缺问题，将 DenseNet121 CNN 分类准确率从 82.5% 提升至 91.2%。",
-            "cs2.title": "自动化数据分析与可视化仪表盘",
-            "cs2.desc": "编写 Python 自动化数据采集脚本与动态可视化仪表盘，解析多阶段实验日志与模型收敛指标。",
-            "cs3.title": "关系型 SQL 查询与业务分析流水线",
-            "cs3.desc": "构建关系型数据库查询、数据聚合与数据提取流水线，进行结构化业务逻辑分析。",
-            "cs4.title": "生成式视觉基线探索 (DCGAN & WGAN-GP)",
-            "cs4.desc": "设计并对比 DCGAN 与带有梯度惩罚的 WGAN-GP 图像块生成模型，评估训练稳定性。",
+            "cs1.desc": "对比 StyleGAN2-ADA、StyleGAN3 与 DCGAN 在临床宫颈图像上的表现（最佳 FID 49.62），将 DenseNet121 准确率提升至 97.00%（50:50 混合）及 95.00%（100% 合成图像替换）。",
+            "cs2.title": "实时钓鱼网址检测系统 (63万 URL • 随机森林)",
+            "cs2.desc": "为通信与信息部 (Diskominfo) 构建基于 630,071 条 URL 的网络安全机器学习流水线（测试准确率 89.0%），集成 9 项词法特征、FastAPI 与 Streamlit。",
+            "cs3.title": "自主市场研究智能体 (ReAct & 余弦向量存储)",
+            "cs3.desc": "构建具备网页搜索与抓取工具调用、NumPy 余弦相似度向量记忆及结构化高管报告生成的多步 ReAct 智能体。",
+            "cs4.title": "Python AI 核心工具包 (TDD 数据结构、NumPy & Pandas)",
+            "cs4.desc": "模块化软件工程与 AI 基础代码库，包含 O(1) 数据结构、向量化 NumPy 余弦相似度矩阵与 Pandas 特征工程流水线（100% 通过 pytest）。",
             "btn.click_insights": "点击查看招聘官深度解析 →",
             "exp.subtitle": "履历与成就",
             "exp.title": '工作经历 & <span class="text-gold">领导力角色</span>',
             "exp.r1_badge": "AI 前沿研究",
             "exp.r1_role": "本科 AI 研究员与开发者",
-            "exp.r1_bullets": '<li>深入对比 StyleGAN2-ADA 与 StyleGAN3 在医疗 AI 数据稀缺场景下的效果。</li><li>取得 59.49 的最佳 FID 指标，并将 DenseNet121 分类准确率提升至 91.2%。</li><li>构建符合高标准数据安全规范的模块化开源代码仓库。</li>',
+            "exp.r1_bullets": '<li>在 Prof. Ir. Siti Nurmaini, M.T., Ph.D. 指导下对比 StyleGAN2-ADA、StyleGAN3 与 DCGAN 在医疗 AI 数据稀缺场景下的表现。</li><li>取得 49.62 的最佳 FID 指标，将 DenseNet121 分类准确率提升至 97.00%（并在 100% 合成数据替换下取得 95.00% 准确率与 100% 阳性精确率）。</li><li>在 GitHub 发布可复现的推理 CLI 与自动化测试套件。</li>',
             "exp.r2_badge": "团队领导力",
             "exp.r2_role": "武术部负责人与委员会成员",
-            "exp.r2_bullets": '<li>负责 UNSRI 跆拳道协会武术部门，统筹训练计划与运动员竞技水平提升。</li><li>组织大型团队活动，培养团队协作能力、高执行效率与高压下的沟通调度能力。</li>',
+            "exp.r2_bullets": '<li>负责 UNSRI 跆拳道协会武术部门并荣获 2023 年第四届县运会 (PORKAB IV) 男子 70 公斤级以下季军。</li><li>组织团队活动，培养团队协作能力与高压下的执行纪律。</li>',
             "exp.r3_badge": "实习经历",
-            "exp.r3_role": "IT 与系统实习生",
-            "exp.r3_bullets": '<li>参与地方政府 IT 系统工作流与网络基础设施日常运维。</li>',
+            "exp.r3_role": "Web 开发与机器学习应用实习生",
+            "exp.r3_bullets": '<li>使用 HTML、CSS、PHP 与 JavaScript 开发并优化政府内部 Web 应用模块（实习考核成绩 A / 89.83）。</li><li>基于 630,071 条 URL 训练随机森林钓鱼链接检测原型（准确率 89.0%）。</li>',
             "certs.subtitle": "权威认证",
             "certs.title": '专业认证 & <span class="text-gold">持续学习</span>',
             "contact.subtitle": "联系我",
@@ -540,78 +540,74 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "StyleGAN2-ADA Cervical Image Augmentation & DenseNet121 Classification",
             body: `
                 <h4>Business & Research Challenge</h4>
-                <p>Medical image classification for cervical cancer screening via Visual Inspection with Acetic Acid (VIA) often suffers from extreme class imbalance and scarce annotated datasets (only 666 original images available).</p>
+                <p>Medical image classification for cervical cancer screening via Visual Inspection with Acetic Acid (VIA) suffers from severe class imbalance and clinical data scarcity.</p>
 
                 <h4>Technical Solution & Engineering</h4>
-                <p>Engineered a multi-stage generative pipeline using StyleGAN2 with Adaptive Data Augmentation (ADA) trained on Kaggle Dual T4 GPUs. Synthesized 666 high-resolution (128x128) abnormal synthetic images without discriminator collapse.</p>
+                <p>Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN on clinical VIA cervical datasets under strict zero data-leakage protocols. Synthesized high-resolution (256x256) abnormal cervical images and evaluated downstream DenseNet121 CNN classification across two scenarios.</p>
 
                 <h4>Quantifiable Results & Value-Add</h4>
                 <ul>
-                    <li><strong>FID Score Convergence:</strong> Achieved peak Fréchet Inception Distance of <strong>59.49</strong> (down from 89.23 in initial stages).</li>
-                    <li><strong>Classification Accuracy Lift:</strong> Injected synthetic images into a DenseNet121 CNN under strict Zero Data-Leakage protocols, boosting test accuracy from <strong>82.5%</strong> (Baseline) to <strong>91.2%</strong> (Augmented).</li>
-                    <li><strong>Code Governance:</strong> Published production-ready modular Python codebase with automated harvest scripts.</li>
+                    <li><strong>FID Score Convergence:</strong> StyleGAN2-ADA achieved a peak Fréchet Inception Distance of <strong>49.62</strong>, outperforming StyleGAN3 (62.66) and DCGAN (210.01).</li>
+                    <li><strong>Scenario A (50% Real + 50% Synthetic):</strong> Elevated DenseNet121 test accuracy to <strong>97.00%</strong> (vs 96.00% baseline).</li>
+                    <li><strong>Scenario B (100% Synthetic Substitution):</strong> Achieved <strong>95.00% test accuracy</strong>, <strong>96% F1-score</strong>, and <strong>100.00% positive precision & specificity</strong> using purely synthetic abnormal training samples.</li>
                 </ul>
 
-                <h4>Sample Python Snippet</h4>
+                <h4>Sample Python CLI Usage</h4>
                 <div class="code-box-preview">
-# StyleGAN2 Synthetic Image Generation Pipeline
-device = torch.device('cuda')
-with open(NETWORK_PKL, 'rb') as f:
-    G = pickle.load(f)['G_ema'].to(device)
-
-z = torch.randn([1, G.z_dim]).to(device)
-img = G(z, None)
-img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
+# Single-image or batch VIA abnormality inference CLI
+python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
+# Output: {"prediction": "ABNORMAL (VIA+)", "confidence": 0.984, "latency_ms": 18.2}
                 </div>
             `,
             link: "https://github.com/aral3000/cervical-cancer-stylegan2-densenet121"
         },
         dashboard: {
-            tag: "Data Science & Visualization Pipeline",
-            title: "Automated Data Analytics & Visualization Dashboard",
+            tag: "Applied ML & Cybersecurity Case Study",
+            title: "Real-Time Phishing URL Detection System (630,071 URLs • Random Forest)",
             body: `
-                <h4>Technical Problem & Solution</h4>
-                <p>Multi-stage deep learning experiments produce massive raw JSON metric logs. Manual tracking is slow and error-prone.</p>
+                <h4>Problem Statement</h4>
+                <p>Malicious phishing URLs evolve rapidly, requiring fast lexical inspection that does not rely solely on static blacklists or slow page-rendering sandboxes.</p>
 
-                <h4>Implementation & Value-Add</h4>
+                <h4>Technical Implementation</h4>
                 <ul>
-                    <li>Engineered automated Python data-harvesting scripts to parse cumulative training metrics and FID scores.</li>
-                    <li>Generated publication-ready statistical visualizations using Matplotlib & Seaborn.</li>
-                    <li>Streamlined metric tracking and experiment convergence auditing.</li>
+                    <li>Engineered 9 fast lexical URL feature extractors (length, subdomain depth, IP-in-host, suspicious TLDs, entropy/special characters, brand-spoofing tokens).</li>
+                    <li>Trained and evaluated a Random Forest classifier on <strong>630,071 URLs</strong> (Dinas Kominfo dataset), achieving <strong>89.0% test accuracy</strong>.</li>
+                    <li>Deployed an interactive Streamlit inspection dashboard and FastAPI REST endpoint with full pytest verification.</li>
                 </ul>
             `,
-            link: "https://github.com/aral3000/cervical-cancer-stylegan2-densenet121"
+            link: "https://github.com/aral3000/phishing-detection-system"
         },
         sql: {
-            tag: "Data Science & Database Querying",
-            title: "Relational SQL Querying & Analytics Pipeline",
+            tag: "Agentic AI & Vector Memory Case Study",
+            title: "Autonomous Market Research Agent (ReAct Loop & Cosine Vector Store)",
             body: `
                 <h4>Technical Overview</h4>
-                <p>Certified by Dicoding Indonesia in Relational Databases and SQL (ID: 4EXG1WJKEPRL). Designed data extraction and analytics pipelines for business logic verification.</p>
+                <p>Designed an autonomous multi-step ReAct (Reason + Act) agent that plans research queries, executes web search and scraping tools, stores findings in a vectorized NumPy cosine similarity memory store, and synthesizes structured executive reports.</p>
 
-                <h4>Key Competencies</h4>
+                <h4>Key Engineering Highlights</h4>
                 <ul>
-                    <li>Complex SQL queries with INNER/LEFT JOINs, subqueries, and GROUP BY aggregations.</li>
-                    <li>Relational database schema modeling and data integrity enforcement.</li>
-                    <li>Integration of SQL query results with Python (Pandas/NumPy) for automated reporting.</li>
+                    <li>Zero-dependency custom Cosine Similarity Vector Store built with vectorized NumPy operations.</li>
+                    <li>Deterministic ReAct loop with tool-call tracing, confidence scoring, and markdown report export.</li>
+                    <li>Includes CLI runner, FastAPI service, Streamlit UI, and 100% passing pytest suite.</li>
                 </ul>
             `,
-            link: "#contact"
+            link: "https://github.com/aral3000/autonomous-market-research-agent"
         },
         vision: {
-            tag: "Computer Vision & Generative Baseline",
-            title: "DCGAN & WGAN-GP Baseline Exploration",
+            tag: "Software Engineering & AI Fundamentals (TDD)",
+            title: "Python AI Core Toolkit (Data Structures, NumPy & Pandas Pipelines)",
             body: `
                 <h4>Technical Overview</h4>
-                <p>Conducted baseline experiments with Deep Convolutional GANs (DCGAN) and Wasserstein GANs with Gradient Penalty (WGAN-GP) for image patch generation.</p>
+                <p>A Test-Driven Development (TDD) monorepo demonstrating core data structures, vectorized numerical computing, and reproducible tabular feature engineering without heavy framework bloat.</p>
 
-                <h4>Key Technical Achievements</h4>
+                <h4>Key Modules</h4>
                 <ul>
-                    <li>Implemented WGAN-GP loss function to enforce 1-Lipschitz constraint via gradient penalty coefficient.</li>
-                    <li>Compared Mode Collapse behavior between vanilla GANs vs WGAN-GP on custom image patches.</li>
+                    <li><strong>O(1) Data Structures:</strong> Custom LRU Cache and Sliding Window Rate Limiter for high-throughput APIs.</li>
+                    <li><strong>Vectorized NumPy:</strong> Batch Cosine Similarity matrix computation without Python loops.</li>
+                    <li><strong>Pandas Feature Pipeline:</strong> Automated missing-value imputation, outlier clipping, and Z-score normalization verified by pytest.</li>
                 </ul>
             `,
-            link: "#contact"
+            link: "https://github.com/aral3000/python-ai-core-toolkit"
         }
     };
 
@@ -665,8 +661,6 @@ img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
         });
     }
 
-    // 7. Contact Form Submission Simulation
-    const contactForm = document.getElementById('contact-form');
     // 7. Contact Form Real Email Dispatch
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
