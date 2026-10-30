@@ -747,4 +747,172 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
         }, 3500);
     }
 
+    // 8. Ambient Meteors / Falling Stars Spawner (Alfari-Inspired)
+    function initMeteors() {
+        const container = document.getElementById('meteor-container');
+        if (!container) return;
+
+        const meteorConfigs = [
+            { top: '-10%', left: '15%', duration: '9s', delay: '-2s' },
+            { top: '-15%', left: '38%', duration: '11s', delay: '-7s' },
+            { top: '10%', left: '-8%', duration: '10s', delay: '-4s' },
+            { top: '25%', left: '5%', duration: '12s', delay: '-9s' },
+            { top: '-12%', left: '58%', duration: '8.5s', delay: '-1s' },
+            { top: '-5%', left: '80%', duration: '12s', delay: '-6s' },
+            { top: '8%', left: '22%', duration: '10.5s', delay: '-3s' },
+            { top: '20%', left: '-5%', duration: '9.5s', delay: '-8s' },
+            { top: '-8%', left: '92%', duration: '13s', delay: '-11s' },
+            { top: '32%', left: '-10%', duration: '11s', delay: '-5s' },
+            { top: '-14%', left: '48%', duration: '8s', delay: '-4s' },
+            { top: '5%', left: '3%', duration: '12.5s', delay: '-1.5s' },
+            { top: '16%', left: '32%', duration: '10s', delay: '-8.5s' },
+            { top: '-4%', left: '68%', duration: '9s', delay: '-3.5s' }
+        ];
+
+        meteorConfigs.forEach(cfg => {
+            const m = document.createElement('span');
+            m.className = 'meteor';
+            m.style.top = cfg.top;
+            m.style.left = cfg.left;
+            m.style.animationDuration = cfg.duration;
+            m.style.animationDelay = cfg.delay;
+            container.appendChild(m);
+        });
+    }
+    initMeteors();
+
+    // 9. 3D Interactive Lanyard ID Card with Real Physics & Spring Damping
+    function init3DLanyard() {
+        const wrapper = document.getElementById('lanyard-wrapper');
+        const card = document.getElementById('lanyard-card');
+        const strap = document.getElementById('lanyard-strap');
+        const glare = document.getElementById('badge-glare');
+        if (!wrapper || !card) return;
+
+        // Physics State
+        let currentX = 0, currentY = 0;
+        let targetX = 0, targetY = 0;
+        let vx = 0, vy = 0;
+        let isDragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let initialCardX = 0, initialCardY = 0;
+        let idleTime = 0;
+        let isHovered = false;
+
+        // Constants
+        const springTension = 0.075;
+        const springDamping = 0.82;
+
+        // Natural Idle Animation (Gentle breathing pendulum sway)
+        function updateIdle() {
+            if (!isDragging && !isHovered) {
+                idleTime += 0.035;
+                targetX = Math.sin(idleTime) * 12;
+                targetY = Math.cos(idleTime * 0.7) * 4;
+            }
+        }
+
+        // Render Loop with Velocity & Spring Damping
+        function physicsLoop() {
+            updateIdle();
+
+            // Spring force: F = -k * x
+            const ax = (targetX - currentX) * springTension;
+            const ay = (targetY - currentY) * springTension;
+
+            vx = (vx + ax) * springDamping;
+            vy = (vy + ay) * springDamping;
+
+            currentX += vx;
+            currentY += vy;
+
+            // Compute 3D rotations based on physical displacement
+            const rotY = Math.max(-32, Math.min(32, currentX * 0.35));
+            const rotX = Math.max(-28, Math.min(28, -currentY * 0.35));
+            const rotZ = Math.max(-18, Math.min(18, currentX * 0.18));
+            const transX = currentX * 0.45;
+            const transY = Math.max(-10, Math.min(30, currentY * 0.3));
+
+            // Apply 3D Transform to Badge Card
+            card.style.transform = `translate3d(${transX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
+
+            // Rotate and Stretch Lanyard Strap to follow card displacement
+            if (strap) {
+                const strapAngle = Math.max(-22, Math.min(22, currentX * 0.22));
+                const strapScale = 1 + Math.abs(currentY) * 0.002;
+                strap.style.transform = `rotate(${strapAngle}deg) scaleY(${strapScale})`;
+            }
+
+            // Move Holographic Glare Across the Surface
+            if (glare) {
+                const glareX = 50 + (rotY * 1.5);
+                const glareY = 50 + (rotX * 1.5);
+                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 215, 0, 0.2) 35%, transparent 70%)`;
+            }
+
+            requestAnimationFrame(physicsLoop);
+        }
+        requestAnimationFrame(physicsLoop);
+
+        // Hover & Mouse Move Interactions
+        wrapper.addEventListener('mouseenter', () => {
+            isHovered = true;
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            isHovered = false;
+            if (!isDragging) {
+                targetX = 0;
+                targetY = 0;
+            }
+        });
+
+        wrapper.addEventListener('mousemove', (e) => {
+            if (isDragging) return;
+            const rect = wrapper.getBoundingClientRect();
+            const relX = e.clientX - (rect.left + rect.width / 2);
+            const relY = e.clientY - (rect.top + rect.height / 2);
+            targetX = Math.max(-45, Math.min(45, relX * 0.5));
+            targetY = Math.max(-35, Math.min(35, relY * 0.5));
+        });
+
+        // Mouse Drag Interaction
+        function onPointerDown(e) {
+            isDragging = true;
+            dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            dragStartY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+            initialCardX = currentX;
+            initialCardY = currentY;
+            card.style.transition = 'none';
+        }
+
+        function onPointerMove(e) {
+            if (!isDragging) return;
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+            const deltaX = clientX - dragStartX;
+            const deltaY = clientY - dragStartY;
+
+            targetX = Math.max(-80, Math.min(80, initialCardX + deltaX));
+            targetY = Math.max(-40, Math.min(70, initialCardY + deltaY));
+        }
+
+        function onPointerUp() {
+            if (!isDragging) return;
+            isDragging = false;
+            targetX = 0;
+            targetY = 0;
+        }
+
+        card.addEventListener('mousedown', onPointerDown);
+        window.addEventListener('mousemove', onPointerMove);
+        window.addEventListener('mouseup', onPointerUp);
+
+        // Touch Drag Interaction (Mobile / Tablet)
+        card.addEventListener('touchstart', onPointerDown, { passive: true });
+        window.addEventListener('touchmove', onPointerMove, { passive: true });
+        window.addEventListener('touchend', onPointerUp);
+    }
+    init3DLanyard();
+
 });

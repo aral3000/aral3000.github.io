@@ -30,6 +30,8 @@
     <canvas id="particle-canvas"></canvas>
     <div class="ambient-light light-1"></div>
     <div class="ambient-light light-2"></div>
+    <!-- Ambient Meteors / Shooting Stars Layer -->
+    <div class="meteor-container" aria-hidden="true" id="meteor-container"></div>
 
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
@@ -69,16 +71,92 @@
         <div class="hero-container">
             <div class="hero-content-wrapper">
                 
-                <!-- Portrait Avatar Card with Full Face Photo -->
-                <div class="avatar-card" id="avatar-card-container">
-                    <div class="avatar-ring-outer"></div>
-                    <div class="avatar-ring-gold"></div>
-                    <div class="avatar-img-box">
-                        <img src="profile.jpg" alt="M. Athallah Rafif Aldera" class="avatar-photo" id="profile-img">
+                <!-- 3D Interactive Lanyard ID Badge (Alfari-Inspired Real Physics) -->
+                <div class="lanyard-wrapper" id="lanyard-wrapper">
+                    <!-- Top Cord / Strap Anchor -->
+                    <div class="lanyard-cord-anchor">
+                        <div class="lanyard-strap" id="lanyard-strap">
+                            <span class="strap-text">UNSRI • AI RESEARCH • ATHALLAH • SYSTEM ENGINEER</span>
+                        </div>
+                        <div class="lanyard-clip">
+                            <div class="clip-ring"></div>
+                            <div class="clip-metal"></div>
+                            <div class="clip-hook"></div>
+                        </div>
                     </div>
-                    <div class="avatar-badge">
-                        <i class="fas fa-briefcase text-gold"></i>
-                        <span data-i18n="hero.open_to_work">Open to Work</span>
+
+                    <!-- 3D Physics ID Badge Card -->
+                    <div class="lanyard-card" id="lanyard-card" role="region" aria-label="Interactive 3D ID Badge (Drag or Move to interact)">
+                        <!-- Badge Top Slot (Hole for clip) -->
+                        <div class="badge-slot"></div>
+
+                        <!-- Card Surface Body -->
+                        <div class="badge-inner">
+                            <!-- Holographic Glare Layer -->
+                            <div class="badge-glare" id="badge-glare"></div>
+
+                            <!-- Card Header (University & Faculty) -->
+                            <div class="badge-header">
+                                <div class="badge-univ-logo">
+                                    <i class="fas fa-university text-gold"></i>
+                                </div>
+                                <div class="badge-univ-info">
+                                    <span class="badge-univ-title">UNIVERSITAS SRIWIJAYA</span>
+                                    <span class="badge-univ-sub">FACULTY OF COMPUTER SCIENCE</span>
+                                </div>
+                                <div class="badge-flag">ID</div>
+                            </div>
+
+                            <!-- Card Photo Stage -->
+                            <div class="badge-photo-frame">
+                                <img src="profile.jpg" alt="M. Athallah Rafif Aldera, S.Kom." class="badge-photo" id="profile-img">
+                                <div class="badge-status-pill">
+                                    <span class="status-pulse-dot"></span>
+                                    <span data-i18n="hero.open_to_work">Open to Work</span>
+                                </div>
+                            </div>
+
+                            <!-- Candidate Credentials -->
+                            <div class="badge-identity">
+                                <h3 class="badge-name">M. Athallah Rafif Aldera</h3>
+                                <div class="badge-degree-role">
+                                    <span class="badge-degree">S.Kom.</span>
+                                    <span class="badge-separator">•</span>
+                                    <span class="badge-spec">AI & ML Engineer</span>
+                                </div>
+                            </div>
+
+                            <!-- Card Tech & Security Details -->
+                            <div class="badge-meta-row">
+                                <div class="badge-chip">
+                                    <i class="fas fa-microchip"></i>
+                                    <span>NFC AI</span>
+                                </div>
+                                <div class="badge-data-col">
+                                    <div class="badge-data-item">
+                                        <span class="meta-label">NIM</span>
+                                        <span class="meta-val">09011282227066</span>
+                                    </div>
+                                    <div class="badge-data-item">
+                                        <span class="meta-label">GPA</span>
+                                        <span class="meta-val gold-val">3.77 / 4.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Badge Footer Barcode / Verification -->
+                            <div class="badge-footer">
+                                <div class="badge-barcode">
+                                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                                <span class="badge-verif-text">MAGANGHUB BATCH 3 VERIFIED CANDIDATE</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Hint on Hover -->
+                        <div class="badge-drag-hint">
+                            <i class="fas fa-hand-pointer"></i> <span>Drag or tilt to swing badge</span>
+                        </div>
                     </div>
                 </div>
 
@@ -340,6 +418,7 @@
                 
                 <!-- Case Study 1 (Flagship) -->
                 <div class="interactive-project-card flagship" data-project="stylegan">
+                    <div class="liquid-metal-border" aria-hidden="true"></div>
                     <div class="ipc-badge"><i class="fas fa-star"></i> <span data-i18n="projects.flagship_badge">Featured Case Study</span></div>
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-brain"></i></div>
@@ -359,6 +438,7 @@
 
                 <!-- Case Study 2 -->
                 <div class="interactive-project-card" data-project="dashboard">
+                    <div class="liquid-metal-border" aria-hidden="true"></div>
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-shield-halved"></i></div>
                         <h3 data-i18n="cs2.title">Real-Time Phishing URL Detection System (630K URLs • Random Forest)</h3>
@@ -377,6 +457,7 @@
 
                 <!-- Case Study 3 -->
                 <div class="interactive-project-card" data-project="sql">
+                    <div class="liquid-metal-border" aria-hidden="true"></div>
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-robot"></i></div>
                         <h3 data-i18n="cs3.title">Autonomous Market Research Agent (ReAct & Cosine Vector Store)</h3>
@@ -395,6 +476,7 @@
 
                 <!-- Case Study 4 -->
                 <div class="interactive-project-card" data-project="vision">
+                    <div class="liquid-metal-border" aria-hidden="true"></div>
                     <div class="ipc-body">
                         <div class="ipc-icon"><i class="fas fa-code"></i></div>
                         <h3 data-i18n="cs4.title">Python AI Core Toolkit (TDD Data Structures, NumPy & Pandas)</h3>

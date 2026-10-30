@@ -335,70 +335,466 @@ ul {
     margin-bottom: 4rem;
 }
 
-/* Avatar Frame - Perfect Face Display */
-.avatar-card {
-    position: relative;
-    width: 290px;
-    height: 290px;
-    margin: 0 auto;
-}
-
-.avatar-ring-outer {
-    position: absolute;
-    inset: -12px;
-    border: 1px dashed rgba(255, 215, 0, 0.4);
-    border-radius: 50%;
-    animation: spin 30s linear infinite;
-}
-
-.avatar-ring-gold {
-    position: absolute;
-    inset: -4px;
-    border: 3px solid var(--gold-main);
-    border-radius: 50%;
-    box-shadow: 0 0 30px var(--gold-glow);
-}
-
-.avatar-img-box {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--gold-light);
+/* ==========================================================================
+   AMBIENT METEORS / SHOOTING STARS (ALFARI-INSPIRED DYNAMIC BACKGROUND)
+   ========================================================================== */
+.meteor-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
     overflow: hidden;
 }
 
-.avatar-photo {
+.meteor {
+    position: absolute;
+    width: 2px;
+    height: 95px;
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.95) 0%, rgba(220, 38, 38, 0.65) 45%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 999px;
+    filter: drop-shadow(0 0 7px rgba(255, 215, 0, 0.85));
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(215deg);
+    animation: meteor-fall linear infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes meteor-fall {
+    0% {
+        opacity: 0;
+        transform: rotate(215deg) translate3d(0, -90px, 0);
+    }
+    12% {
+        opacity: 0.95;
+    }
+    60% {
+        opacity: 0.95;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(215deg) translate3d(0, 1150px, 0);
+    }
+}
+
+/* ==========================================================================
+   3D INTERACTIVE LANYARD ID BADGE (ALFARI-INSPIRED REAL PHYSICS)
+   ========================================================================== */
+.lanyard-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    perspective: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    touch-action: none;
+}
+
+/* Lanyard Cord / Fabric Strap from Top */
+.lanyard-cord-anchor {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    margin-bottom: -12px;
+}
+
+.lanyard-strap {
+    width: 32px;
+    height: 85px;
+    background: repeating-linear-gradient(
+        180deg,
+        #7A0C0D 0px,
+        #520809 10px,
+        #12121A 14px,
+        #FFD700 16px,
+        #7A0C0D 20px
+    );
+    border-left: 2px solid rgba(255, 215, 0, 0.4);
+    border-right: 2px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), inset 0 0 6px rgba(0, 0, 0, 0.7);
+    border-radius: 4px 4px 2px 2px;
+    transform-origin: top center;
+    transition: transform 0.12s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.strap-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 6.5px;
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+    color: rgba(255, 215, 0, 0.8);
+    font-weight: 700;
+    opacity: 0.65;
+}
+
+/* Metal Clamp & Clasp Clip */
+.lanyard-clip {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -2px;
+}
+
+.clip-metal {
+    width: 24px;
+    height: 12px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #888888 50%, #ffffff 70%, #444444 100%);
+    border-radius: 3px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.85);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.clip-ring {
+    width: 14px;
+    height: 14px;
+    border: 2.5px solid #bbb;
+    border-radius: 50%;
+    margin-top: -4px;
+    box-shadow: inset 0 0 3px #000;
+}
+
+.clip-hook {
+    width: 10px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    margin-top: -3px;
+    background: linear-gradient(to right, #888, #eee, #777);
+}
+
+/* The Hanging Badge Card */
+.lanyard-card {
+    position: relative;
+    width: 275px;
+    background: linear-gradient(165deg, rgba(22, 22, 34, 0.96) 0%, rgba(10, 10, 16, 0.98) 100%);
+    border-radius: 18px;
+    border: 1.5px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 
+        0 25px 50px -10px rgba(0, 0, 0, 0.85),
+        0 0 35px rgba(122, 12, 13, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    cursor: grab;
+    transition: box-shadow 0.3s ease;
+    padding: 12px 14px 14px;
+    will-change: transform;
+}
+
+.lanyard-card:active {
+    cursor: grabbing;
+}
+
+/* Slot Hole in Acrylic Badge */
+.badge-slot {
+    width: 42px;
+    height: 7px;
+    background: #060609;
+    border: 1.5px solid rgba(255, 215, 0, 0.45);
+    border-radius: 4px;
+    margin: 0 auto 10px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);
+}
+
+/* Inner Surface & Holographic Glare */
+.badge-inner {
+    position: relative;
+    border-radius: 12px;
+    background: rgba(14, 14, 22, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 10px 10px 12px;
+    overflow: hidden;
+}
+
+.badge-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.55;
+    border-radius: inherit;
+    mix-blend-mode: overlay;
+    transition: opacity 0.2s ease;
+}
+
+/* Badge Header: UNSRI branding */
+.badge-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.badge-univ-logo {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(255, 215, 0, 0.12);
+    border: 1px solid var(--gold-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.badge-univ-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-univ-title {
+    font-family: var(--font-heading);
+    font-size: 9.5px;
+    font-weight: 800;
+    color: var(--gold-light);
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+}
+
+.badge-univ-sub {
+    font-size: 7px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.badge-flag {
+    font-size: 8px;
+    font-weight: 800;
+    color: #e53e3e;
+    background: rgba(229, 62, 62, 0.15);
+    border: 1px solid rgba(229, 62, 62, 0.4);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* Candidate Photo Frame */
+.badge-photo-frame {
+    position: relative;
+    width: 125px;
+    height: 125px;
+    margin: 0 auto 10px;
+    border-radius: 14px;
+    border: 2px solid var(--gold-main);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 16px var(--gold-glow);
+    overflow: hidden;
+    background: #000;
+}
+
+.badge-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    border-radius: 50%;
-    transition: var(--transition);
+    display: block;
+    transition: transform 0.3s ease;
 }
 
-.avatar-card:hover .avatar-photo {
-    transform: scale(1.05);
+.lanyard-card:hover .badge-photo {
+    transform: scale(1.04);
 }
 
-.avatar-badge {
+.badge-status-pill {
     position: absolute;
     bottom: 5px;
-    right: 5px;
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--gold-main);
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 15, 0.92);
+    border: 1px solid #10b981;
+    border-radius: 999px;
+    padding: 2px 8px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
+    gap: 4px;
+    font-size: 7.5px;
+    font-weight: 700;
+    color: #34d399;
+    letter-spacing: 0.4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+}
+
+.status-pulse-dot {
+    width: 5px;
+    height: 5px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #10b981;
+    animation: pulse 1.8s infinite;
+}
+
+/* Identity & Degree */
+.badge-identity {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.badge-name {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.2px;
+    margin: 0 0 2px 0;
+}
+
+.badge-degree-role {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 10px;
     color: var(--gold-light);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    font-weight: 700;
+}
+
+.badge-degree {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+.badge-separator {
+    color: var(--text-muted);
+}
+
+.badge-spec {
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+/* Metadata Row (NFC & NIM & GPA) */
+.badge-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(18, 18, 28, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 6px 8px;
+    margin-bottom: 8px;
+}
+
+.badge-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 8.5px;
+    color: var(--gold-main);
+    font-weight: 700;
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.badge-data-col {
+    display: flex;
+    gap: 12px;
+}
+
+.badge-data-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-data-item .meta-label {
+    font-size: 7px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-data-item .meta-val {
+    font-size: 9.5px;
+    font-family: monospace;
+    color: #e2e8f0;
+    font-weight: 700;
+}
+
+.badge-data-item .gold-val {
+    color: var(--gold-main);
+}
+
+/* Badge Footer & Barcode */
+.badge-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.badge-barcode {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 15px;
+    opacity: 0.75;
+}
+
+.badge-barcode span {
+    width: 2px;
+    height: 100%;
+    background: #cbd5e1;
+    display: inline-block;
+}
+
+.badge-barcode span:nth-child(even) {
+    width: 1px;
+    height: 80%;
+}
+
+.badge-barcode span:nth-child(3n) {
+    width: 3px;
+    height: 90%;
+}
+
+.badge-verif-text {
+    font-size: 6.5px;
+    letter-spacing: 1.2px;
+    font-family: monospace;
+    color: rgba(255, 215, 0, 0.85);
+    font-weight: 700;
+}
+
+/* Badge Drag Hint */
+.badge-drag-hint {
+    margin-top: 8px;
+    font-size: 8px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.lanyard-card:hover .badge-drag-hint {
+    opacity: 1;
+    color: var(--gold-light);
 }
 
 /* Hero Text Box */
@@ -868,7 +1264,7 @@ ul {
 
 .interactive-project-card {
     background: var(--bg-card);
-    border: 1.5px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 2.25rem;
     cursor: pointer;
@@ -877,16 +1273,61 @@ ul {
     overflow: hidden;
 }
 
+/* Liquid Metal Border Glow (Alfari-Inspired Shimmer) */
+.liquid-metal-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: conic-gradient(
+        from var(--metal-angle, 0deg),
+        transparent 0%,
+        rgba(255, 215, 0, 0.95) 20%,
+        rgba(220, 38, 38, 0.9) 45%,
+        transparent 60%,
+        rgba(255, 215, 0, 0.8) 80%,
+        transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.55;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    animation: rotate-metal 6s linear infinite;
+}
+
+@property --metal-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotate-metal {
+    to {
+        --metal-angle: 360deg;
+    }
+}
+
 .interactive-project-card.flagship {
     grid-column: span 2;
     background: linear-gradient(135deg, rgba(122, 12, 13, 0.35) 0%, rgba(18, 18, 26, 0.95) 100%);
-    border-color: var(--gold-main);
+}
+
+.interactive-project-card.flagship .liquid-metal-border {
+    opacity: 0.85;
 }
 
 .interactive-project-card:hover {
     transform: translateY(-8px);
-    border-color: var(--gold-light);
-    box-shadow: 0 20px 40px rgba(122, 12, 13, 0.35);
+    box-shadow: 0 20px 45px rgba(122, 12, 13, 0.4), 0 0 25px rgba(255, 215, 0, 0.2);
+}
+
+.interactive-project-card:hover .liquid-metal-border {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.75));
+    animation-duration: 2.8s;
 }
 
 .ipc-badge {
