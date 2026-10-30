@@ -889,10 +889,10 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowBlur = 10;
             ctx.shadowOffsetY = 4;
 
-            // Strap base curve
+            // Strap base curve (reaches down to small metal ferrule at slotY - 7)
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14); // Ends right at the clamp top
+            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 7);
             ctx.lineWidth = strapWidth;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -911,53 +911,53 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowColor = 'transparent';
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 7);
             ctx.lineWidth = Math.max(1.5, 2.5 / Math.sqrt(stretch));
             ctx.strokeStyle = 'rgba(255, 215, 0, 0.85)';
             ctx.stroke();
             ctx.restore();
 
-            // --- C. Draw Metal Connector Joint (Clamp, Ring, Hook) ---
+            // --- C. Draw Small Sleek Metal Pin / Joint at Strap Tip ---
             // Tangent angle at the end of the curve:
-            const tangentAngle = Math.atan2(slotY - 14 - ctrlY, slotX - ctrlX);
+            const tangentAngle = Math.atan2(slotY - 7 - ctrlY, slotX - ctrlX);
 
             ctx.save();
-            ctx.translate(slotX, slotY - 12);
+            ctx.translate(slotX, slotY - 7);
             ctx.rotate(tangentAngle - Math.PI / 2); // Align with rope tangent
 
-            // 1. Metal Clamp (connects to strap)
-            const clampGrad = ctx.createLinearGradient(-11, 0, 11, 0);
-            clampGrad.addColorStop(0, '#888');
-            clampGrad.addColorStop(0.3, '#eee');
-            clampGrad.addColorStop(0.7, '#fff');
-            clampGrad.addColorStop(1, '#555');
-            ctx.fillStyle = clampGrad;
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-            ctx.lineWidth = 1;
+            // 1. Sleek Mini Metal Crimp (clamps ribbon tip)
+            const pinGrad = ctx.createLinearGradient(-5, 0, 5, 0);
+            pinGrad.addColorStop(0, '#777');
+            pinGrad.addColorStop(0.3, '#ddd');
+            pinGrad.addColorStop(0.7, '#fff');
+            pinGrad.addColorStop(1, '#666');
+            ctx.fillStyle = pinGrad;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.lineWidth = 0.75;
             ctx.beginPath();
             if (ctx.roundRect) {
-                ctx.roundRect(-11, -8, 22, 10, 2);
+                ctx.roundRect(-4.5, -3.5, 9, 4.5, 1.2);
             } else {
-                ctx.rect(-11, -8, 22, 10);
+                ctx.rect(-4.5, -3.5, 9, 4.5);
             }
             ctx.fill();
             ctx.stroke();
 
-            // 2. Metal Swivel Ring
-            ctx.strokeStyle = '#ccc';
-            ctx.lineWidth = 2.5;
+            // 2. Small Swivel Ring Eyelet
+            ctx.strokeStyle = '#d4d4d4';
+            ctx.lineWidth = 1.3;
             ctx.beginPath();
-            ctx.arc(0, 5, 5, 0, Math.PI * 2);
+            ctx.arc(0, 3, 2.2, 0, Math.PI * 2);
             ctx.stroke();
 
-            // 3. Metal Hook Loop (Goes directly through slot hole!)
+            // 3. Compact Wire Pin / Hook (Loops through badge slot)
             ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 2.2;
+            ctx.lineWidth = 1.4;
             ctx.beginPath();
-            ctx.moveTo(-3, 8);
-            ctx.lineTo(-3, 16);
-            ctx.arc(0, 16, 3, Math.PI, 0, true);
-            ctx.lineTo(3, 8);
+            ctx.moveTo(-1.8, 5);
+            ctx.lineTo(-1.8, 8.5);
+            ctx.arc(0, 8.5, 1.8, Math.PI, 0, true);
+            ctx.lineTo(1.8, 5);
             ctx.stroke();
 
             ctx.restore();
