@@ -867,19 +867,27 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             const ctrlX = anchorX + (dx * 0.45);
             const ctrlY = anchorY + (dy * 0.5) + sagFactor;
 
-            // --- A. Draw Top Collar Mount Bar ---
+            // --- A. Draw Top Suspension Ring (Gantungan Ring Kecil di Atas Layar) ---
             ctx.save();
-            ctx.fillStyle = '#1c1c22';
-            ctx.strokeStyle = 'rgba(255, 215, 0, 0.55)';
-            ctx.lineWidth = 1.5;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetY = 2;
+            const topRingGrad = ctx.createLinearGradient(anchorX - 9, 0, anchorX + 9, 0);
+            topRingGrad.addColorStop(0, '#666');
+            topRingGrad.addColorStop(0.3, '#e5e5e5');
+            topRingGrad.addColorStop(0.7, '#ffffff');
+            topRingGrad.addColorStop(1, '#555');
+            ctx.strokeStyle = topRingGrad;
+            ctx.lineWidth = 3.2;
             ctx.beginPath();
-            if (ctx.roundRect) {
-                ctx.roundRect(anchorX - 24, 2, 48, 8, 3);
-            } else {
-                ctx.rect(anchorX - 24, 2, 48, 8);
-            }
-            ctx.fill();
+            ctx.arc(anchorX, 9, 8, 0, Math.PI * 2);
             ctx.stroke();
+
+            // Inner mounting rivet
+            ctx.fillStyle = '#c5a059';
+            ctx.beginPath();
+            ctx.arc(anchorX, 9, 3, 0, Math.PI * 2);
+            ctx.fill();
             ctx.restore();
 
             // --- B. Draw Elastic Stretchy Lanyard Strap ---
@@ -889,10 +897,10 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowBlur = 10;
             ctx.shadowOffsetY = 4;
 
-            // Strap base curve (reaches down to small metal ferrule at slotY - 7)
+            // Strap base curve (starts from top ring at anchorY, extends to metal clamp at slotY - 14)
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 7);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14);
             ctx.lineWidth = strapWidth;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -911,53 +919,60 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowColor = 'transparent';
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 7);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14);
             ctx.lineWidth = Math.max(1.5, 2.5 / Math.sqrt(stretch));
             ctx.strokeStyle = 'rgba(255, 215, 0, 0.85)';
             ctx.stroke();
             ctx.restore();
 
-            // --- C. Draw Small Sleek Metal Pin / Joint at Strap Tip ---
+            // --- C. Draw Metal Pin Joint at Strap Tip (~20px Normal Solid Clip) ---
             // Tangent angle at the end of the curve:
-            const tangentAngle = Math.atan2(slotY - 7 - ctrlY, slotX - ctrlX);
+            const tangentAngle = Math.atan2(slotY - 14 - ctrlY, slotX - ctrlX);
 
             ctx.save();
-            ctx.translate(slotX, slotY - 7);
+            ctx.translate(slotX, slotY - 12);
             ctx.rotate(tangentAngle - Math.PI / 2); // Align with rope tangent
 
-            // 1. Sleek Mini Metal Crimp (clamps ribbon tip)
-            const pinGrad = ctx.createLinearGradient(-5, 0, 5, 0);
-            pinGrad.addColorStop(0, '#777');
-            pinGrad.addColorStop(0.3, '#ddd');
-            pinGrad.addColorStop(0.7, '#fff');
-            pinGrad.addColorStop(1, '#666');
-            ctx.fillStyle = pinGrad;
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
-            ctx.lineWidth = 0.75;
+            // 1. Metal Clamp Ferrule (~20px Normal Size, Clamps Ribbon Tip)
+            const clampGrad = ctx.createLinearGradient(-10, 0, 10, 0);
+            clampGrad.addColorStop(0, '#777');
+            clampGrad.addColorStop(0.25, '#ddd');
+            clampGrad.addColorStop(0.55, '#ffffff');
+            clampGrad.addColorStop(0.8, '#ccc');
+            clampGrad.addColorStop(1, '#555');
+            ctx.fillStyle = clampGrad;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 1;
             ctx.beginPath();
             if (ctx.roundRect) {
-                ctx.roundRect(-4.5, -3.5, 9, 4.5, 1.2);
+                ctx.roundRect(-10, -8, 20, 8, 2);
             } else {
-                ctx.rect(-4.5, -3.5, 9, 4.5);
+                ctx.rect(-10, -8, 20, 8);
             }
             ctx.fill();
             ctx.stroke();
 
-            // 2. Small Swivel Ring Eyelet
-            ctx.strokeStyle = '#d4d4d4';
-            ctx.lineWidth = 1.3;
+            // Clamp decorative rivet indentation
+            ctx.fillStyle = '#444';
             ctx.beginPath();
-            ctx.arc(0, 3, 2.2, 0, Math.PI * 2);
+            ctx.arc(0, -4, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 2. Solid Metal Swivel Ring
+            ctx.strokeStyle = '#dcdcdc';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.arc(0, 4.5, 4.2, 0, Math.PI * 2);
             ctx.stroke();
 
-            // 3. Compact Wire Pin / Hook (Loops through badge slot)
+            // 3. Polished Steel Hook Loop (Loops directly into slot hole)
             ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 1.4;
+            ctx.lineWidth = 2.2;
             ctx.beginPath();
-            ctx.moveTo(-1.8, 5);
-            ctx.lineTo(-1.8, 8.5);
-            ctx.arc(0, 8.5, 1.8, Math.PI, 0, true);
-            ctx.lineTo(1.8, 5);
+            ctx.moveTo(-2.8, 7.5);
+            ctx.lineTo(-2.8, 14);
+            ctx.arc(0, 14, 2.8, Math.PI, 0, true);
+            ctx.lineTo(2.8, 7.5);
             ctx.stroke();
 
             ctx.restore();
