@@ -835,35 +835,41 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             }
         }
 
-        // Draw Canvas Elastic Rope & Joint
+        // Draw Canvas Elastic Rope & Hardware Assembly (Tali -> Kotak Penjepit -> Penyangga PVC -> Kartu)
         function drawLanyardRope() {
             const rect = wrapper.getBoundingClientRect();
             ctx.clearRect(0, 0, rect.width, rect.height);
 
-            // Anchor point (top center collar bar)
+            // Anchor point (top center suspension ring)
             const anchorX = rect.width / 2;
-            const anchorY = 8;
+            const anchorY = 10;
 
             // Target connection point: directly at the badge slot hole!
             const slotX = (rect.width / 2) + currentX;
             const slotY = 85 + currentY + 14; // 85px margin-top + 14px to slot hole
 
-            // Vector between anchor and slot
-            const dx = slotX - anchorX;
-            const dy = slotY - anchorY;
+            // Hardware assembly:
+            // - Penyangga PVC: slotY - 14 to slotY + 2
+            // - Kotak Penjepit: slotY - 28 to slotY - 14
+            // - Tali Strap masuk ke bagian atas kotak penjepit: slotY - 26
+            const strapTargetX = slotX;
+            const strapTargetY = slotY - 26;
+
+            // Vector between top anchor and clamp top
+            const dx = strapTargetX - anchorX;
+            const dy = strapTargetY - anchorY;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const naturalLen = 91; // Natural resting distance
+            const naturalLen = 65; // Natural resting distance
 
             // STRETCH RATIO ("Melar"): as dist increases, stretch factor increases!
             const stretch = Math.max(1, dist / naturalLen);
 
             // POISSON CONTRACTION: Strap gets slightly narrower when stretched!
-            const baseWidth = 26;
+            const baseWidth = 24;
             const strapWidth = Math.max(14, baseWidth / Math.sqrt(stretch));
 
             // Dynamic Bezier Control Point (Catenary curve sag due to gravity)
-            // When stretched tight, the curve straightens; when loose, it sags!
-            const sagFactor = Math.max(2, (naturalLen / (dist + 1)) * 18);
+            const sagFactor = Math.max(2, (naturalLen / (dist + 1)) * 16);
             const ctrlX = anchorX + (dx * 0.45);
             const ctrlY = anchorY + (dy * 0.5) + sagFactor;
 
@@ -890,23 +896,23 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.fill();
             ctx.restore();
 
-            // --- B. Draw Elastic Stretchy Lanyard Strap ---
+            // --- B. Draw Elastic Stretchy Lanyard Strap (Satin Ribbon) ---
             ctx.save();
             // Drop shadow behind strap
             ctx.shadowColor = 'rgba(0, 0, 0, 0.65)';
             ctx.shadowBlur = 10;
             ctx.shadowOffsetY = 4;
 
-            // Strap base curve (starts from top ring at anchorY, extends to metal clamp at slotY - 14)
+            // Strap base curve: enters directly inside the top of the Clamp Box
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, strapTargetX, strapTargetY);
             ctx.lineWidth = strapWidth;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
 
             // Red/Gold Woven Gradient along the strap
-            const strapGrad = ctx.createLinearGradient(anchorX, anchorY, slotX, slotY);
+            const strapGrad = ctx.createLinearGradient(anchorX, anchorY, strapTargetX, strapTargetY);
             strapGrad.addColorStop(0, '#5a0809');
             strapGrad.addColorStop(0.25, '#7A0C0D');
             strapGrad.addColorStop(0.5, '#4a0607');
@@ -919,61 +925,98 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowColor = 'transparent';
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, strapTargetX, strapTargetY);
             ctx.lineWidth = Math.max(1.5, 2.5 / Math.sqrt(stretch));
             ctx.strokeStyle = 'rgba(255, 215, 0, 0.85)';
             ctx.stroke();
             ctx.restore();
 
-            // --- C. Draw Metal Pin Joint at Strap Tip (~20px Normal Solid Clip) ---
-            // Tangent angle at the end of the curve:
-            const tangentAngle = Math.atan2(slotY - 14 - ctrlY, slotX - ctrlX);
+            // --- C. Draw Separated Hardware Assembly: Penyangga PVC + Kotak Penjepit ---
+            // Tangent angle along the rope at the clamp connection:
+            const tangentAngle = Math.atan2(strapTargetY - ctrlY, strapTargetX - ctrlX);
+            const localAngle = tangentAngle - Math.PI / 2;
 
             ctx.save();
-            ctx.translate(slotX, slotY - 12);
-            ctx.rotate(tangentAngle - Math.PI / 2); // Align with rope tangent
+            ctx.translate(slotX, slotY);
+            ctx.rotate(localAngle); // Orient hardware with rope tension vector
 
-            // 1. Metal Clamp Ferrule (~20px Normal Size, Clamps Ribbon Tip)
-            const clampGrad = ctx.createLinearGradient(-10, 0, 10, 0);
-            clampGrad.addColorStop(0, '#777');
-            clampGrad.addColorStop(0.25, '#ddd');
-            clampGrad.addColorStop(0.55, '#ffffff');
-            clampGrad.addColorStop(0.8, '#ccc');
-            clampGrad.addColorStop(1, '#555');
-            ctx.fillStyle = clampGrad;
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            // 1. BAGIAN PENYANGGA (White / Translucent PVC Snap Strap between Clamp and Card)
+            // Loops from beneath clamp box (y = -15) through the slot hole of the card (y = 2)
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+            ctx.shadowBlur = 4;
+            ctx.shadowOffsetY = 1;
+
+            ctx.fillStyle = 'rgba(240, 243, 246, 0.94)';
+            ctx.strokeStyle = 'rgba(195, 205, 215, 0.85)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             if (ctx.roundRect) {
-                ctx.roundRect(-10, -8, 20, 8, 2);
+                ctx.roundRect(-5.5, -15, 11, 18, 2);
             } else {
-                ctx.rect(-10, -8, 20, 8);
+                ctx.rect(-5.5, -15, 11, 18);
             }
             ctx.fill();
             ctx.stroke();
 
-            // Clamp decorative rivet indentation
-            ctx.fillStyle = '#444';
+            // Silver Snap Button (Kancing penjepit pada penyangga PVC)
+            const snapGrad = ctx.createRadialGradient(-0.6, -6.6, 0.4, 0, -6, 4);
+            snapGrad.addColorStop(0, '#ffffff');
+            snapGrad.addColorStop(0.4, '#d8dce0');
+            snapGrad.addColorStop(0.8, '#a2a8af');
+            snapGrad.addColorStop(1, '#686e74');
+            ctx.fillStyle = snapGrad;
+            ctx.strokeStyle = '#444';
+            ctx.lineWidth = 0.7;
             ctx.beginPath();
-            ctx.arc(0, -4, 1.5, 0, Math.PI * 2);
+            ctx.arc(0, -6, 3.2, 0, Math.PI * 2);
             ctx.fill();
-
-            // 2. Solid Metal Swivel Ring
-            ctx.strokeStyle = '#dcdcdc';
-            ctx.lineWidth = 2.4;
-            ctx.beginPath();
-            ctx.arc(0, 4.5, 4.2, 0, Math.PI * 2);
             ctx.stroke();
 
-            // 3. Polished Steel Hook Loop (Loops directly into slot hole)
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 2.2;
+            // Inner Rivet Pin Dot
+            ctx.fillStyle = '#222';
             ctx.beginPath();
-            ctx.moveTo(-2.8, 7.5);
-            ctx.lineTo(-2.8, 14);
-            ctx.arc(0, 14, 2.8, Math.PI, 0, true);
-            ctx.lineTo(2.8, 7.5);
+            ctx.arc(0, -6, 1.1, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // 2. KOTAK PENJEPIT TALI (Metal Clamp Stopper Box, seperti di foto produk)
+            // Sits right at the strap end (from y = -29 to y = -14), gripping both ribbon and PVC strap
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetY = 2;
+
+            const clampGrad = ctx.createLinearGradient(-12, 0, 12, 0);
+            clampGrad.addColorStop(0, '#151518');
+            clampGrad.addColorStop(0.25, '#35353d');
+            clampGrad.addColorStop(0.55, '#62626e');
+            clampGrad.addColorStop(0.8, '#35353d');
+            clampGrad.addColorStop(1, '#151518');
+            ctx.fillStyle = clampGrad;
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.75)'; // Luxury gold bevel border
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(-12, -29, 24, 15, 2.5);
+            } else {
+                ctx.rect(-12, -29, 24, 15);
+            }
+            ctx.fill();
             ctx.stroke();
+
+            // Clamp Box Decorative Recessed Groove / Slot Line
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            ctx.fillRect(-8, -23, 16, 3);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 0.5;
+            ctx.strokeRect(-8, -23, 16, 3);
+
+            // Metal specular highlights at top & bottom clamp lip
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.fillRect(-10, -28, 20, 1);
+            ctx.fillRect(-10, -15.5, 20, 1);
+            ctx.restore();
 
             ctx.restore();
         }
