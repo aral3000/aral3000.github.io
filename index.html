@@ -21,8 +21,8 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=2.2">
+    <!-- Custom CSS (Cache-Busted) -->
+    <link rel="stylesheet" href="styles.css?v=20261030_elastic">
 </head>
 <body>
 
@@ -71,26 +71,24 @@
         <div class="hero-container">
             <div class="hero-content-wrapper">
                 
-                <!-- 3D Interactive Holographic Credential Badge (Elastic Squash & Stretch Physics) -->
-                <div class="credential-badge-stage" id="badge-stage">
-                    <!-- Ambient Spotlight Behind Badge -->
-                    <div class="badge-backlight" id="badge-backlight"></div>
+                <!-- 3D Interactive Lanyard ID Badge (Elastic Physics Canvas + 3D Card) -->
+                <div class="lanyard-wrapper" id="lanyard-wrapper">
+                    <!-- High-DPI Canvas for Stretchy Elastic Rope & Metal Joint -->
+                    <canvas id="lanyard-rope-canvas" class="lanyard-rope-canvas"></canvas>
 
-                    <!-- 3D Elastic Melar-Melar Badge Card -->
-                    <div class="credential-card" id="credential-card" role="region" aria-label="Interactive 3D Executive Credential Badge (Drag, tilt, and stretch)">
-                        <!-- Badge Top Attachment Header (Integrated Brass/Gold Slot) -->
-                        <div class="badge-hanger-slot">
-                            <div class="hanger-bracket"></div>
-                            <div class="hanger-hole"></div>
-                            <div class="hanger-clip-gold"></div>
+                    <!-- 3D Physics ID Badge Card (Suspended from Elastic Canvas Rope) -->
+                    <div class="lanyard-card" id="lanyard-card" role="region" aria-label="Interactive 3D ID Badge (Drag to stretch and swing)">
+                        <!-- Badge Top Slot (Canvas hook loops directly into this hole) -->
+                        <div class="badge-slot">
+                            <div class="slot-hole"></div>
                         </div>
 
                         <!-- Card Surface Body -->
                         <div class="badge-inner">
-                            <!-- Dynamic Holographic Sheen / Foil Glare -->
-                            <div class="badge-hologram-sheen" id="badge-sheen"></div>
+                            <!-- Holographic Glare Layer -->
+                            <div class="badge-glare" id="badge-glare"></div>
 
-                            <!-- Card Header: UNSRI Branding -->
+                            <!-- Card Header (University & Faculty) -->
                             <div class="badge-header">
                                 <div class="badge-univ-logo">
                                     <i class="fas fa-university text-gold"></i>
@@ -102,7 +100,7 @@
                                 <div class="badge-flag">ID</div>
                             </div>
 
-                            <!-- Photo Stage -->
+                            <!-- Card Photo Stage -->
                             <div class="badge-photo-frame">
                                 <img src="profile.jpg" alt="M. Athallah Rafif Aldera, S.Kom." class="badge-photo" id="profile-img">
                                 <div class="badge-status-pill">
@@ -111,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <!-- Candidate Identity -->
+                            <!-- Candidate Credentials -->
                             <div class="badge-identity">
                                 <h3 class="badge-name">M. Athallah Rafif Aldera</h3>
                                 <div class="badge-degree-role">
@@ -121,7 +119,7 @@
                                 </div>
                             </div>
 
-                            <!-- Metadata Row (Chip, NIM, GPA) -->
+                            <!-- Card Tech & Security Details -->
                             <div class="badge-meta-row">
                                 <div class="badge-chip">
                                     <i class="fas fa-microchip"></i>
@@ -139,7 +137,7 @@
                                 </div>
                             </div>
 
-                            <!-- Footer Barcode & Verification -->
+                            <!-- Badge Footer Barcode / Verification -->
                             <div class="badge-footer">
                                 <div class="badge-barcode">
                                     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -148,9 +146,9 @@
                             </div>
                         </div>
 
-                        <!-- Badge Interaction Hint -->
+                        <!-- Card Hint on Hover -->
                         <div class="badge-drag-hint">
-                            <i class="fas fa-hand-pointer"></i> <span>Tarik & seret kartu (efek melar-melar)</span>
+                            <i class="fas fa-hand-pointer"></i> <span>Drag or stretch badge to swing</span>
                         </div>
                     </div>
                 </div>
@@ -760,7 +758,7 @@
         </div>
     </footer>
 
-    <!-- JS Script -->
-    <script src="script.js?v=2.2"></script>
+    <!-- JS Script (Cache-Busted) -->
+    <script src="script.js?v=20261030_elastic"></script>
 </body>
 </html>

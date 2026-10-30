@@ -378,118 +378,79 @@ ul {
 }
 
 /* ==========================================================================
-   3D EXECUTIVE HOLOGRAPHIC CREDENTIAL BADGE (ELASTIC RUBBER-BAND SQUASH & STRETCH)
+   3D ELASTIC CANVAS LANYARD (REAL STRETCH PHYSICS & MATHEMATICAL JOINT)
    ========================================================================== */
-.credential-badge-stage {
+.lanyard-wrapper {
     position: relative;
     width: 100%;
     max-width: 310px;
+    height: 520px;
     margin: 0 auto;
     perspective: 1400px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     user-select: none;
     touch-action: none;
-    padding: 10px 0;
+    overflow: visible;
 }
 
-/* Ambient Radial Glow Behind Badge */
-.badge-backlight {
+/* Stretchy Elastic Rope & Metal Joint Canvas */
+.lanyard-rope-canvas {
     position: absolute;
-    width: 260px;
-    height: 340px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(122, 12, 13, 0.45) 0%, rgba(255, 215, 0, 0.15) 50%, transparent 75%);
-    filter: blur(40px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
-    z-index: 1;
-    transition: transform 0.2s ease-out;
+    z-index: 12;
 }
 
-/* 3D Elastic Melar-Melar Badge Card */
-.credential-card {
+/* The Hanging Badge Card */
+.lanyard-card {
     position: relative;
-    width: 280px;
+    width: 275px;
+    margin-top: 85px; /* Space for the natural strap length */
     background: linear-gradient(165deg, rgba(22, 22, 34, 0.96) 0%, rgba(10, 10, 16, 0.98) 100%);
-    border-radius: 20px;
-    border: 1.5px solid rgba(255, 215, 0, 0.45);
+    border-radius: 18px;
+    border: 1.5px solid rgba(255, 215, 0, 0.4);
     box-shadow: 
-        0 25px 60px -10px rgba(0, 0, 0, 0.9),
-        0 0 35px rgba(122, 12, 13, 0.45),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-    transform-origin: center center;
+        0 25px 50px -10px rgba(0, 0, 0, 0.85),
+        0 0 35px rgba(122, 12, 13, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform-origin: 50% 14px; /* Rotates directly around the badge slot hole! */
     transform-style: preserve-3d;
     cursor: grab;
-    padding: 14px 14px 16px;
-    z-index: 5;
-    will-change: transform;
     transition: box-shadow 0.3s ease;
-}
-
-.credential-card:active {
-    cursor: grabbing;
-    box-shadow: 
-        0 35px 70px -10px rgba(0, 0, 0, 0.95),
-        0 0 45px rgba(255, 215, 0, 0.35),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-/* Integrated Top Hanger Slot & Gold Grommet Loop */
-.badge-hanger-slot {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.hanger-bracket {
-    width: 50px;
-    height: 10px;
-    background: linear-gradient(180deg, #2a2a38 0%, #12121a 100%);
-    border: 1px solid rgba(255, 215, 0, 0.35);
-    border-radius: 5px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 2px 5px rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hanger-hole {
-    position: absolute;
-    width: 24px;
-    height: 5px;
-    background: #000;
-    border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.hanger-clip-gold {
-    position: absolute;
-    top: -8px;
-    width: 16px;
-    height: 10px;
-    border: 2px solid var(--gold-main);
-    border-bottom: none;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 0 8px var(--gold-glow);
-}
-
-/* Dynamic Holographic Sheen / Foil Glare */
-.badge-hologram-sheen {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+    padding: 10px 14px 14px;
+    will-change: transform;
     z-index: 10;
-    opacity: 0.6;
-    border-radius: inherit;
-    mix-blend-mode: overlay;
-    transition: opacity 0.2s ease;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 215, 0, 0.25) 35%, transparent 70%);
+}
+
+.lanyard-card:active {
+    cursor: grabbing;
+}
+
+/* Slot Hole in Acrylic Badge */
+.badge-slot {
+    position: relative;
+    width: 38px;
+    height: 8px;
+    background: #060609;
+    border: 1.5px solid rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+    margin: 0 auto 10px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slot-hole {
+    width: 20px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 2px;
 }
 
 /* Inner Surface & Holographic Glare */
@@ -590,7 +551,7 @@ ul {
     transition: transform 0.3s ease;
 }
 
-.credential-card:hover .badge-photo {
+.lanyard-card:hover .badge-photo {
     transform: scale(1.04);
 }
 
@@ -774,7 +735,7 @@ ul {
     transition: opacity 0.2s ease;
 }
 
-.credential-card:hover .badge-drag-hint {
+.lanyard-card:hover .badge-drag-hint {
     opacity: 1;
     color: var(--gold-light);
 }

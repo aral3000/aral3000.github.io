@@ -781,115 +781,233 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
     }
     initMeteors();
 
-    // 9. 3D Executive Holographic Credential Badge with Elastic "Melar-Melar" Physics
-    function init3DCredentialBadge() {
-        const stage = document.getElementById('badge-stage');
-        const card = document.getElementById('credential-card');
-        const backlight = document.getElementById('badge-backlight');
-        const sheen = document.getElementById('badge-sheen');
-        if (!stage || !card) return;
+    // 9. 3D Interactive Lanyard with Elastic Canvas Rope (Real Stretch Physics)
+    function init3DLanyard() {
+        const wrapper = document.getElementById('lanyard-wrapper');
+        const canvas = document.getElementById('lanyard-rope-canvas');
+        const card = document.getElementById('lanyard-card');
+        const glare = document.getElementById('badge-glare');
+        if (!wrapper || !canvas || !card) return;
 
-        // Kinematic Position & Velocity State
+        const ctx = canvas.getContext('2d');
+
+        // Physics State: Position and Velocity (Spring Simulation)
         let currentX = 0, currentY = 0;
         let targetX = 0, targetY = 0;
         let vx = 0, vy = 0;
 
-        // 3D Tilt Rotations
+        // Card Rotations (3D Tilt & Angular Inertia)
         let currentRotX = 0, currentRotY = 0, currentRotZ = 0;
         let targetRotX = 0, targetRotY = 0, targetRotZ = 0;
         let vRotX = 0, vRotY = 0, vRotZ = 0;
 
-        // "Melar-Melar" Elastic Squash & Stretch State
-        let currentScaleX = 1.0, currentScaleY = 1.0;
-        let targetScaleX = 1.0, targetScaleY = 1.0;
-        let vScaleX = 0, vScaleY = 0;
-
-        // Interaction State
+        // Dragging & Interaction State
         let isDragging = false;
-        let dragStartX = 0, dragStartY = 0;
+        let dragPointerStartX = 0, dragPointerStartY = 0;
+        let dragInitialX = 0, dragInitialY = 0;
         let isHovered = false;
         let idleTime = 0;
 
-        // Spring Constants (Rubbery elasticity & bounce)
-        const posTension = 0.085;
-        const posDamping = 0.82;
-        const rotTension = 0.095;
-        const rotDamping = 0.85;
-        const stretchTension = 0.12;
-        const stretchDamping = 0.76;
+        // Spring Constants (tuned for authentic rubber/fabric elastic snap & melar)
+        const springK = 0.082; // Hooke's spring constant
+        const damping = 0.85;  // Friction damping
 
-        // Natural Idle Floating & Breathing
+        // High-DPI Canvas Resizing
+        function resizeCanvas() {
+            const rect = wrapper.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Idle Motion (Gentle breathing pendulum swing)
         function updateIdle() {
             if (!isDragging && !isHovered) {
-                idleTime += 0.035;
-                targetY = Math.sin(idleTime * 1.5) * 8; // Gentle vertical float
-                targetX = Math.cos(idleTime * 0.9) * 4;
-                targetRotY = Math.sin(idleTime) * 4;
-                targetRotX = Math.cos(idleTime * 0.7) * 3;
-                targetRotZ = Math.sin(idleTime * 0.6) * 1.5;
-                targetScaleX = 1.0;
-                targetScaleY = 1.0;
+                idleTime += 0.032;
+                targetX = Math.sin(idleTime) * 14;
+                targetY = Math.cos(idleTime * 0.7) * 4;
+                targetRotZ = (targetX / 14) * 6;
+                targetRotY = (targetX / 14) * 7;
+                targetRotX = (targetY / 4) * 2;
             }
         }
 
-        // Main Elastic Render Loop
-        function renderLoop() {
+        // Draw Canvas Elastic Rope & Joint
+        function drawLanyardRope() {
+            const rect = wrapper.getBoundingClientRect();
+            ctx.clearRect(0, 0, rect.width, rect.height);
+
+            // Anchor point (top center collar bar)
+            const anchorX = rect.width / 2;
+            const anchorY = 8;
+
+            // Target connection point: directly at the badge slot hole!
+            const slotX = (rect.width / 2) + currentX;
+            const slotY = 85 + currentY + 14; // 85px margin-top + 14px to slot hole
+
+            // Vector between anchor and slot
+            const dx = slotX - anchorX;
+            const dy = slotY - anchorY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const naturalLen = 91; // Natural resting distance
+
+            // STRETCH RATIO ("Melar"): as dist increases, stretch factor increases!
+            const stretch = Math.max(1, dist / naturalLen);
+
+            // POISSON CONTRACTION: Strap gets slightly narrower when stretched!
+            const baseWidth = 26;
+            const strapWidth = Math.max(14, baseWidth / Math.sqrt(stretch));
+
+            // Dynamic Bezier Control Point (Catenary curve sag due to gravity)
+            // When stretched tight, the curve straightens; when loose, it sags!
+            const sagFactor = Math.max(2, (naturalLen / (dist + 1)) * 18);
+            const ctrlX = anchorX + (dx * 0.45);
+            const ctrlY = anchorY + (dy * 0.5) + sagFactor;
+
+            // --- A. Draw Top Collar Mount Bar ---
+            ctx.save();
+            ctx.fillStyle = '#1c1c22';
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.55)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(anchorX - 24, 2, 48, 8, 3);
+            } else {
+                ctx.rect(anchorX - 24, 2, 48, 8);
+            }
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+
+            // --- B. Draw Elastic Stretchy Lanyard Strap ---
+            ctx.save();
+            // Drop shadow behind strap
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.65)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetY = 4;
+
+            // Strap base curve
+            ctx.beginPath();
+            ctx.moveTo(anchorX, anchorY);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14); // Ends right at the clamp top
+            ctx.lineWidth = strapWidth;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // Red/Gold Woven Gradient along the strap
+            const strapGrad = ctx.createLinearGradient(anchorX, anchorY, slotX, slotY);
+            strapGrad.addColorStop(0, '#5a0809');
+            strapGrad.addColorStop(0.25, '#7A0C0D');
+            strapGrad.addColorStop(0.5, '#4a0607');
+            strapGrad.addColorStop(0.75, '#7A0C0D');
+            strapGrad.addColorStop(1, '#660a0b');
+            ctx.strokeStyle = strapGrad;
+            ctx.stroke();
+
+            // Gold Border Stripes on the strap edges (Stretches with width!)
+            ctx.shadowColor = 'transparent';
+            ctx.beginPath();
+            ctx.moveTo(anchorX, anchorY);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, slotX, slotY - 14);
+            ctx.lineWidth = Math.max(1.5, 2.5 / Math.sqrt(stretch));
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.85)';
+            ctx.stroke();
+            ctx.restore();
+
+            // --- C. Draw Metal Connector Joint (Clamp, Ring, Hook) ---
+            // Tangent angle at the end of the curve:
+            const tangentAngle = Math.atan2(slotY - 14 - ctrlY, slotX - ctrlX);
+
+            ctx.save();
+            ctx.translate(slotX, slotY - 12);
+            ctx.rotate(tangentAngle - Math.PI / 2); // Align with rope tangent
+
+            // 1. Metal Clamp (connects to strap)
+            const clampGrad = ctx.createLinearGradient(-11, 0, 11, 0);
+            clampGrad.addColorStop(0, '#888');
+            clampGrad.addColorStop(0.3, '#eee');
+            clampGrad.addColorStop(0.7, '#fff');
+            clampGrad.addColorStop(1, '#555');
+            ctx.fillStyle = clampGrad;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(-11, -8, 22, 10, 2);
+            } else {
+                ctx.rect(-11, -8, 22, 10);
+            }
+            ctx.fill();
+            ctx.stroke();
+
+            // 2. Metal Swivel Ring
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(0, 5, 5, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // 3. Metal Hook Loop (Goes directly through slot hole!)
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(-3, 8);
+            ctx.lineTo(-3, 16);
+            ctx.arc(0, 16, 3, Math.PI, 0, true);
+            ctx.lineTo(3, 8);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // Main Animation & Render Loop
+        function animate() {
             updateIdle();
 
-            // 1. Position Spring Physics (F = -k*x)
-            const ax = (targetX - currentX) * posTension;
-            const ay = (targetY - currentY) * posTension;
-            vx = (vx + ax) * posDamping;
-            vy = (vy + ay) * posDamping;
+            // Spring Physics on Position: F = -k * (x - target)
+            const fx = (targetX - currentX) * springK;
+            const fy = (targetY - currentY) * springK;
+            vx = (vx + fx) * damping;
+            vy = (vy + fy) * damping;
             currentX += vx;
             currentY += vy;
 
-            // 2. 3D Tilt Spring Physics
-            const aRotX = (targetRotX - currentRotX) * rotTension;
-            const aRotY = (targetRotY - currentRotY) * rotTension;
-            const aRotZ = (targetRotZ - currentRotZ) * rotTension;
-            vRotX = (vRotX + aRotX) * rotDamping;
-            vRotY = (vRotY + aRotY) * rotDamping;
-            vRotZ = (vRotZ + aRotZ) * rotDamping;
+            // Spring Physics on 3D Rotations
+            const fRotX = (targetRotX - currentRotX) * springK * 1.2;
+            const fRotY = (targetRotY - currentRotY) * springK * 1.2;
+            const fRotZ = (targetRotZ - currentRotZ) * springK * 1.2;
+            vRotX = (vRotX + fRotX) * damping;
+            vRotY = (vRotY + fRotY) * damping;
+            vRotZ = (vRotZ + fRotZ) * damping;
             currentRotX += vRotX;
             currentRotY += vRotY;
             currentRotZ += vRotZ;
 
-            // 3. "Melar-Melar" Elastic Spring Physics (Squash & Stretch)
-            const aScaleX = (targetScaleX - currentScaleX) * stretchTension;
-            const aScaleY = (targetScaleY - currentScaleY) * stretchTension;
-            vScaleX = (vScaleX + aScaleX) * stretchDamping;
-            vScaleY = (vScaleY + aScaleY) * stretchDamping;
-            currentScaleX += vScaleX;
-            currentScaleY += vScaleY;
+            // 1. Transform the Card in 3D Space
+            card.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) rotateZ(${currentRotZ.toFixed(2)}deg)`;
 
-            // 4. Apply Unified 3D Transform to Card
-            card.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) rotateZ(${currentRotZ.toFixed(2)}deg) scale3d(${currentScaleX.toFixed(3)}, ${currentScaleY.toFixed(3)}, 1)`;
-
-            // 5. Ambient Backlight Follower
-            if (backlight) {
-                const bgX = currentX * 0.4;
-                const bgY = currentY * 0.4;
-                backlight.style.transform = `translate(calc(-50% + ${bgX.toFixed(1)}px), calc(-50% + ${bgY.toFixed(1)}px))`;
+            // 2. Holographic Glare Shimmer
+            if (glare) {
+                const glareX = 50 + (currentRotY * 2.2);
+                const glareY = 50 + (currentRotX * 2.2);
+                glare.style.background = `radial-gradient(circle at ${glareX.toFixed(1)}% ${glareY.toFixed(1)}%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 215, 0, 0.2) 35%, transparent 70%)`;
             }
 
-            // 6. Dynamic Holographic Foil Sheen
-            if (sheen) {
-                const glareX = 50 + (currentRotY * 2.2) + (currentX * 0.15);
-                const glareY = 50 + (currentRotX * 2.2) + (currentY * 0.15);
-                sheen.style.background = `radial-gradient(circle at ${glareX.toFixed(1)}% ${glareY.toFixed(1)}%, rgba(255, 255, 255, 0.48) 0%, rgba(255, 215, 0, 0.22) 32%, transparent 72%)`;
-            }
+            // 3. Render Elastic Stretchy Rope & Metal Clip on Canvas
+            drawLanyardRope();
 
-            requestAnimationFrame(renderLoop);
+            requestAnimationFrame(animate);
         }
-        requestAnimationFrame(renderLoop);
 
-        // Hover & Mouse Interaction (Smooth Parallax Tilt)
-        stage.addEventListener('mouseenter', () => {
+        // --- Interaction Listeners ---
+        wrapper.addEventListener('mouseenter', () => {
             isHovered = true;
         });
 
-        stage.addEventListener('mouseleave', () => {
+        wrapper.addEventListener('mouseleave', () => {
             isHovered = false;
             if (!isDragging) {
                 targetX = 0;
@@ -897,88 +1015,72 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
                 targetRotX = 0;
                 targetRotY = 0;
                 targetRotZ = 0;
-                targetScaleX = 1.0;
-                targetScaleY = 1.0;
             }
         });
 
-        stage.addEventListener('mousemove', (e) => {
+        wrapper.addEventListener('mousemove', (e) => {
             if (isDragging) return;
-            const rect = stage.getBoundingClientRect();
+            const rect = wrapper.getBoundingClientRect();
             const relX = e.clientX - (rect.left + rect.width / 2);
-            const relY = e.clientY - (rect.top + rect.height / 2);
+            const relY = e.clientY - (rect.top + 85 + 200);
 
-            targetX = Math.max(-25, Math.min(25, relX * 0.18));
-            targetY = Math.max(-20, Math.min(20, relY * 0.18));
-            targetRotY = Math.max(-24, Math.min(24, (relX / (rect.width / 2)) * 18));
-            targetRotX = Math.max(-20, Math.min(20, -(relY / (rect.height / 2)) * 14));
-            targetRotZ = Math.max(-8, Math.min(8, (relX / (rect.width / 2)) * 6));
+            // Subtle parallax tilt and stretch towards cursor
+            targetX = Math.max(-35, Math.min(35, relX * 0.35));
+            targetY = Math.max(-15, Math.min(40, relY * 0.25));
+            targetRotY = Math.max(-20, Math.min(20, relX * 0.18));
+            targetRotX = Math.max(-15, Math.min(15, -relY * 0.12));
+            targetRotZ = (targetX / 35) * 12;
         });
 
-        // Mouse Drag Interaction (Elastic "Melar-Melar" Pulling)
-        function onPointerDown(e) {
+        // Dragging & Stretching (Pointer / Touch)
+        function onDragStart(e) {
             isDragging = true;
-            dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-            dragStartY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+            dragPointerStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            dragPointerStartY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+            dragInitialX = currentX;
+            dragInitialY = currentY;
+            card.style.cursor = 'grabbing';
         }
 
-        function onPointerMove(e) {
+        function onDragMove(e) {
             if (!isDragging) return;
             const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
             const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-            const deltaX = clientX - dragStartX;
-            const deltaY = clientY - dragStartY;
+            const dx = clientX - dragPointerStartX;
+            const dy = clientY - dragPointerStartY;
 
-            // Rubber-band resistance curve
-            targetX = deltaX * 0.65;
-            targetY = deltaY * 0.65;
+            // Elastic drag: pull with rubber resistance & melar!
+            targetX = Math.max(-120, Math.min(120, dragInitialX + dx));
+            targetY = Math.max(-40, Math.min(140, dragInitialY + dy)); // Can stretch down up to +140px!
 
-            // Compute distance for squash & stretch ("Melar")
-            const dist = Math.hypot(deltaX, deltaY);
-            const stretchAmount = Math.min(0.24, dist * 0.0016);
-
-            // Squash & Stretch deformation preserving perceived mass
-            if (Math.abs(deltaY) > Math.abs(deltaX)) {
-                targetScaleY = 1.0 + stretchAmount;
-                targetScaleX = 1.0 - (stretchAmount * 0.45);
-            } else {
-                targetScaleX = 1.0 + stretchAmount;
-                targetScaleY = 1.0 - (stretchAmount * 0.45);
-            }
-
-            // Tilt in direction of drag
-            targetRotY = Math.max(-35, Math.min(35, (deltaX / 100) * 25));
-            targetRotX = Math.max(-28, Math.min(28, -(deltaY / 100) * 20));
-            targetRotZ = Math.max(-16, Math.min(16, (deltaX / 100) * 12));
+            // 3D Tilt responds to drag stretch
+            targetRotZ = Math.max(-35, Math.min(35, (targetX / 120) * 32));
+            targetRotY = Math.max(-28, Math.min(28, (targetX / 120) * 25));
+            targetRotX = Math.max(-20, Math.min(20, -(targetY / 140) * 22));
         }
 
-        function onPointerUp() {
+        function onDragEnd() {
             if (!isDragging) return;
             isDragging = false;
-
-            // Snap back targets with bounce
+            card.style.cursor = 'grab';
+            // Snap back to natural position with spring elasticity!
             targetX = 0;
             targetY = 0;
             targetRotX = 0;
             targetRotY = 0;
             targetRotZ = 0;
-
-            // Trigger rubber-band overshoot ("Melar" wobble)
-            targetScaleX = 1.0;
-            targetScaleY = 1.0;
-            vScaleX = (currentScaleX - 1.0) * -0.4;
-            vScaleY = (currentScaleY - 1.0) * -0.4;
         }
 
-        card.addEventListener('mousedown', onPointerDown);
-        window.addEventListener('mousemove', onPointerMove);
-        window.addEventListener('mouseup', onPointerUp);
+        card.addEventListener('mousedown', onDragStart);
+        window.addEventListener('mousemove', onDragMove);
+        window.addEventListener('mouseup', onDragEnd);
 
-        // Touch Drag Interaction (Mobile & Tablet)
-        card.addEventListener('touchstart', onPointerDown, { passive: true });
-        window.addEventListener('touchmove', onPointerMove, { passive: true });
-        window.addEventListener('touchend', onPointerUp);
+        card.addEventListener('touchstart', onDragStart, { passive: true });
+        window.addEventListener('touchmove', onDragMove, { passive: true });
+        window.addEventListener('touchend', onDragEnd);
+
+        requestAnimationFrame(animate);
     }
-    init3DCredentialBadge();
+    init3DLanyard();
 
 });
