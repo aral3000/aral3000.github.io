@@ -846,18 +846,25 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
 
             // Target connection point: directly at the badge slot hole!
             const slotX = (rect.width / 2) + currentX;
-            const slotY = 85 + currentY + 14; // 85px margin-top + 14px to slot hole
+            const slotY = 85 + currentY + 15.5; // 85px margin-top + 15.5px to slot hole
 
-            // Hardware assembly:
-            // - Penyangga PVC: slotY - 14 to slotY + 2
-            // - Kotak Penjepit: slotY - 28 to slotY - 14
-            // - Tali Strap masuk ke bagian atas kotak penjepit: slotY - 26
-            const strapTargetX = slotX;
-            const strapTargetY = slotY - 26;
+            // Vector from slot hole up towards top anchor
+            const toAnchorX = anchorX - slotX;
+            const toAnchorY = anchorY - slotY;
 
-            // Vector between top anchor and clamp top
-            const dx = strapTargetX - anchorX;
-            const dy = strapTargetY - anchorY;
+            // True pull angle from slot hole towards anchor
+            const pullAngle = Math.atan2(toAnchorY, toAnchorX);
+
+            // Hardware assembly dimensions:
+            // - Penyangga PVC: slotY to (slotY along pullAngle * 12px)
+            // - Kotak Penjepit: (slotY along pullAngle * 12px) to (slotY along pullAngle * 26px)
+            // Clamp top is where the red satin strap enters:
+            const clampTopX = slotX + Math.cos(pullAngle) * 26;
+            const clampTopY = slotY + Math.sin(pullAngle) * 26;
+
+            // Strap vector (from top anchor to clamp top)
+            const dx = clampTopX - anchorX;
+            const dy = clampTopY - anchorY;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const naturalLen = 65; // Natural resting distance
 
@@ -869,7 +876,7 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             const strapWidth = Math.max(14, baseWidth / Math.sqrt(stretch));
 
             // Dynamic Bezier Control Point (Catenary curve sag due to gravity)
-            const sagFactor = Math.max(2, (naturalLen / (dist + 1)) * 16);
+            const sagFactor = Math.max(2, (naturalLen / (dist + 1)) * 14);
             const ctrlX = anchorX + (dx * 0.45);
             const ctrlY = anchorY + (dy * 0.5) + sagFactor;
 
@@ -903,16 +910,16 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowBlur = 10;
             ctx.shadowOffsetY = 4;
 
-            // Strap base curve: enters directly inside the top of the Clamp Box
+            // Strap base curve: enters directly inside the top of the Clamp Box at clampTopX, clampTopY
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, strapTargetX, strapTargetY);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, clampTopX, clampTopY);
             ctx.lineWidth = strapWidth;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
 
             // Red/Gold Woven Gradient along the strap
-            const strapGrad = ctx.createLinearGradient(anchorX, anchorY, strapTargetX, strapTargetY);
+            const strapGrad = ctx.createLinearGradient(anchorX, anchorY, clampTopX, clampTopY);
             strapGrad.addColorStop(0, '#5a0809');
             strapGrad.addColorStop(0.25, '#7A0C0D');
             strapGrad.addColorStop(0.5, '#4a0607');
@@ -925,23 +932,20 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.shadowColor = 'transparent';
             ctx.beginPath();
             ctx.moveTo(anchorX, anchorY);
-            ctx.quadraticCurveTo(ctrlX, ctrlY, strapTargetX, strapTargetY);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, clampTopX, clampTopY);
             ctx.lineWidth = Math.max(1.5, 2.5 / Math.sqrt(stretch));
             ctx.strokeStyle = 'rgba(255, 215, 0, 0.85)';
             ctx.stroke();
             ctx.restore();
 
             // --- C. Draw Separated Hardware Assembly: Penyangga PVC + Kotak Penjepit ---
-            // Tangent angle along the rope at the clamp connection:
-            const tangentAngle = Math.atan2(strapTargetY - ctrlY, strapTargetX - ctrlX);
-            const localAngle = tangentAngle - Math.PI / 2;
-
+            // Orient hardware precisely along pullAngle from slot hole to clamp top (0px gap guaranteed):
             ctx.save();
             ctx.translate(slotX, slotY);
-            ctx.rotate(localAngle); // Orient hardware with rope tension vector
+            ctx.rotate(pullAngle + Math.PI / 2); // local negative Y points along pullAngle
 
             // 1. BAGIAN PENYANGGA (White / Translucent PVC Snap Strap between Clamp and Card)
-            // Loops from beneath clamp box (y = -15) through the slot hole of the card (y = 2)
+            // Loops from beneath clamp box (y = -13) through the slot hole of the card (y = 2)
             ctx.save();
             ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
             ctx.shadowBlur = 4;
@@ -952,15 +956,15 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.lineWidth = 1;
             ctx.beginPath();
             if (ctx.roundRect) {
-                ctx.roundRect(-5.5, -15, 11, 18, 2);
+                ctx.roundRect(-5.5, -13, 11, 16, 2);
             } else {
-                ctx.rect(-5.5, -15, 11, 18);
+                ctx.rect(-5.5, -13, 11, 16);
             }
             ctx.fill();
             ctx.stroke();
 
             // Silver Snap Button (Kancing penjepit pada penyangga PVC)
-            const snapGrad = ctx.createRadialGradient(-0.6, -6.6, 0.4, 0, -6, 4);
+            const snapGrad = ctx.createRadialGradient(-0.6, -5.6, 0.4, 0, -5, 4);
             snapGrad.addColorStop(0, '#ffffff');
             snapGrad.addColorStop(0.4, '#d8dce0');
             snapGrad.addColorStop(0.8, '#a2a8af');
@@ -969,19 +973,19 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.strokeStyle = '#444';
             ctx.lineWidth = 0.7;
             ctx.beginPath();
-            ctx.arc(0, -6, 3.2, 0, Math.PI * 2);
+            ctx.arc(0, -5, 3.2, 0, Math.PI * 2);
             ctx.fill();
             ctx.stroke();
 
             // Inner Rivet Pin Dot
             ctx.fillStyle = '#222';
             ctx.beginPath();
-            ctx.arc(0, -6, 1.1, 0, Math.PI * 2);
+            ctx.arc(0, -5, 1.1, 0, Math.PI * 2);
             ctx.fill();
             ctx.restore();
 
             // 2. KOTAK PENJEPIT TALI (Metal Clamp Stopper Box, seperti di foto produk)
-            // Sits right at the strap end (from y = -29 to y = -14), gripping both ribbon and PVC strap
+            // Sits right from y = -26 to y = -12. Top of clamp is exactly at y = -26 (clampTopX, clampTopY)!
             ctx.save();
             ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
             ctx.shadowBlur = 6;
@@ -998,24 +1002,24 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             ctx.lineWidth = 1;
             ctx.beginPath();
             if (ctx.roundRect) {
-                ctx.roundRect(-12, -29, 24, 15, 2.5);
+                ctx.roundRect(-12, -26, 24, 14, 2.5);
             } else {
-                ctx.rect(-12, -29, 24, 15);
+                ctx.rect(-12, -26, 24, 14);
             }
             ctx.fill();
             ctx.stroke();
 
             // Clamp Box Decorative Recessed Groove / Slot Line
             ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-            ctx.fillRect(-8, -23, 16, 3);
+            ctx.fillRect(-8, -20.5, 16, 3);
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
             ctx.lineWidth = 0.5;
-            ctx.strokeRect(-8, -23, 16, 3);
+            ctx.strokeRect(-8, -20.5, 16, 3);
 
             // Metal specular highlights at top & bottom clamp lip
             ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
-            ctx.fillRect(-10, -28, 20, 1);
-            ctx.fillRect(-10, -15.5, 20, 1);
+            ctx.fillRect(-10, -25.5, 20, 1);
+            ctx.fillRect(-10, -13, 20, 1);
             ctx.restore();
 
             ctx.restore();
