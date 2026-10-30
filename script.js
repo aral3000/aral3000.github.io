@@ -781,80 +781,87 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
     }
     initMeteors();
 
-    // 9. 3D Interactive Lanyard ID Card with Real Physics & Spring Damping
+    // 9. 3D Interactive Lanyard ID Card (Unified Kinematic Pendulum Engine)
     function init3DLanyard() {
         const wrapper = document.getElementById('lanyard-wrapper');
+        const pendulum = document.getElementById('lanyard-pendulum');
         const card = document.getElementById('lanyard-card');
-        const strap = document.getElementById('lanyard-strap');
+        const clip = document.getElementById('lanyard-clip');
         const glare = document.getElementById('badge-glare');
-        if (!wrapper || !card) return;
+        if (!wrapper || !pendulum || !card) return;
 
-        // Physics State
-        let currentX = 0, currentY = 0;
-        let targetX = 0, targetY = 0;
-        let vx = 0, vy = 0;
+        // Kinematic State
+        let currentAngleZ = 0;
+        let targetAngleZ = 0;
+        let vAngleZ = 0;
+
+        let currentTiltX = 0, currentTiltY = 0;
+        let targetTiltX = 0, targetTiltY = 0;
+        let vTiltX = 0, vTiltY = 0;
+
         let isDragging = false;
         let dragStartX = 0, dragStartY = 0;
-        let initialCardX = 0, initialCardY = 0;
+        let dragDeltaX = 0, dragDeltaY = 0;
         let idleTime = 0;
         let isHovered = false;
 
-        // Constants
-        const springTension = 0.075;
-        const springDamping = 0.82;
+        // Physics Constants (High-fidelity spring damping)
+        const springTension = 0.085;
+        const springDamping = 0.86;
 
-        // Natural Idle Animation (Gentle breathing pendulum sway)
+        // Natural Idle Oscillation (Gentle breathing pendulum motion)
         function updateIdle() {
             if (!isDragging && !isHovered) {
                 idleTime += 0.035;
-                targetX = Math.sin(idleTime) * 12;
-                targetY = Math.cos(idleTime * 0.7) * 4;
+                targetAngleZ = Math.sin(idleTime) * 3.5;
+                targetTiltY = Math.sin(idleTime) * 2.5;
+                targetTiltX = Math.cos(idleTime * 0.7) * 1.5;
             }
         }
 
-        // Render Loop with Velocity & Spring Damping
+        // Unified Kinematic Render Loop
         function physicsLoop() {
             updateIdle();
 
-            // Spring force: F = -k * x
-            const ax = (targetX - currentX) * springTension;
-            const ay = (targetY - currentY) * springTension;
+            // Angular Spring Physics for the Main Pendulum Assembly
+            const aZ = (targetAngleZ - currentAngleZ) * springTension;
+            vAngleZ = (vAngleZ + aZ) * springDamping;
+            currentAngleZ += vAngleZ;
 
-            vx = (vx + ax) * springDamping;
-            vy = (vy + ay) * springDamping;
+            // 3D Tilt Spring Physics for the Suspended Card
+            const aX = (targetTiltX - currentTiltX) * (springTension * 1.2);
+            vTiltX = (vTiltX + aX) * springDamping;
+            currentTiltX += vTiltX;
 
-            currentX += vx;
-            currentY += vy;
+            const aY = (targetTiltY - currentTiltY) * (springTension * 1.2);
+            vTiltY = (vTiltY + aY) * springDamping;
+            currentTiltY += vTiltY;
 
-            // Compute 3D rotations based on physical displacement
-            const rotY = Math.max(-32, Math.min(32, currentX * 0.35));
-            const rotX = Math.max(-28, Math.min(28, -currentY * 0.35));
-            const rotZ = Math.max(-18, Math.min(18, currentX * 0.18));
-            const transX = currentX * 0.45;
-            const transY = Math.max(-10, Math.min(30, currentY * 0.3));
+            // 1. Transform Main Pendulum (Strap + Clip + Card swing together from top mount)
+            pendulum.style.transform = `rotateZ(${currentAngleZ.toFixed(2)}deg)`;
 
-            // Apply 3D Transform to Badge Card
-            card.style.transform = `translate3d(${transX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
-
-            // Rotate and Stretch Lanyard Strap to follow card displacement
-            if (strap) {
-                const strapAngle = Math.max(-22, Math.min(22, currentX * 0.22));
-                const strapScale = 1 + Math.abs(currentY) * 0.002;
-                strap.style.transform = `rotate(${strapAngle}deg) scaleY(${strapScale})`;
+            // 2. Transform Metal Pin/Clip (Synchronized micro-bend at joint)
+            if (clip) {
+                const clipMicroAngle = currentAngleZ * 0.12;
+                clip.style.transform = `rotateZ(${clipMicroAngle.toFixed(2)}deg)`;
             }
 
-            // Move Holographic Glare Across the Surface
+            // 3. Transform Card (Hinged to the clip hook with inertia lag & 3D face tilt)
+            const cardInertiaZ = currentAngleZ * 0.28;
+            card.style.transform = `rotateX(${currentTiltX.toFixed(2)}deg) rotateY(${currentTiltY.toFixed(2)}deg) rotateZ(${cardInertiaZ.toFixed(2)}deg)`;
+
+            // 4. Update Dynamic Holographic Glare across acrylic surface
             if (glare) {
-                const glareX = 50 + (rotY * 1.5);
-                const glareY = 50 + (rotX * 1.5);
-                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 215, 0, 0.2) 35%, transparent 70%)`;
+                const glareX = 50 + (currentTiltY * 2.2) + (currentAngleZ * 0.8);
+                const glareY = 50 + (currentTiltX * 2.2);
+                glare.style.background = `radial-gradient(circle at ${glareX.toFixed(1)}% ${glareY.toFixed(1)}%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 215, 0, 0.22) 35%, transparent 70%)`;
             }
 
             requestAnimationFrame(physicsLoop);
         }
         requestAnimationFrame(physicsLoop);
 
-        // Hover & Mouse Move Interactions
+        // Hover & Mouse Interaction (Tilt & Subtle Displacement)
         wrapper.addEventListener('mouseenter', () => {
             isHovered = true;
         });
@@ -862,8 +869,9 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
         wrapper.addEventListener('mouseleave', () => {
             isHovered = false;
             if (!isDragging) {
-                targetX = 0;
-                targetY = 0;
+                targetAngleZ = 0;
+                targetTiltX = 0;
+                targetTiltY = 0;
             }
         });
 
@@ -872,43 +880,48 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             const rect = wrapper.getBoundingClientRect();
             const relX = e.clientX - (rect.left + rect.width / 2);
             const relY = e.clientY - (rect.top + rect.height / 2);
-            targetX = Math.max(-45, Math.min(45, relX * 0.5));
-            targetY = Math.max(-35, Math.min(35, relY * 0.5));
+
+            // Convert mouse offset to natural swing angle and 3D face tilt
+            targetAngleZ = Math.max(-28, Math.min(28, (relX / (rect.width / 2)) * 22));
+            targetTiltY = Math.max(-24, Math.min(24, (relX / (rect.width / 2)) * 18));
+            targetTiltX = Math.max(-18, Math.min(18, -(relY / (rect.height / 2)) * 14));
         });
 
-        // Mouse Drag Interaction
+        // Mouse Drag Interaction (Grabbing & Swinging the ID Card)
         function onPointerDown(e) {
             isDragging = true;
             dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
             dragStartY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-            initialCardX = currentX;
-            initialCardY = currentY;
-            card.style.transition = 'none';
+            dragDeltaX = 0;
+            dragDeltaY = 0;
         }
 
         function onPointerMove(e) {
             if (!isDragging) return;
             const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
             const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-            const deltaX = clientX - dragStartX;
-            const deltaY = clientY - dragStartY;
+            dragDeltaX = clientX - dragStartX;
+            dragDeltaY = clientY - dragStartY;
 
-            targetX = Math.max(-80, Math.min(80, initialCardX + deltaX));
-            targetY = Math.max(-40, Math.min(70, initialCardY + deltaY));
+            // Compute realistic angular displacement from drag
+            targetAngleZ = Math.max(-48, Math.min(48, (dragDeltaX / 110) * 36));
+            targetTiltY = Math.max(-32, Math.min(32, (dragDeltaX / 110) * 24));
+            targetTiltX = Math.max(-22, Math.min(22, -(dragDeltaY / 90) * 18));
         }
 
         function onPointerUp() {
             if (!isDragging) return;
             isDragging = false;
-            targetX = 0;
-            targetY = 0;
+            targetAngleZ = 0;
+            targetTiltX = 0;
+            targetTiltY = 0;
         }
 
         card.addEventListener('mousedown', onPointerDown);
         window.addEventListener('mousemove', onPointerMove);
         window.addEventListener('mouseup', onPointerUp);
 
-        // Touch Drag Interaction (Mobile / Tablet)
+        // Touch Drag Interaction (Mobile & Tablet Devices)
         card.addEventListener('touchstart', onPointerDown, { passive: true });
         window.addEventListener('touchmove', onPointerMove, { passive: true });
         window.addEventListener('touchend', onPointerUp);
