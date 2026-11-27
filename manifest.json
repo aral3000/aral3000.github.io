@@ -4,8 +4,8 @@
   "description": "AI Engineer & Data Scientist Portfolio of M. Athallah Rafif Aldera",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0A0A0F",
-  "theme_color": "#7A0C0D",
+  "background_color": "#191939",
+  "theme_color": "#191939",
   "orientation": "portrait-primary",
   "icons": [
     {

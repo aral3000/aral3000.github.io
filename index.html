@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>M. Athallah Rafif Aldera | AI Engineer & Data Scientist Portfolio</title>
-    <meta name="description" content="Official Portfolio of M. Athallah Rafif Aldera - AI Engineer, Data Scientist, and Computer Systems Graduate from Sriwijaya University.">
-    
+    <title>M. Athallah Rafif Aldera | AI Engineer &amp; Data Scientist</title>
+    <meta name="description" content="Portfolio of M. Athallah Rafif Aldera, S.Kom. AI Engineer, Data Scientist, and Computer Systems Graduate from Sriwijaya University.">
+
     <!-- PWA & Mobile Web App Meta Tags -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#7A0C0D">
+    <meta name="theme-color" content="#191939">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="profile.jpg">
@@ -16,717 +16,954 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS (Cache-Busted) -->
-    <link rel="stylesheet" href="styles.css?v=20261030_perfect_joint">
+    <link rel="stylesheet" href="styles.css?v=20261127_starry_v4">
 </head>
 <body>
 
-    <!-- Ambient Lighting & Canvas Particle Background -->
-    <canvas id="particle-canvas"></canvas>
-    <div class="ambient-light light-1"></div>
-    <div class="ambient-light light-2"></div>
-    <!-- Ambient Meteors / Shooting Stars Layer -->
-    <div class="meteor-container" aria-hidden="true" id="meteor-container"></div>
+    <!-- Top Keynote Reading Progress Indicator -->
+    <div class="keynote-progress" id="keynote-progress" aria-hidden="true"></div>
 
-    <!-- Navigation Header -->
+    <!-- Sticky Frosted Navigation Bar -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
                 <span class="logo-name">Athallah</span><span class="logo-dot">.</span>
             </a>
-            
-            <nav class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active" data-i18n="nav.home">Home</a>
-                <a href="#about" class="nav-link" data-i18n="nav.about">About Me</a>
+
+            <nav class="nav-menu" id="nav-menu" aria-label="Primary Navigation">
+                <a href="#home" class="nav-link active" data-i18n="nav.home">Overview</a>
+                <a href="#about" class="nav-link" data-i18n="nav.about">About</a>
                 <a href="#skills" class="nav-link" data-i18n="nav.skills">Capabilities</a>
-                <a href="#projects" class="nav-link" data-i18n="nav.projects">Featured Work</a>
+                <a href="#projects" class="nav-link" data-i18n="nav.projects">Work</a>
                 <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
-                <a href="#certifications" class="nav-link" data-i18n="nav.certifications">Certifications</a>
+                <a href="#certifications" class="nav-link" data-i18n="nav.certifications">Credentials</a>
             </nav>
-            
-            <!-- Far Right Corner Action Group with Multi-Language Switcher -->
+
             <div class="nav-actions">
-                <div class="lang-selector">
-                    <button class="lang-btn active" data-lang="en" title="English">EN</button>
-                    <button class="lang-btn" data-lang="id" title="Bahasa Indonesia">ID</button>
-                    <button class="lang-btn" data-lang="zh" title="简体中文">中文</button>
+                <div class="lang-selector" role="group" aria-label="Language toggle">
+                    <button class="lang-btn active" data-lang="en" type="button" title="English">EN</button>
+                    <button class="lang-btn" data-lang="id" type="button" title="Bahasa Indonesia">ID</button>
                 </div>
-                <button class="btn-talk" id="btn-quick-cv"><i class="fas fa-file-pdf"></i> <span data-i18n="btn.quick_cv">Quick CV</span></button>
-                <a href="#contact" class="btn-talk btn-talk-primary"><i class="fas fa-paper-plane"></i> <span data-i18n="btn.hire">Hire / Contact</span></a>
-                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
-                    <i class="fas fa-bars"></i>
+                <button class="btn-nav-outline" id="btn-quick-cv" type="button" data-i18n="btn.quick_cv">Quick CV</button>
+                <a href="#contact" class="btn-nav-primary" data-i18n="btn.hire">Contact</a>
+                <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Calvino-Inspired Hero Banner (Royal Red & Gold Theme) -->
-    <section class="hero" id="home">
-        <div class="hero-bg-overlay"></div>
-        <div class="hero-container">
-            <div class="hero-content-wrapper">
-                
-                <!-- 3D Interactive Lanyard ID Badge (Elastic Physics Canvas + 3D Card) -->
-                <div class="lanyard-wrapper" id="lanyard-wrapper">
-                    <!-- High-DPI Canvas for Stretchy Elastic Rope & Metal Joint -->
-                    <canvas id="lanyard-rope-canvas" class="lanyard-rope-canvas"></canvas>
-
-                    <!-- 3D Physics ID Badge Card (Suspended from Elastic Canvas Rope) -->
-                    <div class="lanyard-card" id="lanyard-card" role="region" aria-label="Interactive 3D ID Badge (Drag to stretch and swing)">
-                        <!-- Badge Top Slot (Canvas hook loops directly into this hole) -->
-                        <div class="badge-slot">
-                            <div class="slot-hole"></div>
-                        </div>
-
-                        <!-- Card Surface Body -->
-                        <div class="badge-inner">
-                            <!-- Holographic Glare Layer -->
-                            <div class="badge-glare" id="badge-glare"></div>
-
-                            <!-- Card Header (University & Faculty) -->
-                            <div class="badge-header">
-                                <div class="badge-univ-logo">
-                                    <i class="fas fa-university text-gold"></i>
-                                </div>
-                                <div class="badge-univ-info">
-                                    <span class="badge-univ-title">UNIVERSITAS SRIWIJAYA</span>
-                                    <span class="badge-univ-sub">FACULTY OF COMPUTER SCIENCE</span>
-                                </div>
-                                <div class="badge-flag">ID</div>
-                            </div>
-
-                            <!-- Card Photo Stage -->
-                            <div class="badge-photo-frame">
-                                <img src="profile.jpg" alt="M. Athallah Rafif Aldera, S.Kom." class="badge-photo" id="profile-img">
-                                <div class="badge-status-pill">
-                                    <span class="status-pulse-dot"></span>
-                                    <span data-i18n="hero.open_to_work">Open to Work</span>
-                                </div>
-                            </div>
-
-                            <!-- Candidate Credentials -->
-                            <div class="badge-identity">
-                                <h3 class="badge-name">M. Athallah Rafif Aldera</h3>
-                                <div class="badge-degree-role">
-                                    <span class="badge-degree">S.Kom.</span>
-                                    <span class="badge-separator">•</span>
-                                    <span class="badge-spec">AI & ML Engineer</span>
-                                </div>
-                            </div>
-
-                            <!-- Card Tech & Security Details -->
-                            <div class="badge-meta-row">
-                                <div class="badge-chip">
-                                    <i class="fas fa-microchip"></i>
-                                    <span>NFC AI</span>
-                                </div>
-                                <div class="badge-data-col">
-                                    <div class="badge-data-item">
-                                        <span class="meta-label">NIM</span>
-                                        <span class="meta-val">09011282227066</span>
-                                    </div>
-                                    <div class="badge-data-item">
-                                        <span class="meta-label">GPA</span>
-                                        <span class="meta-val gold-val">3.77 / 4.00</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Badge Footer Barcode / Verification -->
-                            <div class="badge-footer">
-                                <div class="badge-barcode">
-                                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                                </div>
-                                <span class="badge-verif-text">MAGANGHUB BATCH 3 VERIFIED CANDIDATE</span>
-                            </div>
-                        </div>
-
-                        <!-- Card Hint on Hover -->
-                        <div class="badge-drag-hint">
-                            <i class="fas fa-hand-pointer"></i> <span>Drag or stretch badge to swing</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Headline & Recruiter Value Proposition -->
-                <div class="hero-text-box">
-                    <div class="hero-greeting-tag">
-                        <i class="fas fa-user-check gold-icon"></i>
-                        <span data-i18n="hero.tag">Computer Systems Graduate | AI & Data Science Candidate</span>
-                    </div>
-                    <h1 class="hero-title" data-i18n="hero.title">
-                        Hello, I'm <span class="text-gold">M. Athallah Rafif Aldera.</span><br>
-                        <span class="title-sub">AI Engineer & Data Scientist</span>
-                    </h1>
-                    <p class="hero-description" data-i18n="hero.desc">
-                        Computer Systems graduate from <strong>Sriwijaya University</strong> specializing in 
-                        <strong>Generative AI, Computer Vision, and Data Analytics</strong>. Equipped with a 
-                        <em>hyper-focus execution rhythm</em> to solve complex technical challenges with speed, accuracy, and business value.
+    <!-- Chapter 1: 100vh Widescreen Split Formal Hero (Starry Night Dark) -->
+    <section class="chapter-dark hero" id="home">
+        <canvas class="starry-ascii-canvas" data-starry-mode="hero" aria-hidden="true"></canvas>
+        <div class="hero-stage-glow" aria-hidden="true"></div>
+        <div class="container">
+            <div class="hero-split-grid">
+                <div class="hero-copy">
+                    <p class="hero-eyebrow hero-stagger" data-i18n="hero.tag">Computer Systems · Sriwijaya University</p>
+                    <h1 class="hero-title hero-stagger" data-i18n="hero.title">Engineered for Intelligence.</h1>
+                    <p class="hero-description hero-stagger" data-i18n="hero.desc">
+                        M. Athallah Rafif Aldera, S.Kom. AI Engineer &amp; Data Scientist building Generative AI, Computer Vision, and applied ML pipelines.
                     </p>
-                    
-                    <div class="hero-cta-group">
-                        <a href="#contact" class="btn-primary-gold">
-                            <i class="fas fa-paper-plane"></i> <span data-i18n="btn.get_in_touch">Get In Touch</span>
-                        </a>
-                        <a href="#projects" class="btn-secondary-red">
-                            <i class="fas fa-layer-group"></i> <span data-i18n="btn.explore_case_studies">Explore Case Studies</span>
-                        </a>
-                        <button class="btn-outline-gold" id="btn-copy-email-hero">
-                            <i class="fas fa-copy"></i> <span data-i18n="btn.copy_email">Copy Email</span>
+
+                    <div class="hero-cta-group hero-stagger">
+                        <a href="#contact" class="btn-keynote-primary" data-i18n="btn.get_in_touch">Get In Touch</a>
+                        <a href="#projects" class="btn-keynote-secondary" data-i18n="btn.explore_case_studies">Explore Work</a>
+                        <button class="btn-keynote-ghost" id="btn-copy-email-hero" type="button">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                            <span data-i18n="btn.copy_email">Copy Email</span>
                         </button>
                     </div>
                 </div>
 
+                <div class="hero-visual-stage hero-stagger">
+                    <figure class="formal-portrait-wrap" id="formal-portrait-wrap">
+                        <img
+                            src="profile.jpg"
+                            alt="M. Athallah Rafif Aldera formal black suit portrait"
+                            width="560"
+                            height="560"
+                            fetchpriority="high"
+                            class="hero-portrait-img"
+                        >
+                        <div class="formal-portrait-fade" aria-hidden="true"></div>
+                        <figcaption class="hero-portrait-caption">
+                            <span data-i18n="hero.caption_degree">B.S. Computer Systems · Class of 2026</span>
+                        </figcaption>
+                    </figure>
+                </div>
             </div>
 
-            <!-- Calvino Hero Footer Bar (Recruiter Quick Info Strip) -->
-            <div class="hero-footer-bar">
-                <div class="hero-foot-item">
-                    <span class="foot-label" data-i18n="hero.target_roles_label">Target Roles</span>
-                    <span class="foot-value"><i class="fas fa-bullseye text-gold"></i> <span data-i18n="hero.target_roles_val">AI Engineer | Data Scientist | Computer Vision Specialist | ML Engineer | Data Analyst | AI Developer</span></span>
+            <!-- Quiet Spec Strip -->
+            <div class="hero-spec-strip hero-stagger">
+                <div class="spec-item">
+                    <span class="spec-label" data-i18n="hero.target_roles_label">Target Roles</span>
+                    <span class="spec-value" data-i18n="hero.target_roles_val">AI Engineer · Data Scientist · Computer Vision · ML Engineer</span>
                 </div>
-                <div class="hero-foot-item">
-                    <span class="foot-label" data-i18n="hero.location_label">Location & Status</span>
-                    <span class="foot-value"><i class="fas fa-location-dot text-gold"></i> <span data-i18n="hero.location_val">Prabumulih / Relocation & Remote Ready</span></span>
+                <div class="spec-item">
+                    <span class="spec-label" data-i18n="hero.location_label">Location &amp; Readiness</span>
+                    <span class="spec-value" data-i18n="hero.location_val">Prabumulih · Open to Relocation &amp; Remote</span>
                 </div>
-                <div class="hero-foot-item">
-                    <span class="foot-label" data-i18n="hero.contact_label">Direct Contact</span>
-                    <a href="mailto:mathallahrafifaldera@gmail.com" class="foot-value email-link">
-                        <span>mathallahrafifaldera@gmail.com</span>
-                        <div class="mail-circle-btn">
-                            <i class="fas fa-arrow-right"></i>
+                <div class="spec-item">
+                    <span class="spec-label" data-i18n="hero.contact_label">Direct Contact</span>
+                    <a href="mailto:mathallahrafifaldera@gmail.com" class="spec-value spec-link">mathallahrafifaldera@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stage 1B: Sticky Scroll-Scrubbed Keynote Manifesto -->
+    <section class="manifesto-track" id="manifesto" aria-label="Keynote Manifesto">
+        <div class="manifesto-sticky">
+            <canvas class="starry-ascii-canvas" data-starry-mode="manifesto" aria-hidden="true"></canvas>
+            <div class="manifesto-scrim" aria-hidden="true"></div>
+            <div class="manifesto-inner">
+                <p class="manifesto-kicker" data-i18n="manifesto.kicker">Keynote Thesis</p>
+                <p class="scrub-text" id="scrub-text" data-i18n="manifesto.text">
+                    From scarce clinical cervical imagery to 630K+ phishing URLs, every system is engineered with StyleGAN2-ADA precision, 97.00% verified accuracy, and production-ready PyTorch discipline.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stage 1C: Diagonal Kinetic Cutout Poster Stage (toga-cutout.png) -->
+    <section class="cutout-section" id="editorial-poster" aria-label="Graduation Keynote Visual">
+        <div class="container">
+            <div class="cutout-section-head reveal-up">
+                <span class="cutout-kicker" data-i18n="cutout.kicker">Editorial Keynote Stage</span>
+                <span class="cutout-sub" data-i18n="cutout.sub">Class of 2026 · Faculty of Computer Science</span>
+            </div>
+
+            <div class="cutout-poster-frame reveal-up" id="cutout-poster-frame">
+                <div class="diagonal-type-wall" id="diagonal-type-wall" aria-hidden="true"></div>
+                <div class="cutout-halo" aria-hidden="true"></div>
+                <img
+                    src="assets/photos/toga-cutout.png?v=2"
+                    alt="M. Athallah Rafif Aldera wearing Sriwijaya University graduation toga"
+                    width="614"
+                    height="962"
+                    loading="lazy"
+                    class="cutout-subject"
+                    id="cutout-subject"
+                >
+                <div class="cutout-top-fade" aria-hidden="true"></div>
+                <div class="cutout-bottom-fade" aria-hidden="true"></div>
+                <span class="poster-corner poster-tl">S.KOM. · UNSRI '26</span>
+                <span class="poster-corner poster-tr">GPA 3.77 / 4.00</span>
+                <span class="poster-corner poster-bl">INDONESIA · AI &amp; DATA</span>
+                <span class="poster-corner poster-br">AI ENGINEER &amp; DATA SCIENTIST</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 2: Tim Cook Keynote Summary Slide (Deep Obsidian Burgundy) -->
+    <section class="chapter-dark-obsidian keynote-summary-section" id="highlights" aria-label="Keynote Highlights">
+        <div class="container">
+            <div class="summary-slide-header reveal-up">
+                <p class="section-eyebrow" data-i18n="summary.eyebrow">Keynote Recap</p>
+                <h2 class="summary-slide-title" data-i18n="summary.title">Built for accuracy, scale, and speed.</h2>
+            </div>
+
+            <div class="keynote-summary-grid reveal-stagger">
+                <div class="summary-tile summary-tile-featured spotlight-card reveal-up">
+                    <span class="summary-kicker" data-i18n="summary.k1">DenseNet121 Classification</span>
+                    <div class="summary-metric" data-count-to="97" data-decimals="2" data-suffix="%">97.00%</div>
+                    <p class="summary-sub" data-i18n="metrics.acc">Peak test accuracy using 50:50 Real + StyleGAN2-ADA synthetic mix (and 95.00% on 100% synthetic training).</p>
+                </div>
+
+                <div class="summary-tile spotlight-card reveal-up">
+                    <span class="summary-kicker" data-i18n="summary.k2">Generative Quality</span>
+                    <div class="summary-metric" data-count-to="49.62" data-decimals="2" data-suffix="">49.62</div>
+                    <p class="summary-sub" data-i18n="metrics.fid">Lowest Fréchet Inception Distance on clinical VIA cervical imagery, outperforming StyleGAN3 &amp; DCGAN.</p>
+                </div>
+
+                <div class="summary-tile spotlight-card reveal-up">
+                    <span class="summary-kicker" data-i18n="summary.k3">Cybersecurity Scale</span>
+                    <div class="summary-metric" data-count-to="630" data-decimals="0" data-suffix="K+">630K+</div>
+                    <p class="summary-sub" data-i18n="metrics.urls">URLs trained in a lexical Random Forest phishing pipeline (89.0% test accuracy) for Diskominfo.</p>
+                </div>
+
+                <div class="summary-tile spotlight-card reveal-up">
+                    <span class="summary-kicker" data-i18n="summary.k4">Academic Distinction</span>
+                    <div class="summary-metric" data-count-to="3.77" data-decimals="2" data-suffix="">3.77</div>
+                    <p class="summary-sub" data-i18n="metrics.degree">Cumulative GPA · Bachelor of Computer Systems (UNSRI '26)</p>
+                </div>
+
+                <div class="summary-tile spotlight-card reveal-up">
+                    <span class="summary-kicker" data-i18n="summary.k5">Verified Badges</span>
+                    <div class="summary-metric" data-count-to="13" data-decimals="0" data-suffix="">13</div>
+                    <p class="summary-sub" data-i18n="metrics.certs">Verified credentials across Google Cloud Credly, Komdigi DTS, ASEAN, UNSRI &amp; Dicoding.</p>
+                </div>
+
+                <div class="summary-tile summary-tile-stack spotlight-card reveal-up">
+                    <span class="summary-kicker" data-i18n="summary.k6">Production Stack</span>
+                    <div class="summary-stack-label">PyTorch · CUDA · FastAPI</div>
+                    <p class="summary-sub" data-i18n="metrics.stack">End-to-end engineering from GPU training loops to REST services, Streamlit UI, and pytest suites.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 3: Identity & Interactive Lanyard (Warm Alabaster Light) -->
+    <section class="chapter-light about-section" id="about">
+        <div class="container">
+            <div class="section-intro reveal-up">
+                <p class="section-eyebrow" data-i18n="about.subtitle">Candidate Overview</p>
+                <h2 class="section-headline" data-i18n="about.title">Precision engineering meets rapid execution.</h2>
+            </div>
+
+            <div class="about-layout">
+                <!-- Interactive 3D Elastic Lanyard ID Card -->
+                <div class="about-lanyard-stage reveal-up">
+                    <div class="lanyard-wrapper" id="lanyard-wrapper">
+                        <canvas id="lanyard-rope-canvas" class="lanyard-rope-canvas"></canvas>
+
+                        <div class="lanyard-card" id="lanyard-card" role="region" aria-label="Interactive 3D ID Badge. Drag to stretch and swing.">
+                            <div class="badge-slot">
+                                <div class="slot-hole"></div>
+                            </div>
+
+                            <div class="badge-inner">
+                                <div class="badge-glare" id="badge-glare"></div>
+
+                                <div class="badge-header">
+                                    <div class="badge-univ-logo">
+                                        <i class="fas fa-university" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="badge-univ-info">
+                                        <span class="badge-univ-title">UNIVERSITAS SRIWIJAYA</span>
+                                        <span class="badge-univ-sub">FACULTY OF COMPUTER SCIENCE</span>
+                                    </div>
+                                    <div class="badge-flag">ID</div>
+                                </div>
+
+                                <div class="badge-photo-frame">
+                                    <img src="profile.jpg" alt="M. Athallah Rafif Aldera, S.Kom." width="560" height="560" class="badge-photo" id="profile-img">
+                                    <div class="badge-status-pill">
+                                        <span class="status-dot"></span>
+                                        <span data-i18n="hero.open_to_work">Open to Work</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-identity">
+                                    <h3 class="badge-name">M. Athallah Rafif Aldera</h3>
+                                    <div class="badge-degree-role">
+                                        <span class="badge-degree">S.Kom.</span>
+                                        <span class="badge-separator">&middot;</span>
+                                        <span class="badge-spec">AI &amp; ML Engineer</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-meta-row">
+                                    <div class="badge-chip">
+                                        <i class="fas fa-microchip" aria-hidden="true"></i>
+                                        <span>NFC ID</span>
+                                    </div>
+                                    <div class="badge-data-col">
+                                        <div class="badge-data-item">
+                                            <span class="meta-label">NIM</span>
+                                            <span class="meta-val">09011282227066</span>
+                                        </div>
+                                        <div class="badge-data-item">
+                                            <span class="meta-label">GPA</span>
+                                            <span class="meta-val accent-val">3.77 / 4.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="badge-footer">
+                                    <div class="badge-barcode" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <span class="badge-verif-text">VERIFIED ENGINEERING CREDENTIAL</span>
+                                </div>
+                            </div>
+
+                            <div class="badge-drag-hint">
+                                <i class="fas fa-hand-pointer" aria-hidden="true"></i>
+                                <span data-i18n="about.drag_hint">Drag badge to test spring physics</span>
+                            </div>
                         </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Interactive Candidate Metrics Ribbon -->
-    <section class="metrics-ribbon">
-        <div class="container">
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-number text-gold">97.00%</div>
-                    <div class="metric-label" data-i18n="metrics.acc">DenseNet121 Peak Classification Accuracy</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number text-gold">49.62</div>
-                    <div class="metric-label" data-i18n="metrics.fid">Peak FID Score (StyleGAN2-ADA)</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number text-gold">9+</div>
-                    <div class="metric-label" data-i18n="metrics.certs">Komdigi, Google Cloud & Dicoding Credentials</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number text-gold">GPA 3.77</div>
-                    <div class="metric-label" data-i18n="metrics.degree">B.S. Computer Systems (UNSRI '26)</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Me Section (Who I Am & Candidate Value) -->
-    <section class="section about-section" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle"><i class="fas fa-user-astronaut text-gold"></i> <span data-i18n="about.subtitle">Candidate Overview</span></span>
-                <h2 class="section-title" data-i18n="about.title">Who I Am & <span class="text-gold">What I Bring to Your Team</span></h2>
-            </div>
-            
-            <div class="about-grid">
-                <div class="about-card main-about">
-                    <div class="about-icon-badge"><i class="fas fa-user-gear"></i></div>
-                    <h3 data-i18n="about.card_title">Professional Profile</h3>
-                    <div data-i18n="about.text">
-                        <p>
-                            I am a Computer Systems graduate from <strong>Sriwijaya University (UNSRI)</strong>, dedicated to pursuing a professional career as an <strong>AI Engineer, Data Scientist, and Technology Innovator</strong>. My core expertise covers Machine Learning algorithms, Deep Learning (Generative AI & Computer Vision), and Data Analytics.
-                        </p>
-                        <p>
-                            I operate with a <strong>hyper-focus execution rhythm</strong>—capable of mastering new technologies rapidly, tackling complex technical problems with high efficiency, and executing projects end-to-end from ideation to production. Ready to deliver immediate value to your organization.
-                        </p>
-                    </div>
-
-                    <div class="bio-tags">
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.ai_pipelines">End-to-End AI Pipelines</span></span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.data_analytics">Data Science & Analytics</span></span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.cv_spec">Computer Vision Specialist</span></span>
-                        <span class="tag"><i class="fas fa-check-circle text-gold"></i> <span data-i18n="tags.hyper_focus">Fast Learner & Hyper-Focus</span></span>
                     </div>
                 </div>
 
-                <div class="about-card highlight-box">
-                    <h4 class="gold-heading"><i class="fas fa-star"></i> <span data-i18n="why.title">Why Hire Me?</span></h4>
-                    <ul class="philosophy-list">
-                        <li>
-                            <div class="p-icon"><i class="fas fa-brain"></i></div>
+                <!-- Right: Editorial Bio & 3 Core Pillars -->
+                <div class="about-editorial reveal-up">
+                    <h3 class="about-subhead" data-i18n="about.card_title">Profile &amp; Engineering Philosophy</h3>
+                    <div class="about-prose" data-i18n="about.text">
+                        <p>Graduated in Computer Systems from <strong>Sriwijaya University (UNSRI)</strong>, focused on building reliable systems across Machine Learning, Deep Generative Modeling, Computer Vision, and Data Analytics.</p>
+                        <p>Known for disciplined execution under tight deadlines: moving seamlessly from experimental PyTorch research and SQL pipelines to clean, tested CLI and API deployments.</p>
+                    </div>
+
+                    <div class="pillars-stack reveal-stagger">
+                        <div class="pillar-row reveal-up">
+                            <div class="pillar-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
                             <div>
-                                <strong data-i18n="why.p1_title">Technical Mastery in AI/ML</strong>
-                                <p data-i18n="why.p1_desc">Proven track record building generative models (StyleGAN2-ADA, StyleGAN3, DCGAN) & CNN classifiers using PyTorch & TensorFlow.</p>
+                                <h4 data-i18n="why.p1_title">Deep Learning &amp; Generative AI</h4>
+                                <p data-i18n="why.p1_desc">Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN architectures paired with DenseNet121 classifiers in PyTorch and TensorFlow.</p>
                             </div>
-                        </li>
-                        <li>
-                            <div class="p-icon"><i class="fas fa-chart-pie"></i></div>
+                        </div>
+                        <div class="pillar-row reveal-up">
+                            <div class="pillar-icon"><i class="fas fa-chart-pie" aria-hidden="true"></i></div>
                             <div>
-                                <strong data-i18n="why.p2_title">Data Science & Analytical Pipelines</strong>
-                                <p data-i18n="why.p2_desc">Proven skills in SQL database querying, exploratory data analysis, and predictive modeling using Scikit-Learn, Pandas & NumPy.</p>
+                                <h4 data-i18n="why.p2_title">Data Science &amp; Analytics Pipelines</h4>
+                                <p data-i18n="why.p2_desc">Structured SQL extraction, exploratory analysis, lexical feature engineering, and Scikit-Learn modeling at 630K+ scale.</p>
                             </div>
-                        </li>
-                        <li>
-                            <div class="p-icon"><i class="fas fa-people-group"></i></div>
+                        </div>
+                        <div class="pillar-row reveal-up">
+                            <div class="pillar-icon"><i class="fas fa-trophy" aria-hidden="true"></i></div>
                             <div>
-                                <strong data-i18n="why.p3_title">Leadership & Execution Discipline</strong>
-                                <p data-i18n="why.p3_desc">Led the Martial Arts Division at UKM Taekwondo UNSRI—managing events, athlete training schedules, and team coordination under pressure.</p>
+                                <h4 data-i18n="why.p3_title">Athletic &amp; Competitive Discipline</h4>
+                                <p data-i18n="why.p3_desc">Directed training and athlete development as Martial Arts Division Lead at UKM Beladiri Taekwondo UNSRI, winning 3rd Place (Under 70kg) at PORKAB IV Ogan Ilir 2023.</p>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Capabilities & Skill Progress Matrix (What I Can Do) -->
-    <section class="section skills-section" id="skills">
+    <!-- Chapter 4: Capabilities Matrix (Warm Stone Light) -->
+    <section class="chapter-light-alt skills-section" id="skills">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-laptop-code text-gold"></i> <span data-i18n="skills.subtitle">Interactive Competency Matrix</span></span>
-                <h2 class="section-title" data-i18n="skills.title">Core Capabilities & <span class="text-gold">Skill Proficiency</span></h2>
-                <p class="section-desc" data-i18n="skills.desc">Click tabs to filter skills and inspect proficiency metrics across AI Engineering, Data Science, and Computer Vision.</p>
+            <div class="section-intro centered reveal-up">
+                <p class="section-eyebrow" data-i18n="skills.subtitle">Technical Stack</p>
+                <h2 class="section-headline" data-i18n="skills.title">Core Capabilities.</h2>
+                <p class="section-lead" data-i18n="skills.desc">Filter technical competencies across AI engineering, data science, and computer vision pipelines.</p>
             </div>
 
-            <!-- Skill Filter Tabs -->
-            <div class="skill-tabs">
-                <button class="skill-tab-btn active" data-filter="all" data-i18n="tabs.all">All Capabilities</button>
-                <button class="skill-tab-btn" data-filter="ai" data-i18n="tabs.ai">AI & Deep Learning</button>
-                <button class="skill-tab-btn" data-filter="ds" data-i18n="tabs.ds">Data Science & SQL</button>
-                <button class="skill-tab-btn" data-filter="cv" data-i18n="tabs.cv">Computer Vision & Tools</button>
+            <div class="skill-tabs reveal-up" role="tablist" aria-label="Filter capabilities">
+                <button class="skill-tab-btn active" data-filter="all" type="button" data-i18n="tabs.all">All</button>
+                <button class="skill-tab-btn" data-filter="ai" type="button" data-i18n="tabs.ai">AI &amp; Deep Learning</button>
+                <button class="skill-tab-btn" data-filter="ds" type="button" data-i18n="tabs.ds">Data Science &amp; SQL</button>
+                <button class="skill-tab-btn" data-filter="cv" type="button" data-i18n="tabs.cv">Computer Vision &amp; Tools</button>
             </div>
 
-            <div class="skills-matrix-grid" id="skills-grid">
-                
-                <!-- AI Skills -->
-                <div class="skill-progress-card" data-category="ai">
+            <div class="skills-matrix-grid reveal-stagger" id="skills-grid">
+                <div class="skill-progress-card reveal-up" data-category="ai">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-brain text-gold"></i> PyTorch & TensorFlow</span>
+                        <span class="sp-name"><i class="fas fa-layer-group" aria-hidden="true"></i> PyTorch &amp; TensorFlow</span>
                         <span class="sp-val">90%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
-                    <p class="sp-desc" data-i18n="sp.pytorch">Deep Learning model training, loss functions, custom CNN heads, and GPU optimization.</p>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="90%" style="width: 90%;"></div></div>
+                    <p class="sp-desc" data-i18n="sp.pytorch">Deep Learning model training, custom loss functions, CNN heads, and GPU optimization.</p>
                 </div>
 
-                <div class="skill-progress-card" data-category="ai">
+                <div class="skill-progress-card reveal-up" data-category="ai">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-robot text-gold"></i> Generative AI (StyleGAN2/3)</span>
+                        <span class="sp-name"><i class="fas fa-images" aria-hidden="true"></i> Generative AI (StyleGAN2/3)</span>
                         <span class="sp-val">92%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 92%;"></div></div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="92%" style="width: 92%;"></div></div>
                     <p class="sp-desc" data-i18n="sp.stylegan">Multi-stage StyleGAN training, ADA adaptive augmentation, and FID metric convergence analysis.</p>
                 </div>
 
-                <div class="skill-progress-card" data-category="ai">
+                <div class="skill-progress-card reveal-up" data-category="ai">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-network-wired text-gold"></i> CNN Classifiers (DenseNet121)</span>
+                        <span class="sp-name"><i class="fas fa-network-wired" aria-hidden="true"></i> CNN Classifiers (DenseNet121)</span>
                         <span class="sp-val">88%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 88%;"></div></div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="88%" style="width: 88%;"></div></div>
                     <p class="sp-desc" data-i18n="sp.densenet">Transfer learning, feature extraction, binary cross-entropy, and confusion matrix validation.</p>
                 </div>
 
-                <!-- Data Science Skills -->
-                <div class="skill-progress-card" data-category="ds">
+                <div class="skill-progress-card reveal-up" data-category="ds">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fab fa-python text-gold"></i> Python 3.10+ Ecosystem</span>
+                        <span class="sp-name"><i class="fab fa-python" aria-hidden="true"></i> Python 3.10+ Ecosystem</span>
                         <span class="sp-val">95%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 95%;"></div></div>
-                    <p class="sp-desc" data-i18n="sp.python">OOP, scripting, automation, harvest utilities, and end-to-end data processing pipelines.</p>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="95%" style="width: 95%;"></div></div>
+                    <p class="sp-desc" data-i18n="sp.python">OOP, scripting, automation, test suites, and end-to-end data processing pipelines.</p>
                 </div>
 
-                <div class="skill-progress-card" data-category="ds">
+                <div class="skill-progress-card reveal-up" data-category="ds">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-database text-gold"></i> SQL Querying & Relational DB</span>
+                        <span class="sp-name"><i class="fas fa-database" aria-hidden="true"></i> SQL Querying &amp; Relational DB</span>
                         <span class="sp-val">85%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 85%;"></div></div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="85%" style="width: 85%;"></div></div>
                     <p class="sp-desc" data-i18n="sp.sql">Relational queries, aggregations, joins, data extraction, and Dicoding SQL certification.</p>
                 </div>
 
-                <div class="skill-progress-card" data-category="ds">
+                <div class="skill-progress-card reveal-up" data-category="ds">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-chart-pie text-gold"></i> Pandas, NumPy & Scikit-Learn</span>
+                        <span class="sp-name"><i class="fas fa-chart-pie" aria-hidden="true"></i> Pandas, NumPy &amp; Scikit-Learn</span>
                         <span class="sp-val">90%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="90%" style="width: 90%;"></div></div>
                     <p class="sp-desc" data-i18n="sp.pandas">Data cleaning, EDA, feature scaling, evaluation metrics, and statistical analytics.</p>
                 </div>
 
-                <!-- CV & Tools -->
-                <div class="skill-progress-card" data-category="cv">
+                <div class="skill-progress-card reveal-up" data-category="cv">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-eye text-gold"></i> OpenCV & Image Processing</span>
+                        <span class="sp-name"><i class="fas fa-eye" aria-hidden="true"></i> OpenCV &amp; Image Processing</span>
                         <span class="sp-val">88%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 88%;"></div></div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="88%" style="width: 88%;"></div></div>
                     <p class="sp-desc" data-i18n="sp.opencv">Image resizing, channel transformations, augmentation pipelines, and PIL/pyspng integration.</p>
                 </div>
 
-                <div class="skill-progress-card" data-category="cv">
+                <div class="skill-progress-card reveal-up" data-category="cv">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fab fa-git-alt text-gold"></i> Git & GitHub DevOps</span>
+                        <span class="sp-name"><i class="fab fa-git-alt" aria-hidden="true"></i> Git &amp; GitHub DevOps</span>
                         <span class="sp-val">90%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 90%;"></div></div>
-                    <p class="sp-desc" data-i18n="sp.git">Branching strategy, .gitignore data security enforcement, GitHub Pages, and version control.</p>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="90%" style="width: 90%;"></div></div>
+                    <p class="sp-desc" data-i18n="sp.git">Branching strategy, data hygiene with .gitignore, GitHub Pages, and version control.</p>
                 </div>
 
-                <div class="skill-progress-card" data-category="cv">
+                <div class="skill-progress-card reveal-up" data-category="cv">
                     <div class="sp-header">
-                        <span class="sp-name"><i class="fas fa-chart-area text-gold"></i> Matplotlib & Seaborn Dashboards</span>
+                        <span class="sp-name"><i class="fas fa-chart-area" aria-hidden="true"></i> Matplotlib &amp; Seaborn Visuals</span>
                         <span class="sp-val">92%</span>
                     </div>
-                    <div class="sp-bar-bg"><div class="sp-bar-fill" style="width: 92%;"></div></div>
+                    <div class="sp-bar-bg"><div class="sp-bar-fill" data-width="92%" style="width: 92%;"></div></div>
                     <p class="sp-desc" data-i18n="sp.plotlib">Automated chart generation, multi-stage training curve visualization, and publication-ready plots.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Interactive Featured Projects & Deep-Dive Case Studies -->
-    <section class="section research-section" id="projects">
+    <!-- Chapter 5: Featured Work (Deep Burgundy Dark) -->
+    <section class="chapter-dark projects-section" id="projects">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-folder-open text-gold"></i> <span data-i18n="projects.subtitle">Interactive Case Studies</span></span>
-                <h2 class="section-title" data-i18n="projects.title">Featured Projects & <span class="text-gold">Recruiter Insights</span></h2>
-                <p class="section-desc" data-i18n="projects.desc">Click on any project card to open the interactive case study modal with technical insights, problem solving, and code preview.</p>
+            <div class="section-intro reveal-up">
+                <p class="section-eyebrow" data-i18n="projects.subtitle">Case Studies</p>
+                <h2 class="section-headline" data-i18n="projects.title">Selected Engineering Work.</h2>
+                <p class="section-lead" data-i18n="projects.desc">Switch views inside the flagship showcase or click any card to inspect the full architecture and repository.</p>
             </div>
 
-            <div class="interactive-projects-grid">
-                
-                <!-- Case Study 1 (Flagship) -->
-                <div class="interactive-project-card flagship" data-project="stylegan">
-                    <div class="liquid-metal-border" aria-hidden="true"></div>
-                    <div class="ipc-badge"><i class="fas fa-star"></i> <span data-i18n="projects.flagship_badge">Featured Case Study</span></div>
-                    <div class="ipc-body">
-                        <div class="ipc-icon"><i class="fas fa-brain"></i></div>
-                        <h3 data-i18n="cs1.title">Generative AI Medical Image Augmentation (StyleGAN2-ADA & DenseNet121)</h3>
-                        <p class="ipc-desc" data-i18n="cs1.desc">Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN on clinical VIA cervical datasets (peak FID 49.62), elevating DenseNet121 accuracy to 97.00% (50:50 mix) and 95.00% on 100% synthetic substitution.</p>
-                        
-                        <div class="ipc-stats">
-                            <span><i class="fas fa-arrow-trend-up text-gold"></i> 97.00% Peak Acc</span>
-                            <span><i class="fas fa-chart-line text-gold"></i> 49.62 Best FID</span>
-                        </div>
+            <!-- Flagship Keynote Spotlight Card with Interactive View Switcher -->
+            <article class="interactive-project-card flagship-spotlight spotlight-card reveal-up" data-project="stylegan" tabindex="0" role="button">
+                <div class="flagship-copy">
+                    <span class="spotlight-kicker" data-i18n="projects.flagship_badge">Flagship Research</span>
+                    <h3 data-i18n="cs1.title">Generative AI Medical Image Augmentation (StyleGAN2-ADA &amp; DenseNet121)</h3>
+                    <p class="flagship-desc" data-i18n="cs1.desc">Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN on clinical VIA cervical datasets (peak FID 49.62), elevating DenseNet121 accuracy to 97.00% (50:50 mix) and 95.00% on 100% synthetic substitution.</p>
 
-                        <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Recruiter Insights &rarr;</span></span>
+                    <div class="flagship-metrics">
+                        <div class="f-metric">
+                            <span class="f-num">97.00%</span>
+                            <span class="f-label" data-i18n="cs1.m1">Peak Test Accuracy</span>
+                        </div>
+                        <div class="f-metric">
+                            <span class="f-num">49.62</span>
+                            <span class="f-label" data-i18n="cs1.m2">Lowest FID Score</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="spotlight-btn" data-open-modal="stylegan" data-i18n="btn.click_insights">Inspect full case study</button>
+                </div>
+
+                <div class="flagship-media-stage" id="flagship-media-stage">
+                    <div class="flagship-switcher" role="tablist" aria-label="Switch flagship visual">
+                        <button type="button" class="flagship-tab-btn active" data-flagship-tab="architecture" role="tab" aria-selected="true" data-i18n="flagship.tab_arch">Methodology</button>
+                        <button type="button" class="flagship-tab-btn" data-flagship-tab="fid" role="tab" aria-selected="false" data-i18n="flagship.tab_fid">FID Curve</button>
+                        <button type="button" class="flagship-tab-btn" data-flagship-tab="benchmarks" role="tab" aria-selected="false" data-i18n="flagship.tab_bench">Benchmarks</button>
+                    </div>
+
+                    <div class="flagship-panel active" data-flagship-panel="architecture">
+                        <div class="flagship-media">
+                            <img
+                                src="assets/photos/research-pipeline.png?v=2"
+                                alt="Cervical VIA image preprocessing and GAN training methodology workflow"
+                                width="1120"
+                                height="1118"
+                                loading="lazy"
+                                class="keynote-media"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flagship-panel" data-flagship-panel="fid">
+                        <div class="flagship-media flagship-media-wide">
+                            <img
+                                src="assets/photos/research-fid-chart.png?v=2"
+                                alt="FID score convergence curve over 2000 training epochs"
+                                width="850"
+                                height="470"
+                                loading="lazy"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flagship-panel" data-flagship-panel="benchmarks">
+                        <div class="flagship-bench-card">
+                            <div class="fb-group">
+                                <span class="fb-group-title" data-i18n="bench.fid_title">FID Score (Lower is Better)</span>
+                                <div class="bench-row">
+                                    <div class="bench-meta"><span>StyleGAN2-ADA</span><strong class="bench-best">49.62</strong></div>
+                                    <div class="bench-track"><div class="bench-fill bench-fill-accent" style="width: 24%;"></div></div>
+                                </div>
+                                <div class="bench-row">
+                                    <div class="bench-meta"><span>StyleGAN3</span><strong>62.66</strong></div>
+                                    <div class="bench-track"><div class="bench-fill" style="width: 31%;"></div></div>
+                                </div>
+                                <div class="bench-row">
+                                    <div class="bench-meta"><span>DCGAN Baseline</span><strong>210.01</strong></div>
+                                    <div class="bench-track"><div class="bench-fill bench-fill-muted" style="width: 100%;"></div></div>
+                                </div>
+                            </div>
+                            <div class="fb-group">
+                                <span class="fb-group-title" data-i18n="bench.acc_title">DenseNet121 Accuracy</span>
+                                <div class="bench-row">
+                                    <div class="bench-meta"><span>50:50 Real + Synthetic</span><strong class="bench-best">97.00%</strong></div>
+                                    <div class="bench-track"><div class="bench-fill bench-fill-accent" style="width: 97%;"></div></div>
+                                </div>
+                                <div class="bench-row">
+                                    <div class="bench-meta"><span>100% Real Baseline</span><strong>96.00%</strong></div>
+                                    <div class="bench-track"><div class="bench-fill" style="width: 96%;"></div></div>
+                                </div>
+                                <div class="bench-row">
+                                    <div class="bench-meta"><span>100% Synthetic Only</span><strong>95.00%</strong></div>
+                                    <div class="bench-track"><div class="bench-fill" style="width: 95%;"></div></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </article>
 
-                <!-- Case Study 2 -->
-                <div class="interactive-project-card" data-project="dashboard">
-                    <div class="liquid-metal-border" aria-hidden="true"></div>
-                    <div class="ipc-body">
-                        <div class="ipc-icon"><i class="fas fa-shield-halved"></i></div>
-                        <h3 data-i18n="cs2.title">Real-Time Phishing URL Detection System (630K URLs • Random Forest)</h3>
-                        <p class="ipc-desc" data-i18n="cs2.desc">Built an end-to-end cybersecurity ML pipeline for Dinas Kominfo trained on 630,071 URLs (89.0% test accuracy), featuring 9 lexical URL extractors, FastAPI service, and Streamlit dashboard.</p>
-                        
-                        <div class="ipc-stats">
-                            <span><i class="fas fa-bullseye text-gold"></i> 89.0% Test Acc</span>
-                            <span><i class="fas fa-bolt text-gold"></i> FastAPI + Streamlit</span>
-                        </div>
-
-                        <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Insights &rarr;</span></span>
-                        </div>
+            <!-- Secondary Projects Row -->
+            <div class="secondary-projects-row reveal-stagger">
+                <article class="interactive-project-card project-card-compact spotlight-card reveal-up" data-project="dashboard" tabindex="0" role="button">
+                    <div class="pc-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></div>
+                    <h3 data-i18n="cs2.title">Real-Time Phishing URL Detection (630K URLs)</h3>
+                    <p class="pc-desc" data-i18n="cs2.desc">Built an end-to-end cybersecurity ML pipeline for Dinas Kominfo trained on 630,071 URLs (89.0% test accuracy) with FastAPI and Streamlit.</p>
+                    <div class="pc-meta">
+                        <span>89.0% Test Acc</span>
+                        <span>FastAPI + Streamlit</span>
                     </div>
-                </div>
+                    <span class="pc-cta" data-i18n="btn.click_insights_short">View architecture</span>
+                </article>
 
-                <!-- Case Study 3 -->
-                <div class="interactive-project-card" data-project="sql">
-                    <div class="liquid-metal-border" aria-hidden="true"></div>
-                    <div class="ipc-body">
-                        <div class="ipc-icon"><i class="fas fa-robot"></i></div>
-                        <h3 data-i18n="cs3.title">Autonomous Market Research Agent (ReAct & Cosine Vector Store)</h3>
-                        <p class="ipc-desc" data-i18n="cs3.desc">Engineered an autonomous multi-step ReAct agent with web search & scraper tools, custom NumPy cosine similarity vector memory, and structured executive report generation.</p>
-                        
-                        <div class="ipc-stats">
-                            <span><i class="fas fa-database text-gold"></i> Vector Memory</span>
-                            <span><i class="fas fa-gears text-gold"></i> ReAct Tool Loop</span>
-                        </div>
-
-                        <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Insights &rarr;</span></span>
-                        </div>
+                <article class="interactive-project-card project-card-compact spotlight-card reveal-up" data-project="sql" tabindex="0" role="button">
+                    <div class="pc-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></div>
+                    <h3 data-i18n="cs3.title">Autonomous Market Research Agent (ReAct)</h3>
+                    <p class="pc-desc" data-i18n="cs3.desc">Engineered an autonomous multi-step ReAct agent with web search tools, custom NumPy cosine similarity vector memory, and report synthesis.</p>
+                    <div class="pc-meta">
+                        <span>Vector Memory</span>
+                        <span>ReAct Loop</span>
                     </div>
-                </div>
+                    <span class="pc-cta" data-i18n="btn.click_insights_short">View architecture</span>
+                </article>
 
-                <!-- Case Study 4 -->
-                <div class="interactive-project-card" data-project="vision">
-                    <div class="liquid-metal-border" aria-hidden="true"></div>
-                    <div class="ipc-body">
-                        <div class="ipc-icon"><i class="fas fa-code"></i></div>
-                        <h3 data-i18n="cs4.title">Python AI Core Toolkit (TDD Data Structures, NumPy & Pandas)</h3>
-                        <p class="ipc-desc" data-i18n="cs4.desc">Modular software engineering & AI fundamentals monorepo implementing O(1) data structures, vectorized NumPy cosine similarity matrices, and Pandas ETL pipelines verified by pytest.</p>
-                        
-                        <div class="ipc-stats">
-                            <span><i class="fas fa-vial-circle-check text-gold"></i> 100% Pytest TDD</span>
-                            <span><i class="fas fa-cubes text-gold"></i> NumPy & Pandas</span>
-                        </div>
-
-                        <div class="ipc-footer">
-                            <span class="btn-click-insight"><i class="fas fa-magnifying-glass"></i> <span data-i18n="btn.click_insights">Click for Insights &rarr;</span></span>
-                        </div>
+                <article class="interactive-project-card project-card-compact spotlight-card reveal-up" data-project="vision" tabindex="0" role="button">
+                    <div class="pc-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+                    <h3 data-i18n="cs4.title">Python AI Core Toolkit (TDD &amp; NumPy)</h3>
+                    <p class="pc-desc" data-i18n="cs4.desc">Modular software engineering and AI fundamentals monorepo implementing O(1) data structures, vectorized cosine matrices, and Pandas ETL verified by pytest.</p>
+                    <div class="pc-meta">
+                        <span>100% Pytest TDD</span>
+                        <span>NumPy &amp; Pandas</span>
                     </div>
-                </div>
-
+                    <span class="pc-cta" data-i18n="btn.click_insights_short">View architecture</span>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Experience & Leadership Track Record Section -->
-    <section class="section experience-section" id="experience">
+    <!-- Chapter 6: Experience & Achievements (Warm Alabaster Light) -->
+    <section class="chapter-light experience-section" id="experience">
         <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle"><i class="fas fa-briefcase text-gold"></i> <span data-i18n="exp.subtitle">Track Record & Impact</span></span>
-                <h2 class="section-title" data-i18n="exp.title">Work Experience & <span class="text-gold">Leadership Roles</span></h2>
+            <div class="section-intro reveal-up">
+                <p class="section-eyebrow" data-i18n="exp.subtitle">Track Record</p>
+                <h2 class="section-headline" data-i18n="exp.title">Experience &amp; Achievements.</h2>
             </div>
 
-            <div class="timeline">
-                
-                <!-- Item 1: AI Research & Engineering (Primary Focus) -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2025 – 2026</div>
-                    <div class="timeline-content">
-                        <div class="role-badge" data-i18n="exp.r1_badge">AI Research</div>
-                        <h3 data-i18n="exp.r1_role">Undergraduate AI Researcher & Developer</h3>
-                        <span class="company-name"><i class="fas fa-university text-gold"></i> Intelligent System Research Group & Sriwijaya University</span>
-                        <ul class="timeline-bullet-list" data-i18n="exp.r1_bullets">
+            <div class="experience-chapters">
+                <!-- Experience 1: ISysRG & UNSRI (Replaced selfie + portrait chart with Benchmark Stage + Wide 16:9 FID Plot) -->
+                <article class="exp-chapter reveal-up">
+                    <div class="exp-copy">
+                        <div class="exp-meta-top">
+                            <span class="exp-period">2025 – 2026</span>
+                            <span class="exp-type" data-i18n="exp.r1_badge">AI Research</span>
+                        </div>
+                        <h3 data-i18n="exp.r1_role">Undergraduate AI Researcher &amp; Developer</h3>
+                        <p class="exp-org">Intelligent System Research Group (ISysRG) &middot; Sriwijaya University</p>
+                        <ul class="exp-bullets" data-i18n="exp.r1_bullets">
                             <li>Benchmarked StyleGAN2-ADA, StyleGAN3, and DCGAN under Prof. Ir. Siti Nurmaini, M.T., Ph.D. to address clinical VIA cervical image scarcity.</li>
-                            <li>Achieved peak FID score of 49.62 (StyleGAN2-ADA), elevated DenseNet121 accuracy to 97.00% (50:50 mix), and proved 95.00% accuracy with 100% positive precision on 100% synthetic substitution.</li>
+                            <li>Achieved peak FID score of 49.62 (StyleGAN2-ADA), elevated DenseNet121 accuracy to 97.00% (50:50 mix), and proved 95.00% accuracy on 100% synthetic substitution.</li>
                             <li>Published reproducible open-source inference CLI and test suite on GitHub.</li>
                         </ul>
                     </div>
-                </div>
 
-                <!-- Item 2: Diskominfo Internship -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Dec 2024 – Jan 2025</div>
-                    <div class="timeline-content">
-                        <div class="role-badge" data-i18n="exp.r3_badge">Internship</div>
-                        <h3 data-i18n="exp.r3_role">Web Developer & Applied ML Intern</h3>
-                        <span class="company-name"><i class="fas fa-building text-gold"></i> Dinas Komunikasi dan Informatika (Diskominfo) Kota Prabumulih</span>
-                        <ul class="timeline-bullet-list" data-i18n="exp.r3_bullets">
+                    <div class="research-stage-panel">
+                        <div class="benchmark-card">
+                            <div class="bm-cols">
+                                <div class="bm-group">
+                                    <h4 class="bm-title" data-i18n="bench.fid_title">FID Score (Lower is Better)</h4>
+                                    <div class="bench-row">
+                                        <div class="bench-meta"><span>StyleGAN2-ADA</span><strong>49.62</strong></div>
+                                        <div class="bench-track-light"><div class="bench-fill-light bench-win" data-width="24%" style="width: 24%;"></div></div>
+                                    </div>
+                                    <div class="bench-row">
+                                        <div class="bench-meta"><span>StyleGAN3</span><strong>62.66</strong></div>
+                                        <div class="bench-track-light"><div class="bench-fill-light" data-width="31%" style="width: 31%;"></div></div>
+                                    </div>
+                                    <div class="bench-row">
+                                        <div class="bench-meta"><span>DCGAN</span><strong>210.01</strong></div>
+                                        <div class="bench-track-light"><div class="bench-fill-light bench-dim" data-width="100%" style="width: 100%;"></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="bm-group">
+                                    <h4 class="bm-title" data-i18n="bench.acc_title">DenseNet121 Accuracy</h4>
+                                    <div class="bench-row">
+                                        <div class="bench-meta"><span>50:50 Synthetic Mix</span><strong>97.00%</strong></div>
+                                        <div class="bench-track-light"><div class="bench-fill-light bench-win" data-width="97%" style="width: 97%;"></div></div>
+                                    </div>
+                                    <div class="bench-row">
+                                        <div class="bench-meta"><span>Real Baseline</span><strong>96.00%</strong></div>
+                                        <div class="bench-track-light"><div class="bench-fill-light" data-width="96%" style="width: 96%;"></div></div>
+                                    </div>
+                                    <div class="bench-row">
+                                        <div class="bench-meta"><span>100% Synthetic Only</span><strong>95.00%</strong></div>
+                                        <div class="bench-track-light"><div class="bench-fill-light" data-width="95%" style="width: 95%;"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <figure class="exp-photo-frame wide-landscape">
+                            <img
+                                src="assets/photos/research-fid-chart.png?v=2"
+                                alt="FID score convergence curve across 2000 training epochs"
+                                width="850"
+                                height="470"
+                                loading="lazy"
+                                class="keynote-media"
+                            >
+                            <figcaption data-i18n="exp.r1_cap">FID score progression curve over 2,000 training epochs</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <!-- Experience 2: Diskominfo Kota Prabumulih -->
+                <article class="exp-chapter exp-chapter-reverse reveal-up">
+                    <div class="exp-copy">
+                        <div class="exp-meta-top">
+                            <span class="exp-period">Dec 2024 – Jan 2025</span>
+                            <span class="exp-type" data-i18n="exp.r3_badge">Internship</span>
+                        </div>
+                        <h3 data-i18n="exp.r3_role">Web Developer &amp; Applied ML Intern</h3>
+                        <p class="exp-org">Dinas Komunikasi dan Informatika (Diskominfo) Kota Prabumulih</p>
+                        <ul class="exp-bullets" data-i18n="exp.r3_bullets">
                             <li>Developed and refined responsive internal web application modules using HTML, CSS, PHP, and JavaScript (Evaluated Grade A / 89.83).</li>
                             <li>Engineered a Random Forest URL phishing detection prototype trained on 630,071 URLs (89.0% test accuracy) to support public-sector digital security literacy.</li>
                         </ul>
                     </div>
-                </div>
+                    <div class="exp-media-duo">
+                        <figure class="exp-photo-frame">
+                            <img
+                                src="assets/photos/exp-diskominfo-work.jpg"
+                                alt="Working on web application and ML prototype in Diskominfo Bidding and Training Room"
+                                width="1050"
+                                height="1400"
+                                loading="lazy"
+                                class="keynote-media"
+                            >
+                            <figcaption data-i18n="exp.r3_cap1">Bidding &amp; Training Room, Diskominfo Prabumulih</figcaption>
+                        </figure>
+                        <figure class="exp-photo-frame">
+                            <img
+                                src="assets/photos/exp-diskominfo-team.jpg"
+                                alt="Team photo with mentors at Pemerintah Kota Prabumulih Diskominfo"
+                                width="1050"
+                                height="1400"
+                                loading="lazy"
+                                class="keynote-media"
+                            >
+                            <figcaption data-i18n="exp.r3_cap2">With field supervisors &amp; TIK engineering team</figcaption>
+                        </figure>
+                    </div>
+                </article>
 
-                <!-- Item 3: Leadership UKM Taekwondo UNSRI -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023 – 2025</div>
-                    <div class="timeline-content">
-                        <div class="role-badge" data-i18n="exp.r2_badge">Leadership</div>
-                        <h3 data-i18n="exp.r2_role">Committee Member & Martial Arts Division Lead</h3>
-                        <span class="company-name"><i class="fas fa-trophy text-gold"></i> UKM Beladiri Taekwondo UNSRI (Bronze Medalist PORKAB IV)</span>
-                        <ul class="timeline-bullet-list" data-i18n="exp.r2_bullets">
+                <!-- Experience 3: UKM Taekwondo UNSRI (Single Taekwondo photo only) -->
+                <article class="exp-chapter reveal-up">
+                    <div class="exp-copy">
+                        <div class="exp-meta-top">
+                            <span class="exp-period">2023 – 2025</span>
+                            <span class="exp-type" data-i18n="exp.r2_badge">Leadership</span>
+                        </div>
+                        <h3 data-i18n="exp.r2_role">Committee Member &amp; Martial Arts Division Lead</h3>
+                        <p class="exp-org">UKM Beladiri Taekwondo UNSRI &middot; Bronze Medalist PORKAB IV</p>
+                        <ul class="exp-bullets" data-i18n="exp.r2_bullets">
                             <li>Directed the Martial Arts Division, overseeing training schedules and athlete development; won 3rd Place (Under 70kg) at PORKAB IV Ogan Ilir 2023.</li>
                             <li>Managed committee responsibilities for organizational events, fostering teamwork and operational discipline under pressure.</li>
                         </ul>
                     </div>
-                </div>
-
+                    <div class="exp-media-single">
+                        <figure class="exp-photo-frame portrait-single">
+                            <img
+                                src="assets/photos/exp-taekwondo.jpg"
+                                alt="M. Athallah Rafif Aldera wearing Taekwondo dobok uniform"
+                                width="1170"
+                                height="1400"
+                                loading="lazy"
+                                class="keynote-media"
+                            >
+                            <figcaption data-i18n="exp.r2_cap">UKM Beladiri Taekwondo UNSRI · PORKAB IV Bronze Medalist</figcaption>
+                        </figure>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Certifications Showcase Grid -->
-    <section class="section cert-section" id="certifications">
+    <!-- Chapter 7: Verified Credentials (Warm Stone Light) -->
+    <section class="chapter-light-alt cert-section" id="certifications">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="section-subtitle"><i class="fas fa-certificate text-gold"></i> <span data-i18n="certs.subtitle">Verified Credentials</span></span>
-                <h2 class="section-title" data-i18n="certs.title">Certifications & <span class="text-gold">Continuous Learning</span></h2>
+            <div class="section-intro centered reveal-up">
+                <p class="section-eyebrow" data-i18n="certs.subtitle">Verified Credentials</p>
+                <h2 class="section-headline" data-i18n="certs.title">Certifications &amp; Training.</h2>
             </div>
 
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-badge-icon"><i class="fas fa-landmark"></i></div>
+            <div class="cert-grid reveal-stagger">
+                <a href="https://www.credly.com/users/m-athallah-rafif-aldera/badges/credly" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Google Cloud credential on Credly">
+                    <div class="cert-badge-icon"><i class="fab fa-google" aria-hidden="true"></i></div>
+                    <div class="cert-info">
+                        <h4>Deploy and Secure Serverless APIs with API Gateway</h4>
+                        <span class="cert-issuer">Google Cloud &middot; Aug 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">Credly Skill Badge</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.credly.com/users/m-athallah-rafif-aldera/badges/credly" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Google Cloud credential on Credly">
+                    <div class="cert-badge-icon"><i class="fab fa-google" aria-hidden="true"></i></div>
+                    <div class="cert-info">
+                        <h4>Create and Manage Cloud Spanner Instances</h4>
+                        <span class="cert-issuer">Google Cloud &middot; Aug 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">Credly Skill Badge</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.credly.com/users/m-athallah-rafif-aldera/badges/credly" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Google Cloud credential on Credly">
+                    <div class="cert-badge-icon"><i class="fab fa-google" aria-hidden="true"></i></div>
+                    <div class="cert-info">
+                        <h4>Prompt Design in Vertex AI</h4>
+                        <span class="cert-issuer">Google Cloud &middot; Feb 2025</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">Credly Skill Badge</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="cert-card cert-card-static reveal-up">
+                    <div class="cert-badge-icon"><i class="fas fa-globe-asia" aria-hidden="true"></i></div>
+                    <div class="cert-info">
+                        <h4>AI Career Readiness Training</h4>
+                        <span class="cert-issuer">ASEAN Foundation &amp; LinkedIn &middot; Oct 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">15 Modules Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card cert-card-static reveal-up">
+                    <div class="cert-badge-icon"><i class="fas fa-landmark" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Dasar-Dasar Implementasi Kecerdasan Artifisial</h4>
-                        <span class="cert-issuer">Kementerian Komdigi (DTS) • Aug 2025</span>
-                        <span class="cert-id">Digital Talent Scholarship</span>
+                        <span class="cert-issuer">Kementerian Komdigi (DTS) &middot; Jun 2025</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">Digital Talent Scholarship</span>
+                        </div>
                     </div>
                 </div>
 
-                <a href="https://www.credly.com/users/m-athallah-rafif-aldera/badges/credly" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fab fa-google"></i></div>
+                <div class="cert-card cert-card-static reveal-up">
+                    <div class="cert-badge-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
                     <div class="cert-info">
-                        <h4>Google Cloud Skill Badges (3 Badges)</h4>
-                        <span class="cert-issuer">Google Cloud • Vertex AI, Spanner & Serverless API</span>
-                        <span class="cert-id">Verified on Credly &rarr;</span>
-                    </div>
-                </a>
-
-                <div class="cert-card">
-                    <div class="cert-badge-icon"><i class="fas fa-globe-asia"></i></div>
-                    <div class="cert-info">
-                        <h4>ASEAN Ahead: AI Career Readiness</h4>
-                        <span class="cert-issuer">ASEAN Foundation & Google.org • Mar 2026</span>
-                        <span class="cert-id">ai.learn Verified</span>
+                        <h4>Career Readiness &amp; Soft Skills Training</h4>
+                        <span class="cert-issuer">Faculty of Computer Science, UNSRI &middot; May 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">Persiapan Dunia Kerja</span>
+                        </div>
                     </div>
                 </div>
 
-                <a href="https://www.dicoding.com/certificates/07Z672QWRPQR" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fas fa-database"></i></div>
+                <div class="cert-card cert-card-static reveal-up">
+                    <div class="cert-badge-icon"><i class="fas fa-language" aria-hidden="true"></i></div>
+                    <div class="cert-info">
+                        <h4>USEPT / SULIET English Proficiency (Score: 457)</h4>
+                        <span class="cert-issuer">UNSRI Language Center &middot; May 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">TOEFL-ITP Format</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://www.dicoding.com/certificates/07Z672QWRPQR" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Dicoding credential">
+                    <div class="cert-badge-icon"><i class="fas fa-database" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Dasar Data Science</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Jan 2026</span>
-                        <span class="cert-id">ID: 07Z672QWRPQR</span>
+                        <span class="cert-issuer">Dicoding Indonesia &middot; Jan 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">ID: 07Z672QWRPQR</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </a>
 
-                <a href="https://www.dicoding.com/certificates/4EXG1WJKEPRL" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fas fa-table-cells"></i></div>
+                <a href="https://www.dicoding.com/certificates/4EXG1WJKEPRL" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Dicoding credential">
+                    <div class="cert-badge-icon"><i class="fas fa-table-cells" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Dasar Structured Query Language (SQL)</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Jan 2026</span>
-                        <span class="cert-id">ID: 4EXG1WJKEPRL</span>
+                        <span class="cert-issuer">Dicoding Indonesia &middot; Jan 2026</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">ID: 4EXG1WJKEPRL</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </a>
 
-                <a href="https://www.dicoding.com/certificates/N9ZOM21KDPG5" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fas fa-brain"></i></div>
+                <a href="https://www.dicoding.com/certificates/N9ZOM21KDPG5" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Dicoding credential">
+                    <div class="cert-badge-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Machine Learning untuk Pemula</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Jun 2024</span>
-                        <span class="cert-id">ID: N9ZOM21KDPG5</span>
+                        <span class="cert-issuer">Dicoding Indonesia &middot; Jun 2024</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">ID: N9ZOM21KDPG5</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </a>
 
-                <a href="https://www.dicoding.com/certificates/81P2NO51NXOY" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fab fa-python"></i></div>
+                <a href="https://www.dicoding.com/certificates/81P2NO51NXOY" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Dicoding credential">
+                    <div class="cert-badge-icon"><i class="fab fa-python" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Memulai Pemrograman dengan Python</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Jun 2024</span>
-                        <span class="cert-id">ID: 81P2NO51NXOY</span>
+                        <span class="cert-issuer">Dicoding Indonesia &middot; Jun 2024</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">ID: 81P2NO51NXOY</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </a>
 
-                <a href="https://www.dicoding.com/certificates/0LZ044E1RP65" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fas fa-robot"></i></div>
+                <a href="https://www.dicoding.com/certificates/0LZ044E1RP65" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Dicoding credential">
+                    <div class="cert-badge-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Dasar AI</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Oct 2024</span>
-                        <span class="cert-id">ID: 0LZ044E1RP65</span>
+                        <span class="cert-issuer">Dicoding Indonesia &middot; Oct 2024</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">ID: 0LZ044E1RP65</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </a>
 
-                <a href="https://www.dicoding.com/certificates/NVP7QNRJRZR0" target="_blank" class="cert-card" style="text-decoration: none; color: inherit;">
-                    <div class="cert-badge-icon"><i class="fas fa-chart-line"></i></div>
+                <a href="https://www.dicoding.com/certificates/NVP7QNRJRZR0" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-link reveal-up" title="Verify Dicoding credential">
+                    <div class="cert-badge-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
                     <div class="cert-info">
                         <h4>Belajar Dasar Visualisasi Data</h4>
-                        <span class="cert-issuer">Dicoding Indonesia • Jun 2024</span>
-                        <span class="cert-id">ID: NVP7QNRJRZR0</span>
+                        <span class="cert-issuer">Dicoding Indonesia &middot; Jun 2024</span>
+                        <div class="cert-foot">
+                            <span class="cert-id">ID: NVP7QNRJRZR0</span>
+                            <span class="cert-link-pill"><span data-i18n="certs.verify">Verify</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Recruiter Contact & Connect Section -->
-    <section class="section contact-section" id="contact">
+    <!-- Chapter 8: Contact (Deep Burgundy Dark) -->
+    <section class="chapter-dark contact-section" id="contact">
         <div class="container">
-            <div class="contact-box-wrapper">
-                
+            <div class="contact-layout reveal-up">
                 <div class="contact-left">
-                    <span class="section-subtitle"><i class="fas fa-paper-plane text-gold"></i> <span data-i18n="contact.subtitle">Get In Touch</span></span>
-                    <h2 class="contact-heading" data-i18n="contact.title">Ready to add value to your <span class="text-gold">tech team</span>.</h2>
+                    <p class="section-eyebrow" data-i18n="contact.subtitle">Connect</p>
+                    <h2 class="contact-heading" data-i18n="contact.title">Ready to contribute to your engineering team.</h2>
                     <p class="contact-text" data-i18n="contact.desc">
-                        Actively seeking opportunities for <strong>AI Engineer, Data Scientist, Computer Vision Specialist, Machine Learning Engineer, Data Analyst,</strong> and <strong>AI Developer</strong> roles. Open for full-time, relocation, and remote positions.
+                        Open to full-time, relocation, and remote roles across <strong>AI Engineering, Data Science, Computer Vision, Machine Learning,</strong> and <strong>Data Analytics</strong>.
                     </p>
 
                     <div class="contact-links-list">
-                        <a href="mailto:mathallahrafifaldera@gmail.com" class="c-link-item">
-                            <div class="c-icon"><i class="fas fa-envelope"></i></div>
+                        <a href="mailto:mathallahrafifaldera@gmail.com" class="c-link-item spotlight-card" title="Send email">
+                            <div class="c-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
                             <div>
-                                <span class="c-label" data-i18n="contact.email_label">Email Address</span>
+                                <span class="c-label" data-i18n="contact.email_label">Email</span>
                                 <span class="c-val">mathallahrafifaldera@gmail.com</span>
                             </div>
+                            <span class="c-ext-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
                         </a>
-                        <a href="https://wa.me/6289519333313" target="_blank" class="c-link-item">
-                            <div class="c-icon"><i class="fab fa-whatsapp"></i></div>
+                        <a href="https://wa.me/6289519333313" target="_blank" rel="noopener noreferrer" class="c-link-item spotlight-card" title="Open WhatsApp">
+                            <div class="c-icon"><i class="fab fa-whatsapp" aria-hidden="true"></i></div>
                             <div>
-                                <span class="c-label" data-i18n="contact.phone_label">Phone / WhatsApp</span>
+                                <span class="c-label" data-i18n="contact.phone_label">WhatsApp</span>
                                 <span class="c-val">+62 895-1933-****</span>
                             </div>
+                            <span class="c-ext-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
                         </a>
-                        <a href="https://www.linkedin.com/in/mathallahrafifaldera/" target="_blank" class="c-link-item">
-                            <div class="c-icon"><i class="fab fa-linkedin"></i></div>
+                        <a href="https://www.linkedin.com/in/mathallahrafifaldera/" target="_blank" rel="noopener noreferrer" class="c-link-item spotlight-card" title="Open LinkedIn profile">
+                            <div class="c-icon"><i class="fab fa-linkedin" aria-hidden="true"></i></div>
                             <div>
-                                <span class="c-label" data-i18n="contact.linkedin_label">LinkedIn Profile</span>
+                                <span class="c-label" data-i18n="contact.linkedin_label">LinkedIn</span>
                                 <span class="c-val">linkedin.com/in/mathallahrafifaldera</span>
                             </div>
+                            <span class="c-ext-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
                         </a>
-                        <a href="https://github.com/aral3000" target="_blank" class="c-link-item">
-                            <div class="c-icon"><i class="fab fa-github"></i></div>
+                        <a href="https://github.com/aral3000" target="_blank" rel="noopener noreferrer" class="c-link-item spotlight-card" title="Open GitHub repositories">
+                            <div class="c-icon"><i class="fab fa-github" aria-hidden="true"></i></div>
                             <div>
-                                <span class="c-label" data-i18n="contact.github_label">GitHub Account</span>
+                                <span class="c-label" data-i18n="contact.github_label">GitHub</span>
                                 <span class="c-val">github.com/aral3000</span>
                             </div>
+                            <span class="c-ext-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
                         </a>
-                        <a href="https://discord.com/users/aral_" target="_blank" class="c-link-item">
-                            <div class="c-icon"><i class="fab fa-discord"></i></div>
+                        <a href="https://discord.com/users/aral_" target="_blank" rel="noopener noreferrer" class="c-link-item spotlight-card" title="Open Discord profile">
+                            <div class="c-icon"><i class="fab fa-discord" aria-hidden="true"></i></div>
                             <div>
-                                <span class="c-label" data-i18n="contact.discord_label">Discord Handle</span>
+                                <span class="c-label" data-i18n="contact.discord_label">Discord</span>
                                 <span class="c-val">aral_</span>
                             </div>
+                            <span class="c-ext-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
                         </a>
                     </div>
                 </div>
 
                 <div class="contact-right">
-                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xnqerzkb" method="POST">
+                    <form class="contact-form spotlight-card" id="contact-form" action="https://formspree.io/f/xvovbkgp" method="POST">
                         <input type="hidden" name="_to" value="mathallahrafifaldera@gmail.com">
                         <input type="hidden" name="_subject" value="New Recruiter Inquiry from Portfolio Website!">
-                        <h3 data-i18n="form.title">Send a Recruiter Message</h3>
+                        <h3 data-i18n="form.title">Send a Direct Message</h3>
                         <div class="form-group">
                             <label for="name" data-i18n="form.name_label">Your Name / Company</label>
-                            <input type="text" id="name" name="name" required placeholder="e.g. HR Manager / Tech Lead">
+                            <input type="text" id="name" name="name" required placeholder="Your name or organization">
                         </div>
                         <div class="form-group">
                             <label for="email" data-i18n="form.email_label">Work Email</label>
-                            <input type="email" id="email" name="email" required placeholder="recruiter@company.com">
+                            <input type="email" id="email" name="email" required placeholder="name@company.com">
                         </div>
                         <div class="form-group">
-                            <label for="message" data-i18n="form.msg_label">Message / Opportunity Details</label>
-                            <textarea id="message" name="message" rows="4" required placeholder="Hello Athallah, we would like to connect with you regarding..."></textarea>
+                            <label for="message" data-i18n="form.msg_label">Message / Role Details</label>
+                            <textarea id="message" name="message" rows="4" required placeholder="Share role details or project inquiry..."></textarea>
                         </div>
-                        <button type="submit" class="btn-primary-gold btn-full">
-                            <i class="fas fa-paper-plane"></i> <span data-i18n="form.btn_send">Send Direct Message</span>
-                        </button>
+                        <button type="submit" class="btn-keynote-primary btn-full" data-i18n="form.btn_send">Send Message</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- Interactive Case Study Modal Dialog -->
-    <div class="modal-overlay" id="project-modal">
+    <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-card">
-            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <button class="modal-close" id="modal-close-btn" type="button" aria-label="Close modal">&times;</button>
             <div class="modal-header">
-                <span class="modal-tag" id="modal-tag">Case Study Insight</span>
+                <span class="modal-tag" id="modal-tag">Case Study</span>
                 <h2 id="modal-title">Project Title</h2>
             </div>
             <div class="modal-body" id="modal-body">
@@ -743,14 +980,14 @@
         <div class="container footer-container">
             <div class="footer-brand">
                 <span class="logo-name">Athallah</span><span class="logo-dot">.</span>
-                <p data-i18n="footer.tag">M. Athallah Rafif Aldera | AI Engineer & Data Scientist Candidate</p>
+                <p data-i18n="footer.tag">M. Athallah Rafif Aldera &middot; AI Engineer &amp; Data Scientist</p>
             </div>
             <div class="footer-socials">
-                <a href="https://github.com/aral3000" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/mathallahrafifaldera/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:mathallahrafifaldera@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://wa.me/6289519333313" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://discord.com/users/aral_" target="_blank" aria-label="Discord" title="Discord: aral_"><i class="fab fa-discord"></i></a>
+                <a href="https://github.com/aral3000" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/mathallahrafifaldera/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                <a href="mailto:mathallahrafifaldera@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                <a href="https://wa.me/6289519333313" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                <a href="https://discord.com/users/aral_" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord: aral_"><i class="fab fa-discord" aria-hidden="true"></i></a>
             </div>
             <div class="footer-copy">
                 &copy; 2026 M. Athallah Rafif Aldera. All rights reserved.
@@ -759,6 +996,7 @@
     </footer>
 
     <!-- JS Script (Cache-Busted) -->
-    <script src="script.js?v=20261030_perfect_joint"></script>
+    <script src="assets/starry-ascii-data.js?v=20261127_starry_v4" defer></script>
+    <script src="script.js?v=20261127_starry_v4" defer></script>
 </body>
 </html>
