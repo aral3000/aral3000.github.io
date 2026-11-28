@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS (Cache-Busted) -->
-    <link rel="stylesheet" href="styles.css?v=20261127_starry_v4">
+    <link rel="stylesheet" href="styles.css?v=20261128_blueprint_v8">
 </head>
 <body>
 
@@ -61,7 +61,7 @@
 
     <!-- Chapter 1: 100vh Widescreen Split Formal Hero (Starry Night Dark) -->
     <section class="chapter-dark hero" id="home">
-        <canvas class="starry-ascii-canvas" data-starry-mode="hero" aria-hidden="true"></canvas>
+        <canvas class="starry-ascii-canvas" data-starry-mode="hero" data-starry-res="high" aria-hidden="true"></canvas>
         <div class="hero-stage-glow" aria-hidden="true"></div>
         <div class="container">
             <div class="hero-split-grid">
@@ -121,7 +121,7 @@
     <!-- Stage 1B: Sticky Scroll-Scrubbed Keynote Manifesto -->
     <section class="manifesto-track" id="manifesto" aria-label="Keynote Manifesto">
         <div class="manifesto-sticky">
-            <canvas class="starry-ascii-canvas" data-starry-mode="manifesto" aria-hidden="true"></canvas>
+            <canvas class="starry-ascii-canvas" data-starry-mode="manifesto" data-starry-res="high" aria-hidden="true"></canvas>
             <div class="manifesto-scrim" aria-hidden="true"></div>
             <div class="manifesto-inner">
                 <p class="manifesto-kicker" data-i18n="manifesto.kicker">Keynote Thesis</p>
@@ -134,6 +134,7 @@
 
     <!-- Stage 1C: Diagonal Kinetic Cutout Poster Stage (toga-cutout.png) -->
     <section class="cutout-section" id="editorial-poster" aria-label="Graduation Keynote Visual">
+        <canvas class="starry-ascii-canvas starry-res-mid" data-starry-mode="poster" data-starry-res="mid" aria-hidden="true"></canvas>
         <div class="container">
             <div class="cutout-section-head reveal-up">
                 <span class="cutout-kicker" data-i18n="cutout.kicker">Editorial Keynote Stage</span>
@@ -162,8 +163,9 @@
         </div>
     </section>
 
-    <!-- Chapter 2: Tim Cook Keynote Summary Slide (Deep Obsidian Burgundy) -->
+    <!-- Chapter 2: Tim Cook Keynote Summary Slide (Deep Obsidian Starry Night) -->
     <section class="chapter-dark-obsidian keynote-summary-section" id="highlights" aria-label="Keynote Highlights">
+        <canvas class="starry-ascii-canvas starry-res-low" data-starry-mode="highlights" data-starry-res="low" aria-hidden="true"></canvas>
         <div class="container">
             <div class="summary-slide-header reveal-up">
                 <p class="section-eyebrow" data-i18n="summary.eyebrow">Keynote Recap</p>
@@ -212,7 +214,7 @@
 
     <!-- Chapter 3: Identity & Interactive Lanyard (Warm Alabaster Light) -->
     <section class="chapter-light about-section" id="about">
-        <div class="container">
+        <div class="container" data-blueprint-tag="FIG. 03 // OVERVIEW">
             <div class="section-intro reveal-up">
                 <p class="section-eyebrow" data-i18n="about.subtitle">Candidate Overview</p>
                 <h2 class="section-headline" data-i18n="about.title">Precision engineering meets rapid execution.</h2>
@@ -331,7 +333,7 @@
 
     <!-- Chapter 4: Capabilities Matrix (Warm Stone Light) -->
     <section class="chapter-light-alt skills-section" id="skills">
-        <div class="container">
+        <div class="container" data-blueprint-tag="FIG. 04 // CAPABILITIES">
             <div class="section-intro centered reveal-up">
                 <p class="section-eyebrow" data-i18n="skills.subtitle">Technical Stack</p>
                 <h2 class="section-headline" data-i18n="skills.title">Core Capabilities.</h2>
@@ -430,8 +432,9 @@
         </div>
     </section>
 
-    <!-- Chapter 5: Featured Work (Deep Burgundy Dark) -->
+    <!-- Chapter 5: Featured Work (Starry Night Dark Callback) -->
     <section class="chapter-dark projects-section" id="projects">
+        <canvas class="starry-ascii-canvas starry-res-whisper" data-starry-mode="projects" data-starry-res="whisper" aria-hidden="true"></canvas>
         <div class="container">
             <div class="section-intro reveal-up">
                 <p class="section-eyebrow" data-i18n="projects.subtitle">Case Studies</p>
@@ -569,7 +572,7 @@
 
     <!-- Chapter 6: Experience & Achievements (Warm Alabaster Light) -->
     <section class="chapter-light experience-section" id="experience">
-        <div class="container">
+        <div class="container" data-blueprint-tag="FIG. 06 // TRACK RECORD">
             <div class="section-intro reveal-up">
                 <p class="section-eyebrow" data-i18n="exp.subtitle">Track Record</p>
                 <h2 class="section-headline" data-i18n="exp.title">Experience &amp; Achievements.</h2>
@@ -717,7 +720,7 @@
 
     <!-- Chapter 7: Verified Credentials (Warm Stone Light) -->
     <section class="chapter-light-alt cert-section" id="certifications">
-        <div class="container">
+        <div class="container" data-blueprint-tag="FIG. 07 // CREDENTIALS">
             <div class="section-intro centered reveal-up">
                 <p class="section-eyebrow" data-i18n="certs.subtitle">Verified Credentials</p>
                 <h2 class="section-headline" data-i18n="certs.title">Certifications &amp; Training.</h2>
@@ -879,8 +882,9 @@
         </div>
     </section>
 
-    <!-- Chapter 8: Contact (Deep Burgundy Dark) -->
+    <!-- Chapter 8: Contact (Starry Night Dark Closing Callback) -->
     <section class="chapter-dark contact-section" id="contact">
+        <canvas class="starry-ascii-canvas starry-res-whisper" data-starry-mode="contact" data-starry-res="whisper" aria-hidden="true"></canvas>
         <div class="container">
             <div class="contact-layout reveal-up">
                 <div class="contact-left">
@@ -996,7 +1000,7 @@
     </footer>
 
     <!-- JS Script (Cache-Busted) -->
-    <script src="assets/starry-ascii-data.js?v=20261127_starry_v4" defer></script>
-    <script src="script.js?v=20261127_starry_v4" defer></script>
+    <script src="assets/starry-ascii-data.js?v=20261127_starry_v5" defer></script>
+    <script src="script.js?v=20261127_starry_v5" defer></script>
 </body>
 </html>

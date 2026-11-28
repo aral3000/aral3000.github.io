@@ -1109,47 +1109,80 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
         requestAnimationFrame(animate);
     }
 
-    // 14. Kinetic 9-Tone Starry Night ASCII Canvas (280x110 Offscreen Base Blit + Animated Swirl Waves)
+    // 14. Kinetic 9-Tone Progressive Starry Night ASCII Canvas (280x110 -> 200x78 -> 112x44 Offscreen Blit)
     function initStarryAscii() {
         const data = window.STARRY_ASCII_DATA;
         const canvases = Array.from(document.querySelectorAll('canvas.starry-ascii-canvas'));
         if (!data || !canvases.length) return;
 
-        const { cols, rows, palette, c: colorStr, l: tierStr } = data;
-        const total = cols * rows;
+        const { cols: srcCols, rows: srcRows, palette, c: colorStr, l: tierStr } = data;
         const POOLS = [" .'", ".:,-", "r+=c/", "cv71>", "3SX%?", "8DHYN", "HMWA@", "@#$MW"];
         const BASE_ALPHA = [0.94, 0.42, 0.82, 0.86, 0.88, 0.92, 0.94, 0.96, 0.98];
-
-        const colorIdx = new Uint8Array(total);
-        const tierIdx = new Uint8Array(total);
-        const buckets = Array.from({ length: palette.length }, () => []);
-        const twinklePool = [];
-
-        for (let i = 0; i < total; i++) {
-            const cI = colorStr.charCodeAt(i) - 48;
-            colorIdx[i] = cI;
-            tierIdx[i] = tierStr.charCodeAt(i) - 48;
-            if (cI === 1) {
-                if ((i & 3) === 0) buckets[1].push(i);
-            } else if (buckets[cI]) {
-                buckets[cI].push(i);
-                if (cI >= 6) twinklePool.push(i);
-            }
-        }
+        const PRESETS = {
+            high:    { cols: 280, rows: 110, waveCount: 6, twinkleCap: 260, bgHex: '#191939' },
+            mid:     { cols: 200, rows: 78,  waveCount: 4, twinkleCap: 150, bgHex: '#10122A' },
+            low:     { cols: 112, rows: 44,  waveCount: 3, twinkleCap: 85,  bgHex: '#10122A' },
+            whisper: { cols: 112, rows: 44,  waveCount: 2, twinkleCap: 70,  bgHex: '#191939' }
+        };
 
         const states = canvases.map((canvas, slot) => {
+            const res = canvas.getAttribute('data-starry-res') || 'high';
+            const cfg = PRESETS[res] || PRESETS.high;
+            const cols = Math.min(cfg.cols, srcCols);
+            const rows = Math.min(cfg.rows, srcRows);
+            const total = cols * rows;
+
+            const colorIdx = new Uint8Array(total);
+            const tierIdx = new Uint8Array(total);
+            const buckets = Array.from({ length: palette.length }, () => []);
+            const twinklePool = [];
             const chars = new Array(total);
-            for (let i = 0; i < total; i++) {
-                const pool = POOLS[tierIdx[i]] || POOLS[0];
-                const seed = ((i * 73 + slot * 19) ^ (i >> 3)) & 255;
-                chars[i] = pool[seed % pool.length];
+
+            for (let r = 0; r < rows; r++) {
+                const sr = (cols === srcCols && rows === srcRows)
+                    ? r
+                    : Math.min(srcRows - 1, Math.floor(((r + 0.5) * srcRows) / rows));
+                for (let col = 0; col < cols; col++) {
+                    const sc = (cols === srcCols && rows === srcRows)
+                        ? col
+                        : Math.min(srcCols - 1, Math.floor(((col + 0.5) * srcCols) / cols));
+                    const sIdx = sr * srcCols + sc;
+                    const i = r * cols + col;
+
+                    const cI = colorStr.charCodeAt(sIdx) - 48;
+                    const tier = tierStr.charCodeAt(sIdx) - 48;
+                    colorIdx[i] = cI;
+                    tierIdx[i] = tier;
+
+                    if (cI === 1) {
+                        if ((i & 3) === 0) buckets[1].push(i);
+                    } else if (buckets[cI]) {
+                        buckets[cI].push(i);
+                        if (cI >= 6) twinklePool.push(i);
+                    }
+
+                    const pool = POOLS[tier] || POOLS[0];
+                    const seed = ((i * 73 + slot * 19) ^ (i >> 3)) & 255;
+                    chars[i] = pool[seed % pool.length];
+                }
             }
+
             const baseCanvas = document.createElement('canvas');
             return {
                 canvas,
                 ctx: canvas.getContext('2d', { alpha: false }),
                 baseCanvas,
                 baseCtx: baseCanvas.getContext('2d', { alpha: false }),
+                cols,
+                rows,
+                total,
+                waveCount: cfg.waveCount,
+                twinkleCap: cfg.twinkleCap,
+                bgHex: cfg.bgHex,
+                colorIdx,
+                tierIdx,
+                buckets,
+                twinklePool,
                 chars,
                 width: 0,
                 height: 0,
@@ -1169,14 +1202,14 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             if (!bCtx || st.width === 0) return;
 
             bCtx.globalAlpha = 1;
-            bCtx.fillStyle = '#191939';
+            bCtx.fillStyle = st.bgHex;
             bCtx.fillRect(0, 0, st.width, st.height);
 
             const halfW = st.cellW * 0.5;
             const halfH = st.cellH * 0.5;
 
-            for (let cI = 0; cI < buckets.length; cI++) {
-                const list = buckets[cI];
+            for (let cI = 0; cI < st.buckets.length; cI++) {
+                const list = st.buckets[cI];
                 if (!list.length) continue;
                 bCtx.font = cI >= 5 ? st.fontBold : st.fontNormal;
                 bCtx.fillStyle = palette[cI];
@@ -1184,8 +1217,8 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
 
                 for (let k = 0; k < list.length; k++) {
                     const i = list[k];
-                    const r = (i / cols) | 0;
-                    const col = i - r * cols;
+                    const r = (i / st.cols) | 0;
+                    const col = i - r * st.cols;
                     const px = st.offsetX + col * st.cellW + halfW;
                     const py = st.offsetY + r * st.cellH + halfH;
                     if (px < -st.cellW || px > st.width + st.cellW || py < -st.cellH || py > st.height + st.cellH) {
@@ -1217,12 +1250,12 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             st.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             st.baseCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            const cellH = Math.max(h / rows, w / (cols * 0.625));
+            const cellH = Math.max(h / st.rows, w / (st.cols * 0.625));
             const cellW = cellH * 0.625;
             st.cellW = cellW;
             st.cellH = cellH;
-            st.offsetX = (w - cols * cellW) * 0.5;
-            st.offsetY = (h - rows * cellH) * 0.5;
+            st.offsetX = (w - st.cols * cellW) * 0.5;
+            st.offsetY = (h - st.rows * cellH) * 0.5;
 
             const fontPx = Math.max(4, Math.floor(Math.min(cellW / 0.72, cellH * 0.80)));
             st.fontNormal = `500 ${fontPx}px "SF Mono", ui-monospace, Menlo, Consolas, monospace`;
@@ -1242,18 +1275,16 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
             const ctx = st.ctx;
             if (!ctx || st.width === 0) return;
 
-            // Fast blit of crisp pre-rendered 30,800-cell painting
             ctx.globalAlpha = 1;
             ctx.drawImage(st.baseCanvas, 0, 0, st.width, st.height);
 
-            // Overlay ~950 shifting Van Gogh swirl wave + starlight twinkle cells cleanly
             const active = [];
             const seen = new Set();
 
             const pushVisible = (idx) => {
                 if (seen.has(idx)) return;
-                const r = (idx / cols) | 0;
-                const col = idx - r * cols;
+                const r = (idx / st.cols) | 0;
+                const col = idx - r * st.cols;
                 const cx = st.offsetX + (col + 0.5) * st.cellW;
                 const cy = st.offsetY + (r + 0.5) * st.cellH;
                 if (cx < -st.cellW || cx > st.width + st.cellW || cy < -st.cellH || cy > st.height + st.cellH) return;
@@ -1261,27 +1292,27 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
                 active.push(idx);
             };
 
-            for (let r = 0; r < rows; r++) {
-                const waveShift = Math.round(Math.sin(r * 0.21 - tick * 0.16) * 20);
-                const startC = ((tick * 5 + waveShift) % cols + cols) % cols;
-                for (let step = 0; step < 6; step++) {
-                    pushVisible(r * cols + ((startC + step * 46) % cols));
+            const strideStep = Math.max(1, Math.floor(st.cols / st.waveCount));
+            for (let r = 0; r < st.rows; r++) {
+                const waveShift = Math.round(Math.sin(r * 0.21 - tick * 0.16) * (st.cols * 0.08));
+                const startC = ((tick * 4 + waveShift) % st.cols + st.cols) % st.cols;
+                for (let step = 0; step < st.waveCount; step++) {
+                    pushVisible(r * st.cols + ((startC + step * strideStep) % st.cols));
                 }
             }
 
-            if (twinklePool.length > 0) {
-                const stride = Math.max(1, Math.floor(twinklePool.length / 260));
-                for (let s = tick % stride; s < twinklePool.length; s += stride) {
-                    pushVisible(twinklePool[s]);
+            if (st.twinklePool.length > 0) {
+                const stride = Math.max(1, Math.floor(st.twinklePool.length / st.twinkleCap));
+                for (let s = tick % stride; s < st.twinklePool.length; s += stride) {
+                    pushVisible(st.twinklePool[s]);
                 }
             }
 
-            // Clear only exact non-overlapping cell tiles, then draw mutated glyphs
-            ctx.fillStyle = '#191939';
+            ctx.fillStyle = st.bgHex;
             for (let k = 0; k < active.length; k++) {
                 const i = active[k];
-                const r = (i / cols) | 0;
-                const col = i - r * cols;
+                const r = (i / st.cols) | 0;
+                const col = i - r * st.cols;
                 const x0 = Math.round(st.offsetX + col * st.cellW);
                 const y0 = Math.round(st.offsetY + r * st.cellH);
                 const w0 = Math.round(st.offsetX + (col + 1) * st.cellW) - x0;
@@ -1295,13 +1326,13 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
                 ctx.font = pass === 0 ? st.fontNormal : st.fontBold;
                 for (let k = 0; k < active.length; k++) {
                     const i = active[k];
-                    const cI = colorIdx[i];
+                    const cI = st.colorIdx[i];
                     const isBold = cI >= 5;
                     if ((pass === 0 && isBold) || (pass === 1 && !isBold)) continue;
 
-                    const r = (i / cols) | 0;
-                    const col = i - r * cols;
-                    const pool = POOLS[tierIdx[i]] || POOLS[0];
+                    const r = (i / st.cols) | 0;
+                    const col = i - r * st.cols;
+                    const pool = POOLS[st.tierIdx[i]] || POOLS[0];
                     st.chars[i] = pool[(Math.random() * pool.length) | 0];
 
                     const baseA = BASE_ALPHA[cI] || 0.85;
