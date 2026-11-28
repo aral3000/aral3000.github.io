@@ -448,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackedSections = document.querySelectorAll('section[id]');
 
     let scrollTicking = false;
+    let cutoutScrollScale = 1;
     function onScrollUpdate() {
         const scrollY = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -474,8 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const vh = window.innerHeight || 900;
                 if (pRect.bottom > 0 && pRect.top < vh) {
                     const cp = 1 - Math.abs((pRect.top + pRect.height / 2 - vh / 2) / vh);
-                    const cs = 1 + Math.max(0, Math.min(1, cp)) * 0.045;
-                    cutoutSubject.style.transform = `translateX(-50%) scale(${cs.toFixed(4)})`;
+                    cutoutScrollScale = 1 + Math.max(0, Math.min(1, cp)) * 0.015;
                 }
             }
 
@@ -1398,7 +1398,129 @@ python infer.py --image sample_via.png --weights models/densenet121_cervical.pth
         });
     }
 
+    // 16. Invincible / CapCut 2.5D Sway & Counter-Parallax on Graduation Cutout Poster
+    function initCutoutInvincibleMotion() {
+        if (prefersReducedMotion || !posterFrame || !cutoutSubject) return;
+
+        const cutoutHalo = posterFrame.querySelector('.cutout-halo');
+        const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+        let targetHoverX = 0;
+        let targetHoverY = 0;
+        let hoverX = 0;
+        let hoverY = 0;
+        let isVisible = !('IntersectionObserver' in window);
+        let rafId = null;
+        let startTs = null;
+        let introStartTs = null;
+        let triggerIntro = !('IntersectionObserver' in window);
+        let introArmed = true;
+
+        if (finePointer) {
+            posterFrame.addEventListener('pointermove', (e) => {
+                const rect = posterFrame.getBoundingClientRect();
+                if (!rect.width || !rect.height) return;
+                targetHoverX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+                targetHoverY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            }, { passive: true });
+            posterFrame.addEventListener('pointerleave', () => {
+                targetHoverX = 0;
+                targetHoverY = 0;
+            });
+        }
+
+        function stopLoop() {
+            if (rafId !== null) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        }
+
+        function startLoop() {
+            if (rafId === null && isVisible && !document.hidden) {
+                rafId = requestAnimationFrame(step);
+            }
+        }
+
+        function step(ts) {
+            rafId = null;
+            if (!isVisible || document.hidden) return;
+            if (startTs === null) startTs = ts;
+            if (triggerIntro) {
+                introStartTs = ts;
+                triggerIntro = false;
+            }
+
+            const t = (ts - startTs) * 0.001;
+            const phase = t * 1.05;
+            const sway = Math.sin(phase);
+            const groove = Math.cos(phase * 2);
+            const breath = 0.5 + 0.5 * Math.sin(phase * 1.5);
+            const introAge = introStartTs !== null ? (ts - introStartTs) * 0.001 : 1;
+            const introEnv = introAge < 0.55 ? Math.pow(1 - introAge / 0.55, 2) : 0;
+            const introWave = introEnv > 0 ? Math.sin(introAge * 26) : 0;
+            const introPop = introEnv > 0 ? Math.sin((introAge / 0.55) * Math.PI) * introEnv : 0;
+            const m = posterFrame.clientWidth < 640 ? 0.65 : 1;
+
+            hoverX += (targetHoverX - hoverX) * 0.06;
+            hoverY += (targetHoverY - hoverY) * 0.06;
+
+            const tx = (sway * 8 + introWave * 14 * introEnv) * m + hoverX * 7;
+            const ty = (groove * 2.2 + 1.0 + Math.cos(introAge * 22) * 5 * introEnv) * m + hoverY * 3;
+            const rotY = (sway * 5.2 + introWave * 9 * introEnv) * m + hoverX * 4.5;
+            const rotZ = (sway * 1.4 + introWave * 2.8 * introEnv) * m + hoverX * 0.8;
+            const rotX = Math.sin(t * 0.75) * 1.3 * m - hoverY * 2.8;
+            const scale = cutoutScrollScale * (1.012 + breath * 0.015 + introPop * 0.045);
+
+            // Keep perspective inline so overflow:hidden + border-radius never clip 3D layers in Chromium
+            cutoutSubject.style.transform = `translateX(-50%) perspective(900px) translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) rotateZ(${rotZ.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
+
+            if (diagWall) {
+                const bgX = -tx * 1.55;
+                const bgY = -ty * 1.45;
+                const bgRotY = -rotY * 0.42;
+                const bgRotX = -rotX * 0.35;
+                const bgScale = 1.05 + (1 - breath) * 0.012 + introEnv * 0.02;
+                diagWall.style.transform = `perspective(900px) translate3d(${bgX.toFixed(2)}px, ${bgY.toFixed(2)}px, 0) rotateY(${bgRotY.toFixed(2)}deg) rotateX(${bgRotX.toFixed(2)}deg) rotate(-11deg) scale(${bgScale.toFixed(4)})`;
+            }
+
+            if (cutoutHalo) {
+                const hX = tx * 0.65;
+                const hY = ty * 0.65;
+                const hScale = 1 + breath * 0.04 + introPop * 0.06;
+                cutoutHalo.style.transform = `translate3d(calc(-50% + ${hX.toFixed(2)}px), ${hY.toFixed(2)}px, 0) scale(${hScale.toFixed(4)})`;
+            }
+
+            rafId = requestAnimationFrame(step);
+        }
+
+        if ('IntersectionObserver' in window) {
+            const visObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isVisible = entry.isIntersecting;
+                    if (!entry.isIntersecting) {
+                        introArmed = true;
+                    } else if (introArmed && entry.intersectionRatio >= 0.35) {
+                        introArmed = false;
+                        triggerIntro = true;
+                    }
+                });
+                if (isVisible) startLoop();
+                else stopLoop();
+            }, { threshold: [0.01, 0.35] });
+            visObs.observe(posterFrame);
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stopLoop();
+            else startLoop();
+        });
+
+        startLoop();
+    }
+
     init3DLanyard();
     initStarryAscii();
     initPhotoProtection();
+    initCutoutInvincibleMotion();
 });
